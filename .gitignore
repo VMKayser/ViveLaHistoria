@@ -1,14 +1,74 @@
-# Godot
-juego/.godot/
-*.translation
-
-# Exportaciones
-build/
-
-# Sistema
+# ── Mi Ciudad Sucre ─ lo que NO se versiona ─────────────────────────────────────
+# Dependencias y cachés
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+__pycache__/
+*.pyc
+*.tmp
+*.blend1
 .DS_Store
 Thumbs.db
+ciudad3d/.godot/
+ciudad3d/.cache/
+godot/.godot/
+juego/.godot/
+build/
+*.translation
 
-# Secretos (claves de API del backend de IA)
+# Generados (se rehacen con los comandos del README)
+ciudad3d/datos/
+/web/public/ciudad3d/
+web/public/models/opt/
+web/public/models/raw/
+web/public/models/ciudad/claude/base_teselas/
+web/public/fotos/mini/
+web/public/fotos/medio/
+web/public/mapa/raw/*
+!web/public/mapa/raw/lienzo.glb
+movil/build/
+movil/crudo/
+/web/public/descargas/*.apk
+/revisiones/
+coordinacion/revisiones/R*/
+
+# Secretos: llaves de firma y presets con contraseñas (NUNCA se suben)
+ciudad3d/export_presets.cfg
+movil/claves/
+*.keystore
+*.jks
 .env
+.env.*
 *.env
+!.env.example
+
+# Material de referencia e investigación (vive fuera del repositorio)
+/fotos/
+/fotosCentro/
+/fotosPlazaYSanMiguel/
+/masCiudadFotos/
+/ultimasFotsos/
+/Peatonal/
+/guia_plaza/
+/SucreAesthetic/
+/SucreAestheticAplied/
+/piloto_estilos/
+/capturas/
+/ui_ideas/
+/skies/
+/secciones/
+/contenido/libro/
+/museo_interior/referencias/
+/museo_interior/referencias.rar
+/recursos/originales/
+/personas/*/diseno.png
+/*.pdf
+/*.docx
+/*.zip
+/*.html
+/*.png
+!/banderaSucre.png
+
+# Inventario que regenera migracion/metadatos.py
+migracion/metadatos.json
