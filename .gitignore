@@ -9,13 +9,10 @@ __pycache__/
 *.tmp
 *.blend1
 .DS_Store
-Thumbs.db
 ciudad3d/.godot/
 ciudad3d/.cache/
 godot/.godot/
-juego/.godot/
 build/
-*.translation
 
 # Generados (se rehacen con los comandos del README)
 ciudad3d/datos/
@@ -43,7 +40,6 @@ movil/claves/
 *.jks
 .env
 .env.*
-*.env
 !.env.example
 
 # Material de referencia e investigación (vive fuera del repositorio)
@@ -75,3 +71,9 @@ movil/claves/
 
 # Inventario que regenera migracion/metadatos.py
 migracion/metadatos.json
+
+# Juego de la Casa de la Libertad (reglas de VMKayser)
+Thumbs.db
+juego/.godot/
+*.translation
+*.env
