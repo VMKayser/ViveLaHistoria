@@ -1,12 +1,37 @@
-# Auditoría de la migración — 2026-11-27 14:21 -0400
+# Auditoría de la migración — 2026-11-27 14:32 -0400
 Ejecutada por: Juan Manuel Rua Echalar · commit e04ac91 · PR comprobados: PR01,PR02,PR03,PR04,PR05,PR06,PR07,PR08,PR09,PR10,PR11,PR12
 
 ## Incumplimientos
-- ❌ Mensajes sin firmas ni atribuciones a asistentes de IA: 53/60 · bb9d17bd: Co-Authored-By:, 8e19d86f: Co-Authored-By:, ec64bb37: Co-Authored-By:, 92691c2e: Co-Authored-By:, 4d8cd93c: Co-Authored-By:, 99f0c605: Co-authored-by:, 4d7d9a74: Co-Authored-By:
+- ❌ next build: FALLÓ or: ] { code: 'ETIMEDOUT' }
+[AggregateError: ] { code: 'ETIMEDOUT' }
+Failed to compile.
+
+src/app/layout.tsx
+`next/font` error:
+Failed to fetch `Geist` from Google Fonts.
+
+src/app/layout.tsx
+`next/font` error:
+Failed to fetch `Geist Mono` from Google Fonts.
+
+
+> Build failed because of webpack errors
+
+- ❌ Godot importa godot (1809): FALLÓ m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+
 
 ## Advertencias
 - ⚠️ Archivos fuera del manifiesto: 245: blender/casa_libertad.blend, blender/construir_casa_libertad.py, guia/ESTRUCTURA_PROYECTO.md, guia/PLAN_DE_TRABAJO_6_HORAS.md, guia/README.md, herramientas/generar_nivel.py, herramientas/optimizar_importacion.py, juego/assets/LICENCIAS.md, juego/assets/arquitectura/casa_libertad.glb, juego/assets/arquitectura/casa_libertad.glb.import, juego/assets/arquitectura/luz_horneada.png, juego/assets/arquitectura/luz_horneada.png.import, juego/assets/arte/bolivar_gil_de_castro.jpg, juego/assets/arte/bolivar_gil_de_castro.jpg.import, juego/assets/cielo/kloofendal_48d_partly_cloudy_puresky.hdr
-- ⚠️ Rutas absolutas de un equipo concreto en documentación: 4: museo_interior/README.md, guia/ESTRUCTURA_PROYECTO.md, guia/README.md, guia/PLAN_DE_TRABAJO_6_HORAS.md
+- ⚠️ Rutas absolutas de un equipo concreto en documentación: 4: guia/ESTRUCTURA_PROYECTO.md, museo_interior/README.md, guia/README.md, guia/PLAN_DE_TRABAJO_6_HORAS.md
+- ⚠️ Commit 97ecd899 a las 14:22, fuera de la ventana 09:40–12:30
+- ⚠️ Commit 97ecd899 a las 14:22, fuera de la ventana 09:40–12:30
+- ⚠️ Commit 6825629a a las 14:21, fuera de la ventana 09:40–12:30
+- ⚠️ Commit 6825629a a las 14:21, fuera de la ventana 09:40–12:30
 - ⚠️ Commit bb9d17bd a las 14:02, fuera de la ventana 09:40–12:30
 - ⚠️ Commit bb9d17bd a las 14:02, fuera de la ventana 09:40–12:30
 - ⚠️ Commit 4d0d84f0 a las 13:33, fuera de la ventana 09:40–12:30
@@ -37,6 +62,7 @@ Ejecutada por: Juan Manuel Rua Echalar · commit e04ac91 · PR comprobados: PR01
 - ⚠️ Commit 78cdcdf6 a las 12:31, fuera de la ventana 09:40–12:30
 - ⚠️ Commit 162d2ae6 a las 12:31, fuera de la ventana 09:40–12:30
 - ⚠️ Commit 162d2ae6 a las 12:31, fuera de la ventana 09:40–12:30
+- ⚠️ Commits con firma de IA hechos fuera del plan por VMKayser (no se reescribe la historia): 97ecd899 (VMKayser): Co-Authored-By:, bb9d17bd (VMKayser): Co-Authored-By:, 8e19d86f (VMKayser): Co-Authored-By:, ec64bb37 (VMKayser): Co-Authored-By:, 92691c2e (VMKayser): Co-Authored-By:, 4d8cd93c (VMKayser): Co-Authored-By:, 99f0c605 (VMKayser): Co-authored-by:, 4d7d9a74 (VMKayser): Co-Authored-By:
 - ⚠️ PR #5 develop · VMKayser · creado 2026-11-27 11:41 · fusionado 11:44 por antrak13: lo fusionó otra persona (documentar por qué)
 
 ## Correcto
@@ -49,11 +75,13 @@ Ejecutada por: Juan Manuel Rua Echalar · commit e04ac91 · PR comprobados: PR01
 - ✅ Archivos de secretos versionados: 0 []
 - ✅ Posibles credenciales en texto: 0
 - ✅ Rutas absolutas de un equipo concreto (/home/…, C:\Users\…) en código o configuración: 0
-- ✅ Commits con fecha de autor y de commit del 2026-11-27: 60/60
+- ✅ Commits con fecha de autor y de commit del 2026-11-27: 62/62
+- ✅ Mensajes sin firmas ni atribuciones a asistentes de IA: 62/62
 - ✅ Un solo commit raíz (sin historial importado): 1
 - ✅ Etiquetas: ninguna
-- ✅ Commits por autor: Freddy Daniel Valencia Medina=1, Juan Manuel Rua Echalar=28, ManuelRua=11, VMKayser=8, antrak13=12
+- ✅ Commits por autor: Freddy Daniel Valencia Medina=1, Juan Manuel Rua Echalar=29, ManuelRua=11, VMKayser=9, antrak13=12
 - ✅ Archivos incorporados con fecha distinta del 2026-11-27: 0
+- ✅ PR #17 chore/auditoria-final · ManuelRua · creado 2026-11-27 14:22 · OPEN
 - ✅ PR #16 feat/museo-casa-libertad · ManuelRua · creado 2026-11-27 12:41 · fusionado 12:45 por ManuelRua
 - ✅ PR #15 feat/personajes-animaciones · antrak13 · creado 2026-11-27 12:37 · CLOSED
 - ✅ PR #14 feat/museo-escenas-historicas · antrak13 · creado 2026-11-27 12:37 · fusionado 12:40 por antrak13
@@ -77,7 +105,5 @@ Ejecutada por: Juan Manuel Rua Echalar · commit e04ac91 · PR comprobados: PR01
 - ✅ Fechas internas posteriores al 2026-11-27 (incoherentes): 0 []
 - ✅ Recursos con coordenadas GPS en EXIF: 0 []
 - ✅ npm ci: correcto
-- ✅ next build: correcto
 - ✅ Ciudad 3D completa: empaquetar + exportar a la web (npm run ciudad): correcto
 - ✅ Godot importa ciudad3d: correcto
-- ✅ Godot importa godot (1809): correcto
