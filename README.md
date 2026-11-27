@@ -1,5 +1,7 @@
 # Vive la Historia · Casa de la Libertad
 
+[![Pruebas](https://github.com/antrak13/Mi_Ciudad_Sucre/actions/workflows/pruebas.yml/badge.svg)](https://github.com/antrak13/Mi_Ciudad_Sucre/actions/workflows/pruebas.yml)
+
 Juego educativo en primera persona sobre la historia de la **Casa de la Libertad** (Sucre, Bolivia).
 El jugador recorre la Sala Mayor en 1825, cumple misiones, toma decisiones y descubre lo que realmente pasó.
 **Cada dato histórico del juego se muestra en una ficha con su fuente**, priorizando fuentes oficiales.
@@ -44,6 +46,16 @@ godot --headless --path juego --script res://tests/validar_datos.gd
 # Recorre la Escena 1 completa simulando al jugador (29 comprobaciones, incluida la colisión del piso)
 godot --headless --path juego res://tests/prueba_flujo.tscn
 ```
+
+Estas pruebas corren solas en GitHub Actions (`.github/workflows/pruebas.yml`) en cada push a `main`/`develop` y en cada
+pull request, junto con:
+
+- **Datos y scripts:** todos los JSON/JSONL del repositorio bien formados y los scripts de Python sin errores de sintaxis.
+- **Ciudad Charcas 1809:** el piloto automático recorre los 8 pasos de la historia (`godot --headless --path godot -- --piloto`);
+  se activa cuando la carpeta `godot/` está en la rama.
+- **Web:** `npm run lint`, `tsc --noEmit` y `npm run build` en `web/`.
+
+El resultado de cada job (fuentes y fichas, pasos comprobados, pasos de la historia) queda en el resumen de la ejecución.
 
 ## Política de fuentes
 
