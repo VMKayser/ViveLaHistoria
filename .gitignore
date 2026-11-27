@@ -33,6 +33,9 @@ movil/crudo/
 /revisiones/
 coordinacion/revisiones/R*/
 
+# Planificación interna del equipo (rúbrica, costos, estrategia): no se publica
+planificacion/
+
 # Secretos: llaves de firma y presets con contraseñas (NUNCA se suben)
 ciudad3d/export_presets.cfg
 movil/claves/
