@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://escenas_historicas/casa_libertad/casa_libertad.gd" id="1"]
+[ext_resource type="PackedScene" path="res://escenas_historicas/casa_libertad/casa_libertad.glb" id="2"]
+
+[node name="CasaLibertad" type="Node3D"]
+script = ExtResource("1")
+
+[node name="CasaLibertad_GLB" parent="." instance=ExtResource("2")]
