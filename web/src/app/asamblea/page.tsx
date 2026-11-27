@@ -9,8 +9,11 @@ import { useEffect, useRef, useState } from "react";
 export default function PaginaAsamblea() {
   const marco = useRef<HTMLIFrameElement>(null);
   const [estado, setEstado] = useState<"buscando" | "listo" | "falta">("buscando");
+  // ?lang=en abre el juego en inglés (fichas, diálogos, interfaz y cronista)
+  const [idioma, setIdioma] = useState("");
 
   useEffect(() => {
+    setIdioma(new URLSearchParams(window.location.search).get("lang") === "en" ? "?lang=en" : "");
     fetch("/asamblea/index.html", { method: "HEAD", cache: "no-store" })
       .then((r) => setEstado(r.ok ? "listo" : "falta"))
       .catch(() => setEstado("falta"));
@@ -19,7 +22,7 @@ export default function PaginaAsamblea() {
   return (
     <main className="relative h-dvh w-full overflow-hidden bg-black text-white">
       {estado === "listo" && (
-        <iframe ref={marco} src="/asamblea/index.html" title="Casa de la Libertad · Asamblea de 1825"
+        <iframe ref={marco} src={`/asamblea/index.html${idioma}`} title="Casa de la Libertad · Asamblea de 1825"
           className="absolute inset-0 h-full w-full border-0" allow="autoplay; fullscreen"
           onLoad={() => marco.current?.contentWindow?.focus()} />
       )}

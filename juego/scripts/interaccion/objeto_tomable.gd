@@ -33,7 +33,7 @@ func interactuar(jugador: Jugador) -> void:
 	EstadoJuego.registrar("tomar", id_interaccion)
 	if not ficha_id.is_empty():
 		EstadoJuego.desbloquear_ficha(ficha_id)
-	EstadoJuego.aviso.emit("Tomaste: %s" % nombre_visible)
+	EstadoJuego.aviso.emit(tr("Tomaste: %s") % nombre_visible)
 
 
 func inspeccionar() -> void:

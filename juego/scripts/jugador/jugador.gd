@@ -124,7 +124,7 @@ func _actualizar_enfoque() -> void:
 		if objetivo != null and objetivo.puede_interactuar(self):
 			texto = objetivo.texto_para(self)
 		elif objeto_en_mano != null:
-			texto = "[R] Inspeccionar %s" % objeto_en_mano.nombre_visible
+			texto = tr("[R] Inspeccionar %s") % objeto_en_mano.nombre_visible
 	if texto != _texto_enfoque:
 		_texto_enfoque = texto
 		enfoque_cambiado.emit(texto)
