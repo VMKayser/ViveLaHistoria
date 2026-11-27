@@ -1,0 +1,45 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "probar": "next build && next start",
+    "lint": "eslint",
+    "modelos": "gltf-transform optimize public/models/raw/piloto.glb public/models/piloto.glb --compress meshopt --texture-compress webp",
+    "mapa": "gltf-transform optimize public/mapa/raw/lienzo.glb public/mapa/lienzo.glb --compress meshopt --simplify false --join false --palette false",
+    "fotos": "python3 ../scripts/fotos_indice.py",
+    "modelos:opt": "node scripts/optimizar_modelos.mjs",
+    "trafico": "node scripts/preparar_vehiculos.mjs && python3 scripts/red_vial.py",
+    "ciudad": "node ../ciudad3d/herramientas/exportar.mjs web",
+    "ciudad:apk": "node ../ciudad3d/herramientas/exportar.mjs apk",
+    "asamblea": "mkdir -p public/asamblea && ${GODOT:-godot} --headless --path ../juego --export-release Web ../web/public/asamblea/index.html",
+    "ciudad:minimapa": "SUCRE_MINIMAPA=1 ${GODOT:-$HOME/apps/godot/Godot_v4.7.2-stable_linux.x86_64} --path ../ciudad3d --rendering-method gl_compatibility --resolution 640x480",
+    "predev": "node scripts/optimizar_modelos.mjs"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.2",
+    "@react-three/postprocessing": "^3.2.2",
+    "next": "15.5.28",
+    "postprocessing": "^6.39.5",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@gltf-transform/cli": "^4.5.1",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/three": "^0.186.0",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.28",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

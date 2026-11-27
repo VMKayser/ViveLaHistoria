@@ -1,0 +1,32 @@
+{
+  "id": "carroza_azul",
+  "nombre": "Carroza colonial cerrada",
+  "referencia": "Colonial Carriage Turnaround Sheet.png",
+  "largo": 3.94,
+  "ancho": 1.70,
+  "alto": 2.52,
+  "ejes": [-1.18, 1.28],
+  "radios_ruedas": {"trasera": 0.70, "delantera": 0.55},
+  "radio_rueda": 0.70,
+  "semivia_ruedas": 0.79,
+  "radios": {"trasera": 12, "delantera": 12},
+  "movimiento": {
+    "tipo_direccion": "tornamesa",
+    "velocidad_maxima": 2.65,
+    "retroceso_maximo": 0.7,
+    "aceleracion": 0.85,
+    "frenada": 1.45,
+    "direccion_maxima": 0.29,
+    "rapidez_direccion": 0.58
+  },
+  "enganche": {"distancia_al_eje_delantero_m": 2.22, "inicio_varas_desde_eje_m": 0.72},
+  "acabados": {"presupuesto_triangulos": 45000},
+  "paleta": {
+    "azul": "#254868", "azul_borde": "#355d84", "cuero": "#292936",
+    "capota": "#303044", "hierro": "#454147", "aro": "#51474a",
+    "laton": "#bc8745", "filete": "#d5a768", "piso": "#423538",
+    "vidrio": "#877875", "vidrio_farol": "#ffdb8e",
+    "tapizado": "#5b4a52", "madera": "#54464b"
+  },
+  "interpretacion": ["Cotas estimadas de la lámina", "Asiento interior y herrajes inferiores interpretados", "Lanza y tiro para un caballo interpretados"]
+}

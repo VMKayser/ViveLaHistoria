@@ -1,0 +1,22 @@
+{
+ "relieve": {
+  "relieve_acuarela_agua": 0,
+  "relieve_acuarela_asfalto": 1,
+  "relieve_acuarela_cal": 2,
+  "relieve_acuarela_ladera": 3,
+  "relieve_acuarela_tierra": 4,
+  "relieve_concreto": 5,
+  "relieve_empedrado": 6,
+  "relieve_mamposteria": 7,
+  "relieve_pasto": 8
+ },
+ "detalle": {
+  "adoquin": 0,
+  "hierro": 1,
+  "madera": 4,
+  "muro": 6,
+  "teja": 13,
+  "vereda": 15,
+  "zocalo_piedra": 17
+ }
+}

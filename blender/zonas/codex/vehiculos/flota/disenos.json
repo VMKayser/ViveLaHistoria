@@ -1,0 +1,29 @@
+{
+  "vagoneta_blanca": {
+    "datos": "vagoneta_blanca/vagoneta_blanca.json"
+  },
+  "montero_sport_blanca": {
+    "datos": "montero_sport_blanca/montero_sport_blanca.json"
+  },
+  "ecosport_blanca": {
+    "datos": "ecosport_blanca/ecosport_blanca.json"
+  },
+  "hilux_blanca": {
+    "datos": "hilux_blanca/hilux_blanca.json"
+  },
+  "toyota_roja": {
+    "datos": "toyota_roja/toyota_roja.json"
+  },
+  "ford_azul": {
+    "datos": "ford_azul/ford_azul.json"
+  },
+  "turismo_abierto": {
+    "datos": "turismo_abierto/turismo_abierto.json"
+  },
+  "remolque_madera": {
+    "datos": "remolque_madera/remolque_madera.json"
+  },
+  "model_t_coupe": {
+    "datos": "model_t_coupe/model_t_coupe.json"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "movimiento": {
+    "velocidad_maxima": 8.3333333333,
+    "retroceso_maximo": 2.0,
+    "aceleracion": 1.8,
+    "frenada": 3.5,
+    "direccion_maxima": 0.52,
+    "rapidez_direccion": 0.85,
+    "velocidad_demo": 2.5,
+    "radio_demo": 10.0
+  },
+  "presupuesto_triangulos": 95000
+}

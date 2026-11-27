@@ -1,0 +1,133 @@
+{
+  "id": "turismo_abierto",
+  "nombre": "Turismo abierto clásico",
+  "archivo_lamina": "clasicos/ChatGPT Image Nov 25, 2026, 03_43_00 PM.png",
+  "largo": 4.0,
+  "ancho": 1.69,
+  "alto": 1.88,
+  "ejes": [
+    -1.43,
+    1.48
+  ],
+  "radio_rueda": 0.431,
+  "semivia_ruedas": 0.773,
+  "ancho_rueda": 0.133,
+  "radio_aro": 0.338,
+  "radios": 10,
+  "faldon": [
+    [
+      0.46,
+      -1.88,
+      0.75,
+      0.46,
+      0.07
+    ],
+    [
+      0.55,
+      -1.96,
+      0.72,
+      0.559,
+      0.075
+    ],
+    [
+      0.66,
+      -1.997,
+      0.697,
+      0.588,
+      0.073
+    ],
+    [
+      0.92,
+      -1.992,
+      0.696,
+      0.612,
+      0.072
+    ],
+    [
+      1.12,
+      -2.016,
+      0.693,
+      0.625,
+      0.08
+    ],
+    [
+      1.291,
+      -2.046,
+      0.69,
+      0.62,
+      0.077
+    ]
+  ],
+  "capo": [
+    [
+      0.59,
+      0.604,
+      1.318
+    ],
+    [
+      0.766,
+      0.542,
+      1.356
+    ],
+    [
+      1.137,
+      0.448,
+      1.356
+    ],
+    [
+      1.515,
+      0.39,
+      1.335
+    ],
+    [
+      1.647,
+      0.359,
+      1.314
+    ]
+  ],
+  "fender": [
+    0.115,
+    0.14
+  ],
+  "meta_parabrisas": [
+    [
+      0.604,
+      1.309,
+      0.552
+    ],
+    [
+      0.362,
+      1.851,
+      0.523
+    ]
+  ],
+  "paleta": {
+    "carroceria": [
+      "#33313a",
+      0.35,
+      0.18
+    ],
+    "aleta": [
+      "#433838",
+      0.4,
+      0.2
+    ],
+    "radios": [
+      "#b88840",
+      0.41,
+      0.16
+    ],
+    "vidrio": [
+      "#b6aaa0",
+      0.23,
+      0,
+      0.23
+    ]
+  },
+  "interpretacion": [
+    "Cotas estimadas de las láminas.",
+    "Salpicadero y caras ocultas interpretados."
+  ],
+  "centro_rueda_z": 0.431,
+  "referencia": "clasicos/ChatGPT Image Nov 25, 2026, 03_43_00 PM.png"
+}

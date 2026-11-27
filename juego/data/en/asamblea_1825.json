@@ -1,0 +1,386 @@
+{
+	"id": "asamblea_1825",
+	"titulo": "The Assembly of 1825",
+	"subtitulo": "Great Hall of the University, Chuquisaca · July and August 1825",
+	"aviso_recreacion": "The dialogues are a re-creation. Historical facts are shown on fact cards with their source.",
+	"personajes": {
+		"mendizabal": {
+			"nombre": "José Mariano Mendizábal",
+			"rol": "Secretary of the Assembly",
+			"ficticio": false,
+			"ficha": "f_mendizabal"
+		},
+		"serrano": {
+			"nombre": "Mariano Serrano",
+			"rol": "President of the Assembly",
+			"ficticio": false,
+			"ficha": "f_serrano"
+		},
+		"olaneta": {
+			"nombre": "Casimiro Olañeta",
+			"rol": "Deputy, speaker for independence",
+			"ficticio": false,
+			"ficha": "f_olaneta"
+		},
+		"diputado_peru": {
+			"nombre": "Deputy for Peru",
+			"rol": "Argues for union with Peru",
+			"ficticio": true
+		},
+		"diputado_rioplata": {
+			"nombre": "Deputy for the Río de la Plata",
+			"rol": "Argues for union with the Río de la Plata",
+			"ficticio": true
+		}
+	},
+	"objetos": {
+		"credencial": {
+			"nombre": "Deputy's credential",
+			"ficha": "f_convocatoria"
+		},
+		"pliego_peru": {
+			"nombre": "Brief: union with Peru",
+			"ficha": "f_indecision"
+		},
+		"pliego_rioplata": {
+			"nombre": "Brief: union with the Río de la Plata",
+			"ficha": "f_indecision"
+		},
+		"pliego_independencia": {
+			"nombre": "Brief: independence",
+			"ficha": "f_olaneta"
+		},
+		"acta": {
+			"nombre": "Declaration of Independence",
+			"ficha": "f_acta"
+		}
+	},
+	"misiones": [
+		{
+			"id": "m1_llegada",
+			"titulo": "Reach the Great Hall",
+			"descripcion": "It is July 1825. Report to the secretary, collect your credential and enter the hall where the Assembly meets.",
+			"objetivos": [
+				{
+					"tipo": "hablar",
+					"objetivo": "mendizabal",
+					"texto": "Talk to Secretary Mendizábal in the courtyard"
+				},
+				{
+					"tipo": "tomar",
+					"objetivo": "credencial",
+					"texto": "Take your deputy's credential"
+				},
+				{
+					"tipo": "zona",
+					"objetivo": "sala_mayor",
+					"texto": "Enter the Great Hall"
+				}
+			]
+		},
+		{
+			"id": "m2_posturas",
+			"titulo": "Hear the three positions",
+			"descripcion": "The Assembly has not yet decided the fate of Upper Peru. Listen to each side and gather their arguments.",
+			"objetivos": [
+				{
+					"tipo": "tomar",
+					"objetivo": "pliego_peru",
+					"texto": "Argument for union with Peru (courtyard)"
+				},
+				{
+					"tipo": "tomar",
+					"objetivo": "pliego_rioplata",
+					"texto": "Argument for union with the Río de la Plata (upper gallery)"
+				},
+				{
+					"tipo": "tomar",
+					"objetivo": "pliego_independencia",
+					"texto": "Argument for independence (Olañeta, in the hall)"
+				}
+			]
+		},
+		{
+			"id": "m3_votacion",
+			"titulo": "The vote",
+			"descripcion": "You have heard everyone. Go to President Serrano's table to vote.",
+			"objetivos": [
+				{
+					"tipo": "decision",
+					"objetivo": "d_destino",
+					"texto": "Vote on the fate of Upper Peru"
+				},
+				{
+					"tipo": "decision",
+					"objetivo": "d_nombre",
+					"texto": "Propose a name for the new republic"
+				}
+			]
+		},
+		{
+			"id": "m4_firmas",
+			"titulo": "Signing the Declaration",
+			"descripcion": "Take the Declaration to three deputies to sign and return to Serrano before the session closes.",
+			"tiempo_limite": 180,
+			"objetivos": [
+				{
+					"tipo": "tomar",
+					"objetivo": "acta",
+					"texto": "Take the Declaration from the president's table"
+				},
+				{
+					"tipo": "firma",
+					"objetivo": "*",
+					"cantidad": 3,
+					"texto": "Get the signatures of three deputies"
+				},
+				{
+					"tipo": "firma_presidente",
+					"objetivo": "serrano",
+					"texto": "Take the Declaration to Serrano for the final signature"
+				}
+			]
+		},
+		{
+			"id": "m5_entrega",
+			"titulo": "Deliver the Declaration",
+			"descripcion": "Leave the signed Declaration on the Secretariat's table.",
+			"objetivos": [
+				{
+					"tipo": "entregar",
+					"objetivo": "mesa_secretaria",
+					"texto": "Leave the Declaration on the Secretariat's table"
+				}
+			]
+		}
+	],
+	"dialogos": {
+		"mendizabal": [
+			{
+				"si_mision": "m1_llegada",
+				"lineas": [
+					{
+						"texto": "Welcome, deputy. I am José Mariano Mendizábal, secretary of this Assembly.",
+						"ficha": "f_mendizabal"
+					},
+					{
+						"texto": "Marshal Sucre summoned the deputies of the five provinces of Upper Peru by a decree of 9 February.",
+						"ficha": "f_convocatoria"
+					},
+					{
+						"texto": "The decree named Oruro, but we are meeting here, in Chuquisaca. Before you go in, tell me: where do you think we should have met?",
+						"ficha": "f_sede"
+					}
+				],
+				"al_terminar": {
+					"decision": "d_sede"
+				}
+			},
+			{
+				"si_mision": "m4_firmas",
+				"lineas": [
+					{
+						"texto": "Take the Declaration to the deputies. President Serrano will sign last."
+					}
+				]
+			},
+			{
+				"si_mision": "m5_entrega",
+				"lineas": [
+					{
+						"texto": "Leave the Declaration on the Secretariat's table, by the wall."
+					}
+				]
+			},
+			{
+				"lineas": [
+					{
+						"texto": "The Great Hall is at the far end of the courtyard. It was the Jesuits' chapel and today it is the University's main hall.",
+						"ficha": "f_sala_mayor"
+					}
+				]
+			}
+		],
+		"diputado_peru": [
+			{
+				"si_mision": "m2_posturas",
+				"lineas": [
+					{
+						"texto": "This Assembly has not yet decided whether we join Peru, Argentina, or become independent.",
+						"ficha": "f_indecision"
+					},
+					{
+						"texto": "I argue for union with Peru. Take this brief with my reasons and think it over before you vote."
+					}
+				],
+				"al_terminar": {
+					"entregar": "pliego_peru"
+				}
+			},
+			{
+				"lineas": [
+					{
+						"texto": "Listen to every side before you vote, deputy."
+					}
+				]
+			}
+		],
+		"diputado_rioplata": [
+			{
+				"si_mision": "m2_posturas",
+				"lineas": [
+					{
+						"texto": "The fate of these provinces is still undecided: Peru, Argentina or independence.",
+						"ficha": "f_indecision"
+					},
+					{
+						"texto": "I argue for union with the Provinces of the Río de la Plata. Here is my brief."
+					}
+				],
+				"al_terminar": {
+					"entregar": "pliego_rioplata"
+				}
+			},
+			{
+				"lineas": [
+					{
+						"texto": "From this gallery you can see the whole courtyard. Go back to the hall when it is time to vote."
+					}
+				]
+			}
+		],
+		"olaneta": [
+			{
+				"si_mision": "m2_posturas",
+				"lineas": [
+					{
+						"texto": "I am Casimiro Olañeta. In this Assembly I defend the cause of independence.",
+						"ficha": "f_olaneta"
+					},
+					{
+						"texto": "Take this brief and compare it with the others. Let your vote be a considered one."
+					}
+				],
+				"al_terminar": {
+					"entregar": "pliego_independencia"
+				}
+			},
+			{
+				"lineas": [
+					{
+						"texto": "The session continues, deputy."
+					}
+				]
+			}
+		],
+		"serrano": [
+			{
+				"si_mision": "m3_votacion",
+				"lineas": [
+					{
+						"texto": "I am Mariano Serrano, president of this Assembly. The time has come to vote.",
+						"ficha": "f_serrano"
+					}
+				],
+				"al_terminar": {
+					"decision": "d_destino"
+				}
+			},
+			{
+				"si_mision": "m2_posturas",
+				"lineas": [
+					{
+						"texto": "Before you vote, listen to the deputies of each position."
+					}
+				]
+			},
+			{
+				"si_mision": "m5_entrega",
+				"lineas": [
+					{
+						"texto": "The Declaration is signed. Deliver it to the Secretariat."
+					}
+				]
+			},
+			{
+				"lineas": [
+					{
+						"texto": "The Assembly is still in session, deputy."
+					}
+				]
+			}
+		]
+	},
+	"decisiones": {
+		"d_sede": {
+			"pregunta": "Where should the Assembly have met?",
+			"contexto": "The decree of 9 February named Oruro. Some deputies asked for another seat.",
+			"opciones": [
+				{
+					"id": "oruro",
+					"texto": "In Oruro, as the decree said",
+					"reaccion": "Mendizábal notes your opinion. The Assembly, however, convened in Chuquisaca."
+				},
+				{
+					"id": "chuquisaca",
+					"texto": "In Chuquisaca",
+					"reaccion": "Mendizábal nods: this is where the Assembly finally convened."
+				}
+			],
+			"ficha_resultado": "f_sede"
+		},
+		"d_destino": {
+			"pregunta": "Which path should Upper Peru take?",
+			"contexto": "You heard the three positions and you have their briefs. Your vote is recorded in the minutes of the session.",
+			"opciones": [
+				{
+					"id": "peru",
+					"texto": "Join Peru",
+					"reaccion": "Your vote is recorded, but the Assembly took another path."
+				},
+				{
+					"id": "rioplata",
+					"texto": "Join the Provinces of the Río de la Plata",
+					"reaccion": "Your vote is recorded, but the Assembly took another path."
+				},
+				{
+					"id": "independencia",
+					"texto": "Become an independent republic",
+					"reaccion": "Your vote matches what the Assembly decided."
+				}
+			],
+			"ficha_resultado": "f_proclamacion",
+			"siguiente": "d_nombre"
+		},
+		"d_nombre": {
+			"pregunta": "What name should the new republic bear?",
+			"contexto": "The Assembly must give the new State a name.",
+			"opciones": [
+				{
+					"id": "republica_bolivar",
+					"texto": "República Bolívar",
+					"reaccion": "That was the name the Assembly adopted."
+				},
+				{
+					"id": "bolivia",
+					"texto": "Bolivia",
+					"reaccion": "That name came later. The sources disagree on who proposed it and when."
+				},
+				{
+					"id": "alto_peru",
+					"texto": "Republic of Upper Peru",
+					"reaccion": "The Assembly chose another name: República Bolívar."
+				}
+			],
+			"ficha_resultado": "f_nombre_bolivia"
+		}
+	},
+	"cierre": {
+		"titulo": "The Declaration was signed",
+		"texto": "The Assembly decided on independence and founded the República Bolívar. From then until 1898, Congress met in this very hall.",
+		"fichas": [
+			"f_congreso",
+			"f_acta"
+		]
+	}
+}
