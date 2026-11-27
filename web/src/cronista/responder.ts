@@ -63,13 +63,13 @@ function sinIA(r: Resultado[], idioma: Idioma, t0: number): Respuesta {
   if (!pertinente(r)) return { respuesta: SIN_FUENTE[idioma], fuentes: [], modo: "sin_ia", ms: Date.now() - t0 };
   const dos = r.slice(0, 2);
   const cuerpo = dos.map((x, i) => `${x.texto.length > 320 ? x.texto.slice(0, 317) + "…" : x.texto} [${i + 1}]`).join(" ");
-  const intro = idioma === "en" ? "This is what my sources say (in Spanish): " : "Esto dicen mis fuentes: ";
+  const intro = idioma === "en" ? (dos.every((x) => x.idioma === "en") ? "This is what my sources say: " : "This is what my sources say (some in Spanish): ") : "Esto dicen mis fuentes: ";
   return { respuesta: intro + cuerpo, fuentes: listaFuentes(dos), modo: "sin_ia", ms: Date.now() - t0 };
 }
 
 export async function responder(pregunta: string, idioma: Idioma = "es"): Promise<Respuesta> {
   const t0 = Date.now();
-  const r = buscar(pregunta, 6);
+  const r = buscar(pregunta, 6, idioma);
   const clave = process.env.GEMINI_API_KEY;
   if (!clave || !pertinente(r)) return sinIA(r, idioma, t0);
   try {

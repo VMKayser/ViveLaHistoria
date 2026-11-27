@@ -24,7 +24,7 @@ func puede_interactuar(_jugador: Jugador) -> bool:
 
 
 func texto_para(_jugador: Jugador) -> String:
-	return "[E] %s %s" % [verbo, nombre_visible]
+	return "[E] %s %s" % [tr(verbo), nombre_visible]
 
 
 func interactuar(_jugador: Jugador) -> void:

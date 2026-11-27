@@ -44,7 +44,7 @@ func _ready() -> void:
 		add_child(_modelo)
 		_anim = _modelo.find_child("AnimationPlayer", true, false) as AnimationPlayer
 	var etiqueta := Label3D.new()
-	etiqueta.text = "El cronista\n[C] preguntar"
+	etiqueta.text = "%s\n%s" % [tr("El cronista"), tr("[C] preguntar")]
 	etiqueta.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	etiqueta.font_size = 26
 	etiqueta.pixel_size = 0.0022

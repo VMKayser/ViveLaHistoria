@@ -1,0 +1,366 @@
+{
+	"descripcion": "Historical fact cards shown by the game. Each card cites its sources (ids from data/fuentes.json). 'cita' is the literal text of the main source (translated in this English version). 'estado': verificada | fuentes_difieren | por_verificar. 'revision' is completed by a teacher or curator before publishing.",
+	"fichas": [
+		{
+			"id": "f_sala_mayor",
+			"escenas": [
+				"asamblea_1825",
+				"universidad_1809"
+			],
+			"titulo": "The Great Hall",
+			"texto": "Today's Hall of Independence was the Jesuits' private chapel and later the Great Hall, or Aula Magna, of the University of San Francisco Xavier.",
+			"estado": "verificada",
+			"fuentes": [
+				"cdl_salon_independencia"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		},
+		{
+			"id": "f_manzana_jesuitica",
+			"escenas": [
+				"asamblea_1825",
+				"universidad_1809"
+			],
+			"titulo": "The Jesuit Block",
+			"texto": "Construction of the Jesuit Block began in 1592, first for a school and then for the University of San Francisco Xavier of Chuquisaca, founded in 1624.",
+			"cita": "This beautiful building belongs to the Jesuit Block, whose construction began in 1592 to house a school, first (translated from the Spanish original)",
+			"estado": "verificada",
+			"fuentes": [
+				"cdl_historia"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		},
+		{
+			"id": "f_convocatoria",
+			"escenas": [
+				"asamblea_1825"
+			],
+			"titulo": "The call of 1825",
+			"texto": "Marshal Sucre summoned the deputies of the five provinces of Upper Peru by a decree of 9 February 1825. The assembly met in this hall from July 1825.",
+			"cita": "summoned by Marshal Sucre by decree of 9 February (translated from the Spanish original)",
+			"estado": "verificada",
+			"fuentes": [
+				"cdl_historia"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		},
+		{
+			"id": "f_sede",
+			"escenas": [
+				"asamblea_1825"
+			],
+			"titulo": "From Oruro to Chuquisaca",
+			"texto": "Under the decree of 9 February, the assembly was to gather in Oruro on 5 April and open its sessions on the 19th of that month. It finally convened in Chuquisaca on Sunday, 10 July 1825.",
+			"cita": "On Sunday, 10 July 1825, 38 deputies from the provinces of so-called Upper Peru met in Chuquisaca (translated from the Spanish original)",
+			"estado": "fuentes_difieren",
+			"discrepancia": "The two articles explain the change of venue differently. One says Sucre changed the date and venue, arguing that Chuquisaca and Potosí were still occupied by royalist troops. The other attributes the Chuquisaca proposal to Casimiro Olañeta's group, who argued that many deputies were elderly. The same article counts 38 deputies, but the minutes it quotes say 39.",
+			"fuentes": [
+				"cds_asamblea_fundacional",
+				"cds_asamblea_trabada"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		},
+		{
+			"id": "f_indecision",
+			"escenas": [
+				"asamblea_1825"
+			],
+			"titulo": "Three possible paths",
+			"texto": "At the end of July 1825 the Assembly had not yet decided whether Upper Peru would join Peru, Argentina, or declare itself independent.",
+			"cita": "Until 27 July 1825, the Assembly of representatives of Upper Peru had not decided whether to join 'lower Peru', Argentina, or declare itself an independent territory. (translated from the Spanish original)",
+			"estado": "verificada",
+			"fuentes": [
+				"cds_asamblea_trabada"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		},
+		{
+			"id": "f_proclamacion",
+			"escenas": [
+				"asamblea_1825"
+			],
+			"titulo": "The proclamation of independence",
+			"texto": "The Assembly decided to proclaim independence on 6 August 1825 and to found the República Bolívar.",
+			"cita": "Assembly that decided to proclaim independence on 6 August of that year, and to found the República Bolívar (translated from the Spanish original)",
+			"estado": "fuentes_difieren",
+			"discrepancia": "An article in Correo del Sur (2025) argues that the founding act was the decree of 8 August 1825, not the proclamation of 6 August.",
+			"fuentes": [
+				"cdl_historia",
+				"cds_construir_patria"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		},
+		{
+			"id": "f_serrano",
+			"escenas": [
+				"asamblea_1825"
+			],
+			"titulo": "Mariano Serrano",
+			"texto": "Mariano Serrano presided over the Deliberative Assembly and drafted the Declaration of Independence. His portrait presides over the Hall of the Signatories.",
+			"estado": "verificada",
+			"fuentes": [
+				"cdl_sala_firmantes"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		},
+		{
+			"id": "f_olaneta",
+			"escenas": [
+				"asamblea_1825"
+			],
+			"titulo": "Casimiro Olañeta",
+			"texto": "Casimiro Olañeta was the speaker who championed independence in the Assembly. His portrait, painted by Melchor María Mercado, hangs in the Hall of the Signatories.",
+			"estado": "verificada",
+			"fuentes": [
+				"cdl_sala_firmantes"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		},
+		{
+			"id": "f_mendizabal",
+			"escenas": [
+				"asamblea_1825"
+			],
+			"titulo": "José Mariano Mendizábal",
+			"texto": "José Mariano Mendizábal was secretary of the Assembly and later Archbishop of La Plata.",
+			"estado": "verificada",
+			"fuentes": [
+				"cdl_sala_firmantes"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		},
+		{
+			"id": "f_nombre_bolivia",
+			"escenas": [
+				"asamblea_1825"
+			],
+			"titulo": "From República Bolívar to Bolivia",
+			"texto": "The museum credits Father Martín Cruz, parish priest of Tarapaya and deputy for Potosí, with proposing to change the name República Bolívar to Bolivia.",
+			"estado": "fuentes_difieren",
+			"discrepancia": "Correo del Sur (2025) notes that this traditional account is undocumented, that the deputy signed as Manuel Martín, and that the name Bolivia first appears in the session of 3 October 1825.",
+			"fuentes": [
+				"cdl_sala_firmantes",
+				"cds_construir_patria"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		},
+		{
+			"id": "f_acta",
+			"escenas": [
+				"asamblea_1825"
+			],
+			"titulo": "The Declaration of Independence",
+			"texto": "Today the Declaration of Independence of Upper Peru is displayed in a case on a stone column in the Hall of Independence.",
+			"cita": "The Declaration of Independence of Upper Peru is displayed in a case on a stone column (translated from the Spanish original)",
+			"estado": "fuentes_difieren",
+			"discrepancia": "El País (2017) states that what is on display is a facsimile of the declaration, in a showcase in the Deputies' Hall.",
+			"fuentes": [
+				"cdl_salon_independencia",
+				"elpais_cuna_bolivia"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		},
+		{
+			"id": "f_congreso",
+			"escenas": [
+				"asamblea_1825"
+			],
+			"titulo": "The seat of Congress",
+			"texto": "Until 1898 the Bolivian Congress met in this hall. Bolivia's first Constitution, drafted by Bolívar, was enacted here, and Marshal Sucre took the oath as the Republic's first President.",
+			"cita": "From then until 1898, the Bolivian Congress met in that magnificent hall. (translated from the Spanish original)",
+			"estado": "verificada",
+			"fuentes": [
+				"cdl_historia"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		},
+		{
+			"id": "f_retratos",
+			"escenas": [
+				"asamblea_1825"
+			],
+			"titulo": "The portraits of the Hall",
+			"texto": "The portrait of Bolívar painted by José Gil de Castro in Lima presides over the Hall of Independence. To its right hangs Sucre's and to its left that of General José Ballivián.",
+			"estado": "verificada",
+			"fuentes": [
+				"cdl_salon_independencia"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		},
+		{
+			"id": "f_guerrilla",
+			"escenas": [
+				"guerrilla_1816"
+			],
+			"titulo": "The guerrillas of Upper Peru",
+			"texto": "Juana Azurduy, at the head of her Leales squadron, and her husband Manuel Asencio Padilla, leader of the Upper Peru guerrillas, fought between Tarabuco, La Laguna, Pomabamba and El Villar.",
+			"estado": "verificada",
+			"fuentes": [
+				"cdl_sala_guerrilleros"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		},
+		{
+			"id": "f_pendon",
+			"escenas": [
+				"guerrilla_1816"
+			],
+			"titulo": "The captured banner",
+			"texto": "A painting in the museum shows Juana Azurduy after seizing a Spanish banner from the royalists.",
+			"nota": "The exact place and date of that action still need to be verified in an official source.",
+			"estado": "verificada",
+			"fuentes": [
+				"cdl_sala_guerrilleros"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		},
+		{
+			"id": "f_grado_azurduy",
+			"escenas": [
+				"guerrilla_1816"
+			],
+			"titulo": "Lieutenant Colonel of the Militia",
+			"texto": "According to the museum, the government of Buenos Aires granted Juana Azurduy the rank of Lieutenant Colonel of the Militia at Belgrano's request.",
+			"estado": "verificada",
+			"fuentes": [
+				"cdl_sala_guerrilleros"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		},
+		{
+			"id": "f_restos_azurduy",
+			"escenas": [
+				"guerrilla_1816"
+			],
+			"titulo": "The remains of Juana Azurduy",
+			"texto": "In the Hall of the Guerrillas, a carved wooden chest holds the remains of Juana Azurduy, who died in Sucre in 1862 at the age of 82.",
+			"estado": "verificada",
+			"fuentes": [
+				"cdl_sala_guerrilleros"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		},
+		{
+			"id": "f_doctores_charcas",
+			"escenas": [
+				"universidad_1809"
+			],
+			"titulo": "The doctors of Charcas",
+			"texto": "The leading figures of the revolutions of 1809 (25 May in Chuquisaca, 16 July in La Paz, 10 August in Quito) and of 25 May 1810 in Buenos Aires earned their doctorates of Charcas in this building.",
+			"cita": "the leading figures of the revolutions of 1809 earned their doctorates of Charcas in it (translated from the Spanish original)",
+			"estado": "verificada",
+			"fuentes": [
+				"cdl_historia"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		},
+		{
+			"id": "f_25_mayo_1809",
+			"escenas": [
+				"universidad_1809"
+			],
+			"titulo": "25 May 1809",
+			"texto": "On 25 May 1809 there was a popular uprising in Chuquisaca against the intendant governor Ramón García de León y Pizarro. The Royal Audiencia of Charcas removed him and formed a junta.",
+			"nota": "An official Bolivian source supporting this fact is still missing.",
+			"estado": "por_verificar",
+			"fuentes": [
+				"wiki_revolucion_chuquisaca"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		},
+		{
+			"id": "f_silogismo",
+			"escenas": [
+				"universidad_1809"
+			],
+			"titulo": "The Chuquisaca syllogism",
+			"texto": "Bernardo de Monteagudo set out an argument for self-determination, later known as the Chuquisaca syllogism: the Indies are a personal domain of the King of Spain; the King is prevented from reigning; therefore, the Indies must govern themselves.",
+			"nota": "Text originally from an English source. An official or academic source in Spanish is still missing.",
+			"estado": "por_verificar",
+			"fuentes": [
+				"wiki_revolucion_chuquisaca"
+			],
+			"revision": {
+				"aprobada": false,
+				"revisor": "",
+				"fecha": ""
+			}
+		}
+	]
+}
