@@ -1,0 +1,58 @@
+{
+  "id": "turismo_abierto",
+  "nombre": "Turismo abierto clásico",
+  "triangulos": 66301,
+  "mallas": 54,
+  "materiales": 18,
+  "triangulos_degenerados": 0,
+  "limite_min_m": [
+    -2.0926,
+    -0.903,
+    0.0
+  ],
+  "limite_max_m": [
+    1.9923,
+    0.903,
+    1.8748
+  ],
+  "dimensiones_m": [
+    4.0848,
+    1.806,
+    1.8748
+  ],
+  "pivotes_ruedas": [
+    "rueda_trasera_derecha",
+    "rueda_trasera_izquierda",
+    "rueda_delantera_derecha",
+    "rueda_delantera_izquierda"
+  ],
+  "validacion_urbana": "Vehículo móvil local sin emplazamiento estático en manzanas.",
+  "interpretacion": [
+    "Cotas estimadas de las láminas.",
+    "Salpicadero y caras ocultas interpretados."
+  ],
+  "movimiento": {
+    "velocidad_maxima": 7.5,
+    "retroceso_maximo": 1.62,
+    "aceleracion": 1.46,
+    "frenada": 2.88,
+    "direccion_maxima": 0.4,
+    "rapidez_direccion": 0.81,
+    "velocidad_demo": 2.2,
+    "radio_demo": 9.0,
+    "radio_rueda": 0.431,
+    "eje_trasero": -1.43,
+    "eje_delantero": 1.48,
+    "semivia": 0.773
+  },
+  "referencia": "clasicos/ChatGPT Image Nov 25, 2026, 03_43_00 PM.png",
+  "normal_goma": {
+    "fuente": "ambientCG Rubber004",
+    "licencia": "CC0 1.0"
+  },
+  "clips": [
+    "rodar_adelante",
+    "rodar_atras"
+  ],
+  "angulos_direccion_verificados": 41
+}

@@ -1,0 +1,23 @@
+{
+  "titulo": "Remolque de pasajeros de madera",
+  "vehiculos": [
+    {
+      "id": "remolque_madera",
+      "nombre": "Remolque de pasajeros de madera",
+      "largo": 5.9,
+      "ancho": 1.91,
+      "alto": 2.58,
+      "ejes": [
+        -1.91,
+        1.43
+      ],
+      "radio_rueda": 0.478,
+      "semivia_ruedas": 0.887,
+      "triangulos": 69956,
+      "tipo": "remolque",
+      "glb": "../remolque_madera.glb",
+      "blend": "../remolque_madera.blend",
+      "ficha": "../remolque_madera.ficha.json"
+    }
+  ]
+}

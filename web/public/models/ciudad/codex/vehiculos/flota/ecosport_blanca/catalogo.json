@@ -1,0 +1,22 @@
+{
+  "titulo": "Ford EcoSport blanca",
+  "vehiculos": [
+    {
+      "id": "ecosport_blanca",
+      "nombre": "Ford EcoSport blanca",
+      "largo": 4.16,
+      "ancho": 1.77,
+      "alto": 1.81,
+      "ejes": [
+        -1.21,
+        1.26
+      ],
+      "radio_rueda": 0.337,
+      "semivia_ruedas": 0.747,
+      "triangulos": 89293,
+      "glb": "../ecosport_blanca.glb",
+      "blend": "../ecosport_blanca.blend",
+      "ficha": "../ecosport_blanca.ficha.json"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "vagoneta_blanca",
+  "nombre": "Vagoneta blanca clásica",
+  "triangulos": 87398,
+  "mallas": 35,
+  "materiales": 15,
+  "triangulos_degenerados": 0,
+  "limite_min_m": [
+    -2.2393,
+    -0.9869,
+    0.0
+  ],
+  "limite_max_m": [
+    2.2447,
+    0.9869,
+    1.65
+  ],
+  "dimensiones_m": [
+    4.484,
+    1.9738,
+    1.65
+  ],
+  "pivotes_ruedas": [
+    "rueda_trasera_derecha",
+    "rueda_trasera_izquierda",
+    "rueda_delantera_derecha",
+    "rueda_delantera_izquierda"
+  ],
+  "validacion_urbana": "Vehículo móvil local sin emplazamiento estático en manzanas.",
+  "interpretacion": [
+    "Las medidas se estimaron desde las proporciones de la lámina, con el perfil como guía longitudinal y las vistas frontal y trasera para anchos y ópticas.",
+    "El lado oculto, el bastidor, los asientos y el maletero se interpretaron. Cuatro puertas laterales y un portón se representan cerrados.",
+    "La forma de los emblemas sigue la lámina. Las matrículas se reproducen lisas."
+  ],
+  "movimiento": {
+    "velocidad_maxima": 8.3333333333,
+    "retroceso_maximo": 2.0,
+    "aceleracion": 1.8,
+    "frenada": 3.5,
+    "direccion_maxima": 0.43,
+    "rapidez_direccion": 0.85,
+    "velocidad_demo": 2.5,
+    "radio_demo": 9.0,
+    "radio_rueda": 0.328,
+    "eje_trasero": -1.17,
+    "eje_delantero": 1.41,
+    "semivia": 0.711
+  },
+  "referencia": "01_vagoneta_blanca_clasica",
+  "normal_goma": {
+    "fuente": "ambientCG Rubber004",
+    "licencia": "CC0 1.0"
+  },
+  "clips": [
+    "rodar_adelante",
+    "rodar_atras"
+  ],
+  "angulos_direccion_verificados": 41
+}
