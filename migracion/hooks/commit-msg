@@ -1,0 +1,6 @@
+#!/bin/sh
+# Rechaza commits con firmas o atribuciones automáticas de asistentes de IA (MIGRATION_PLAN.md §Reglas).
+if grep -qiE 'co-authored-by:|generated (with|by)|🤖|noreply@anthropic|claude code|claude\.ai|chatgpt|gemini cli|copilot' "$1"; then
+  echo "commit-msg: el mensaje lleva una firma o atribución automática de un asistente. Quítala y vuelve a commitear." >&2
+  exit 1
+fi
