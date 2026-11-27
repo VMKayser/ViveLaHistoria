@@ -13,6 +13,7 @@ Hackathon Regional 2026 · Sede Sucre · Sector Patrimonio y educación.
 | Parte | Estado |
 | --- | --- |
 | Escena 1: La Asamblea de 1825 | Jugable de inicio a fin, con arquitectura de Blender, texturas PBR y luz horneada |
+| Personajes de la Escena 1 | 5 personas con ropa de 1825 (MakeHuman), que miran al jugador y gesticulan al hablar (`blender/personajes_1825.py`) |
 | Sistema de fuentes y fichas | Listo: 10 fuentes (5 oficiales), 20 fichas |
 | Escenas 2 (Juana Azurduy, 1816) y 3 (Universidad, 1809) | Fichas cargadas; jugabilidad pendiente |
 | Personajes y brazos del jugador | Provisionales (cápsulas); listos para recibir los modelos del equipo |
