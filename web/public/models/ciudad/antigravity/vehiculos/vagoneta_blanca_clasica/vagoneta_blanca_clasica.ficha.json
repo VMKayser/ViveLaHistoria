@@ -1,0 +1,50 @@
+{
+  "id": "vagoneta_blanca_clasica",
+  "nombre": "Vagoneta blanca clásica",
+  "triangulos": 54492,
+  "mallas": 35,
+  "materiales": 15,
+  "triangulos_degenerados": 0,
+  "limite_min_m": [
+    -2.227,
+    -0.9499,
+    0.0
+  ],
+  "limite_max_m": [
+    2.225,
+    0.9499,
+    1.53
+  ],
+  "dimensiones_m": [
+    4.452,
+    1.8998,
+    1.53
+  ],
+  "pivotes_ruedas": [
+    "rueda_trasera_derecha",
+    "rueda_trasera_izquierda",
+    "rueda_delantera_derecha",
+    "rueda_delantera_izquierda"
+  ],
+  "validacion_urbana": "Vehículo móvil local sin emplazamiento estático en manzanas.",
+  "interpretacion": [
+    "Dimensiones estimadas a escala humana (4,32 × 1,70 × 1,53 m, batalla 2,30 m) a partir de las proporciones medidas en la lámina de 4 vistas y fotografía de referencia, sin plano acotado de fábrica.",
+    "El perfil lateral gobierna largo, batalla, voladizos, cintura y los tres grupos de cristales laterales; las vistas frontal y trasera gobiernan caída de invernadero (tumblehome), ópticas, parrilla, emblemas y portaplaca.",
+    "Distribución interior sobria (tablero con volante a la izquierda según vista frontal de la lámina, asientos con apoyacabezas, espejo interior y piso de maletero) interpretada para acompañar las vistas acristaladas sin inventar accesorios exteriores.",
+    "Puertas y portón modelados cerrados conforme al diseño; rig de dirección Ackermann y rodadura firmada en las cuatro ruedas listo para integrar."
+  ],
+  "acabados": {
+    "presupuesto_triangulos": 58000,
+    "radio_esquina_frontal": 0.19,
+    "radio_esquina_trasera": 0.16,
+    "segmentos_redondeo": 3,
+    "segmentos_neumatico": 56,
+    "textura_goma": "texturas/Rubber004_1K-JPG_NormalGL.jpg",
+    "normal_goma_intensidad": 0.22
+  },
+  "normal_goma": {
+    "archivo": "texturas/Rubber004_1K-JPG_NormalGL.jpg",
+    "fuente": "https://ambientcg.com/view?id=Rubber004",
+    "licencia": "CC0 1.0"
+  }
+}

@@ -1,0 +1,170 @@
+{
+ "autobus_bronco": {
+  "archivo": "autobus_bronco.glb",
+  "bytes": 593948,
+  "bytesOrigen": 5088588,
+  "triangulos": {
+   "cuerpo0": 31505,
+   "vidrio0": 2280,
+   "rueda0": 3181,
+   "cuerpo1": 8177,
+   "rueda1": 234,
+   "cuerpo2": 1469
+  }
+ },
+ "vagoneta_blanca": {
+  "archivo": "vagoneta_blanca.glb",
+  "bytes": 229200,
+  "bytesOrigen": 4354776,
+  "triangulos": {
+   "cuerpo0": 14220,
+   "vidrio0": 3848,
+   "rueda0": 1553,
+   "cuerpo1": 12761,
+   "rueda1": 172,
+   "cuerpo2": 1743
+  }
+ },
+ "montero_sport_blanca": {
+  "archivo": "montero_sport_blanca.glb",
+  "bytes": 316476,
+  "bytesOrigen": 4547532,
+  "triangulos": {
+   "cuerpo0": 23796,
+   "vidrio0": 3400,
+   "rueda0": 1768,
+   "cuerpo1": 13183,
+   "rueda1": 216,
+   "cuerpo2": 3159
+  }
+ },
+ "ecosport_blanca": {
+  "archivo": "ecosport_blanca.glb",
+  "bytes": 250912,
+  "bytesOrigen": 4434772,
+  "triangulos": {
+   "cuerpo0": 18323,
+   "vidrio0": 3400,
+   "rueda0": 1606,
+   "cuerpo1": 13265,
+   "rueda1": 189,
+   "cuerpo2": 1314
+  }
+ },
+ "hilux_blanca": {
+  "archivo": "hilux_blanca.glb",
+  "bytes": 237940,
+  "bytesOrigen": 4334844,
+  "triangulos": {
+   "cuerpo0": 17144,
+   "vidrio0": 2620,
+   "rueda0": 1603,
+   "cuerpo1": 12443,
+   "rueda1": 208,
+   "cuerpo2": 1593
+  }
+ },
+ "toyota_roja": {
+  "archivo": "toyota_roja.glb",
+  "bytes": 218692,
+  "bytesOrigen": 4552780,
+  "triangulos": {
+   "cuerpo0": 14239,
+   "vidrio0": 3012,
+   "rueda0": 1869,
+   "cuerpo1": 12586,
+   "rueda1": 229,
+   "cuerpo2": 1605
+  }
+ },
+ "ford_azul": {
+  "archivo": "ford_azul.glb",
+  "bytes": 256200,
+  "bytesOrigen": 4642224,
+  "triangulos": {
+   "cuerpo0": 17610,
+   "vidrio0": 2340,
+   "rueda0": 2008,
+   "cuerpo1": 12706,
+   "rueda1": 262,
+   "cuerpo2": 2541
+  }
+ },
+ "turismo_abierto": {
+  "archivo": "turismo_abierto.glb",
+  "bytes": 240336,
+  "bytesOrigen": 4017388,
+  "triangulos": {
+   "cuerpo0": 17080,
+   "vidrio0": 756,
+   "rueda0": 2326,
+   "cuerpo1": 9209,
+   "rueda1": 200,
+   "cuerpo2": 2107
+  }
+ },
+ "model_t_coupe": {
+  "archivo": "model_t_coupe.glb",
+  "bytes": 263160,
+  "bytesOrigen": 4161304,
+  "triangulos": {
+   "cuerpo0": 18145,
+   "vidrio0": 2168,
+   "rueda0": 2423,
+   "cuerpo1": 10411,
+   "rueda1": 204,
+   "cuerpo2": 2114
+  }
+ },
+ "remolque_madera": {
+  "archivo": "remolque_madera.glb",
+  "bytes": 308820,
+  "bytesOrigen": 4046444,
+  "triangulos": {
+   "cuerpo0": 24683,
+   "vidrio0": 0,
+   "rueda0": 2450,
+   "cuerpo1": 9218,
+   "rueda1": 259,
+   "cuerpo2": 1844,
+   "ruedad0": 2466,
+   "ruedad1": 240,
+   "tornamesa0": 1798,
+   "tornamesa1": 600
+  }
+ },
+ "carroza_azul": {
+  "archivo": "carroza_azul.glb",
+  "bytes": 390648,
+  "bytesOrigen": 940368,
+  "triangulos": {
+   "cuerpo0": 17552,
+   "vidrio0": 6,
+   "rueda0": 2652,
+   "cuerpo1": 4686,
+   "rueda1": 242,
+   "cuerpo2": 346,
+   "ruedad0": 2106,
+   "ruedad1": 206,
+   "tornamesa0": 1934,
+   "tornamesa1": 640
+  }
+ },
+ "carruaje_madera": {
+  "archivo": "carruaje_madera.glb",
+  "bytes": 449188,
+  "bytesOrigen": 1313020,
+  "triangulos": {
+   "cuerpo0": 27274,
+   "vidrio0": 0,
+   "rueda0": 2500,
+   "cuerpo1": 6666,
+   "rueda1": 234,
+   "cuerpo2": 684,
+   "ruedad0": 1854,
+   "ruedad1": 198,
+   "tornamesa0": 1926,
+   "tornamesa1": 640
+  }
+ }
+}

@@ -1,0 +1,232 @@
+{
+  "_leeme": [
+    "Flota del tráfico de la ciudad Godot. La lee web/scripts/preparar_vehiculos.mjs (kits) y ciudad3d/herramientas/vehiculos.mjs (flota).",
+    "archivo: GLB de codex relativo a web/public/models/ciudad/codex/vehiculos/ (solo lectura).",
+    "tipos: material -> tipo de vértice (1 pintura, 2 pintura de detalle, 3 faros, 4 pilotos). Los vidrios son 5 solos.",
+    "variantes: colores de cada unidad (principal = tipo 1, detalle = tipo 2). Si falta, sale del <id>.variantes.json de codex.",
+    "error: simplificación en metros por nivel (cuerpo0, rueda0, cuerpo1, rueda1, cuerpo2).",
+    "masa (kg) y piso (m sobre el suelo donde empieza la caja de choque).",
+    "caballo: GLB del caballo enganchado a la tornamesa (carrozas). cochero: figura sentada en el pescante.",
+    "flota: qué sale a la calle y con qué peso (proporción). remolque: tipo que arrastra (enganchado a la cola). Carrozas y carruajes, un tercio (pedido del usuario, 2026-11-26).",
+    "plaza: dónde se concentra el tránsito (ver su _leeme).",
+    "movimiento: pisa la ficha de codex. Velocidades subidas el 2026-11-26 (pedido del usuario: que el caminante, que corre a 5,5 m/s, no los alcance): autos 50 km/h, micro 43, clásicos 41, carrozas 30 (galope)."
+  ],
+  "vehiculos": [
+    {
+      "id": "autobus_bronco",
+      "archivo": "autobus_bronco.glb",
+      "variantes_archivo": "autobus_bronco.variantes.json",
+      "rueda": "rueda_trasera_derecha",
+      "tipos": { "pintura_acento__0343b8": 1, "pintura_acento__1553c0": 2, "metal__e3e8f3": 3, "pintura_acento__cf3028": 4 },
+      "error": { "cuerpo0": 0.0025, "rueda0": 0.004, "cuerpo1": 0.03, "rueda1": 0.035, "cuerpo2": 0.16 },
+      "movimiento": { "velocidad_maxima": 12.0, "aceleracion": 1.4 },
+      "masa": 7500,
+      "piso": 0.62
+    },
+    {
+      "id": "vagoneta_blanca",
+      "archivo": "flota/vagoneta_blanca.glb",
+      "rueda": "rueda_trasera_derecha",
+      "tipos": { "blanco_marfil": 1, "pintura_sombra": 2, "lente_clara": 3, "rojo": 4 },
+      "variantes": [
+        { "id": "marfil", "principal": "#e8ded7", "detalle": "#b3a5a2" },
+        { "id": "celeste", "principal": "#8fb0c4", "detalle": "#6b8496" },
+        { "id": "guinda", "principal": "#6c2330", "detalle": "#4d1922" },
+        { "id": "verde", "principal": "#3f6b4f", "detalle": "#2d4c39" },
+        { "id": "beige", "principal": "#c9b38e", "detalle": "#9a8a6d" },
+        { "id": "plata", "principal": "#b4b3b1", "detalle": "#878684" }
+      ],
+      "movimiento": { "velocidad_maxima": 13.9, "aceleracion": 2.2 },
+      "masa": 1400,
+      "piso": 0.35
+    },
+    {
+      "id": "montero_sport_blanca",
+      "archivo": "flota/montero_sport_blanca.glb",
+      "rueda": "rueda_trasera_derecha",
+      "tipos": { "pintura": 1, "luz": 3, "lente": 3, "rojo": 4 },
+      "variantes": [
+        { "id": "blanca", "principal": "#ede7de", "detalle": "#ede7de" },
+        { "id": "plata", "principal": "#b6b6b6", "detalle": "#b6b6b6" },
+        { "id": "negra", "principal": "#2b2a2f", "detalle": "#2b2a2f" },
+        { "id": "gris", "principal": "#696c72", "detalle": "#696c72" },
+        { "id": "azul", "principal": "#2c4a78", "detalle": "#2c4a78" },
+        { "id": "vino", "principal": "#6c1f2a", "detalle": "#6c1f2a" }
+      ],
+      "movimiento": { "velocidad_maxima": 13.9, "aceleracion": 2.2 },
+      "masa": 2000,
+      "piso": 0.45
+    },
+    {
+      "id": "ecosport_blanca",
+      "archivo": "flota/ecosport_blanca.glb",
+      "rueda": "rueda_trasera_derecha",
+      "tipos": { "pintura": 1, "luz": 3, "lente": 3, "rojo": 4 },
+      "variantes": [
+        { "id": "blanca", "principal": "#ede9e3", "detalle": "#ede9e3" },
+        { "id": "roja", "principal": "#a8262e", "detalle": "#a8262e" },
+        { "id": "azul", "principal": "#2f5d8c", "detalle": "#2f5d8c" },
+        { "id": "plata", "principal": "#b8b8b6", "detalle": "#b8b8b6" },
+        { "id": "naranja", "principal": "#c4652b", "detalle": "#c4652b" },
+        { "id": "grafito", "principal": "#4a4a50", "detalle": "#4a4a50" }
+      ],
+      "movimiento": { "velocidad_maxima": 13.9, "aceleracion": 2.2 },
+      "masa": 1300,
+      "piso": 0.4
+    },
+    {
+      "id": "hilux_blanca",
+      "archivo": "flota/hilux_blanca.glb",
+      "rueda": "rueda_trasera_derecha",
+      "tipos": { "pintura": 1, "luz": 3, "lente": 3, "rojo": 4 },
+      "variantes": [
+        { "id": "blanca", "principal": "#efebe3", "detalle": "#efebe3" },
+        { "id": "plata", "principal": "#b5b5b4", "detalle": "#b5b5b4" },
+        { "id": "gris", "principal": "#5d6166", "detalle": "#5d6166" },
+        { "id": "negra", "principal": "#2a292d", "detalle": "#2a292d" },
+        { "id": "roja", "principal": "#9e2329", "detalle": "#9e2329" },
+        { "id": "arena", "principal": "#bfae8c", "detalle": "#bfae8c" }
+      ],
+      "movimiento": { "velocidad_maxima": 13.9, "aceleracion": 2.2 },
+      "masa": 2000,
+      "piso": 0.45
+    },
+    {
+      "id": "toyota_roja",
+      "archivo": "flota/toyota_roja.glb",
+      "rueda": "rueda_trasera_derecha",
+      "tipos": { "pintura": 1, "pintura_sombra": 2, "faro": 3, "rojo": 4 },
+      "variantes": [
+        { "id": "roja", "principal": "#b81e28", "detalle": "#7f1c26" },
+        { "id": "azul", "principal": "#2e4f86", "detalle": "#1f3760" },
+        { "id": "verde", "principal": "#2f6145", "detalle": "#21442f" },
+        { "id": "blanca", "principal": "#e9e3da", "detalle": "#b5aba2" },
+        { "id": "amarilla", "principal": "#d4a332", "detalle": "#9f7a22" },
+        { "id": "negra", "principal": "#2b2a2d", "detalle": "#1c1b1e" }
+      ],
+      "movimiento": { "velocidad_maxima": 13.9, "aceleracion": 2.2 },
+      "masa": 1600,
+      "piso": 0.5
+    },
+    {
+      "id": "ford_azul",
+      "archivo": "flota/ford_azul.glb",
+      "rueda": "rueda_trasera_derecha",
+      "tipos": { "azul_carroceria": 1, "azul_molduras": 2, "faro": 3, "rojo": 4 },
+      "variantes": [
+        { "id": "azul", "principal": "#212d48", "detalle": "#253249" },
+        { "id": "roja", "principal": "#7a1f27", "detalle": "#651a22" },
+        { "id": "verde", "principal": "#24432f", "detalle": "#1d3626" },
+        { "id": "negra", "principal": "#29282c", "detalle": "#222125" },
+        { "id": "plata", "principal": "#9fa3a6", "detalle": "#8a8e91" },
+        { "id": "blanca", "principal": "#e6e1d9", "detalle": "#cfc9c0" }
+      ],
+      "movimiento": { "velocidad_maxima": 13.9, "aceleracion": 2.2 },
+      "masa": 1900,
+      "piso": 0.5
+    },
+    {
+      "id": "turismo_abierto",
+      "archivo": "flota/turismo_abierto.glb",
+      "rueda": "rueda_trasera_derecha",
+      "tipos": { "carroceria": 1, "aleta": 2, "lente": 3, "rojo": 4 },
+      "variantes": [
+        { "id": "grafito", "principal": "#36343d", "detalle": "#453b3b" },
+        { "id": "verde_botella", "principal": "#24473a", "detalle": "#22292a" },
+        { "id": "granate", "principal": "#6b2228", "detalle": "#2d2a2f" },
+        { "id": "azul_noche", "principal": "#233a5c", "detalle": "#1f2530" },
+        { "id": "crema", "principal": "#d6c69f", "detalle": "#3b3436" },
+        { "id": "rojo", "principal": "#a32b2b", "detalle": "#2d2a2f" }
+      ],
+      "movimiento": { "velocidad_maxima": 11.5, "aceleracion": 1.7 },
+      "masa": 1100,
+      "piso": 0.5
+    },
+    {
+      "id": "model_t_coupe",
+      "archivo": "flota/model_t_coupe.glb",
+      "rueda": "rueda_trasera_derecha",
+      "tipos": { "carroceria": 1, "aleta": 2, "lente": 3, "rojo": 4 },
+      "variantes": [
+        { "id": "negro", "principal": "#2d2a2d", "detalle": "#37333d" },
+        { "id": "verde", "principal": "#2b4a3a", "detalle": "#2a2c2b" },
+        { "id": "granate", "principal": "#5e2026", "detalle": "#2b292b" },
+        { "id": "azul", "principal": "#26395a", "detalle": "#262a31" },
+        { "id": "burdeos", "principal": "#4a1f2c", "detalle": "#2b292b" }
+      ],
+      "movimiento": { "velocidad_maxima": 11.5, "aceleracion": 1.7 },
+      "masa": 1000,
+      "piso": 0.5
+    },
+    {
+      "id": "remolque_madera",
+      "archivo": "flota/remolque_madera.glb",
+      "rueda": "rueda_trasera_derecha",
+      "rueda_delantera": "rueda_delantera_derecha",
+      "tipos": {},
+      "variantes": [{ "id": "madera", "principal": "#a6826f", "detalle": "#5a4642" }],
+      "movimiento": { "velocidad_maxima": 13.9 },
+      "masa": 900,
+      "piso": 0.6
+    },
+    {
+      "id": "carroza_azul",
+      "archivo": "carrozas/carroza_azul.glb",
+      "rueda": "rueda_trasera_derecha",
+      "rueda_delantera": "rueda_delantera_derecha",
+      "tipos": { "azul__254868": 1, "azul_borde__355d84": 2, "vidrio_farol__ffdb8e": 3 },
+      "variantes": [
+        { "id": "azul", "principal": "#2a4a68", "detalle": "#385d83" },
+        { "id": "verde", "principal": "#2c5240", "detalle": "#3d6b54" },
+        { "id": "granate", "principal": "#5e2229", "detalle": "#7a2f36" },
+        { "id": "negra", "principal": "#262529", "detalle": "#3a383d" },
+        { "id": "ocre", "principal": "#9c7a2c", "detalle": "#b8964a" }
+      ],
+      "caballo": "carrozas/caballo_rome.glb",
+      "cochero": true,
+      "movimiento": { "velocidad_maxima": 8.3, "aceleracion": 1.8 },
+      "masa": 700,
+      "piso": 0.6
+    },
+    {
+      "id": "carruaje_madera",
+      "archivo": "carrozas/carruaje_madera.glb",
+      "rueda": "rueda_trasera_derecha",
+      "rueda_delantera": "rueda_delantera_derecha",
+      "tipos": {},
+      "variantes": [{ "id": "roble", "principal": "#a55831", "detalle": "#b68143" }],
+      "caballo": "carrozas/caballo_rome.glb",
+      "cochero": true,
+      "movimiento": { "velocidad_maxima": 8.3, "aceleracion": 1.8 },
+      "masa": 650,
+      "piso": 0.6
+    }
+  ],
+  "caballo": {
+    "archivo": "carrozas/caballo_rome.glb",
+    "variantes_archivo": "carrozas/caballo_rome.variantes.json",
+    "tipos": { "pelaje": 1, "crin": 2 }
+  },
+  "flota": [
+    { "tipo": "autobus_bronco", "peso": 2.5 },
+    { "tipo": "vagoneta_blanca", "peso": 1 },
+    { "tipo": "montero_sport_blanca", "peso": 1 },
+    { "tipo": "ecosport_blanca", "peso": 1 },
+    { "tipo": "hilux_blanca", "peso": 1 },
+    { "tipo": "toyota_roja", "peso": 1 },
+    { "tipo": "ford_azul", "peso": 1 },
+    { "tipo": "carroza_azul", "peso": 2.5 },
+    { "tipo": "turismo_abierto", "peso": 0.6 },
+    { "tipo": "turismo_abierto", "remolque": "remolque_madera", "peso": 0.6 },
+    { "tipo": "model_t_coupe", "peso": 0.8 },
+    { "tipo": "carruaje_madera", "peso": 2.5 }
+  ],
+  "plaza": {
+    "_leeme": "Mucho tránsito en la Plaza 25 de Mayo (pedido del usuario, 2026-11-26): con el caminante a menos de 'alcance' m de su centro, 'parte' de los vehículos que reaparecen lo hacen en carriles a menos de 'radio' m de la plaza, y en los cruces cercanos eligen 'atraccion' veces más el camino que se acerca a ella (dan vueltas a la plaza).",
+    "centro": [-176.8, 209.1],
+    "radio": 85,
+    "alcance": 520,
+    "parte": 0.85,
+    "atraccion": 8
+  }
+}
