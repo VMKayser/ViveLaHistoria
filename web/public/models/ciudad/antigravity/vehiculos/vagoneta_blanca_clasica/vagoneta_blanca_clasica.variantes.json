@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "id": "vagoneta_blanca_clasica",
+  "predeterminado": "blanca",
+  "maestro": "vagoneta_blanca_clasica.glb",
+  "controlador": "cinematica_vehiculo.mjs",
+  "variantes": [
+    {
+      "id": "blanca",
+      "nombre": "Blanca clásica",
+      "principal": "#f2ece4",
+      "glb": "vagoneta_blanca_clasica_blanca.glb",
+      "blend": "vagoneta_blanca_clasica_blanca.blend",
+      "bytes_glb": 3491652,
+      "sha256_glb": "bcf1ad0e7b2b285d299600aeee647b84d785e2439ba0c30da26ad7e54c5c828c"
+    },
+    {
+      "id": "celeste",
+      "nombre": "Celeste años 90",
+      "principal": "#6d8fa8",
+      "glb": "vagoneta_blanca_clasica_celeste.glb",
+      "blend": "vagoneta_blanca_clasica_celeste.blend",
+      "bytes_glb": 3491672,
+      "sha256_glb": "ce8fb6ff7702c317985706a4dcb0e94e11c8c9700e73ed5ae5ef52277f90e9f3"
+    },
+    {
+      "id": "guinda",
+      "nombre": "Guinda clásico",
+      "principal": "#8c2f39",
+      "glb": "vagoneta_blanca_clasica_guinda.glb",
+      "blend": "vagoneta_blanca_clasica_guinda.blend",
+      "bytes_glb": 3491672,
+      "sha256_glb": "aefac0973463f8a1ad65401421092976fa55c6d779aed9add82d4755a3dc5838"
+    },
+    {
+      "id": "verde",
+      "nombre": "Verde botella",
+      "principal": "#356354",
+      "glb": "vagoneta_blanca_clasica_verde.glb",
+      "blend": "vagoneta_blanca_clasica_verde.blend",
+      "bytes_glb": 3491672,
+      "sha256_glb": "c33e3443af1bf41b21001523b8af1a7bffe3abca9863a1047803bc11aa1f15b3"
+    }
+  ]
+}

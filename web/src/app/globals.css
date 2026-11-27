@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+/*
+  Colores de la interfaz: bandera de Sucre (banderaSucre.png): cruz de Borgoña roja sobre blanco y corona de oro.
+  - rojo:   la cruz (acciones principales, estado activo, marca)
+  - oro:    la corona (realces, foco, posición en el minimapa)
+  - cal:    el blanco de la bandera, apenas cálido, como los muros encalados de la Ciudad Blanca (fondos de paneles)
+  - tinta:  texto (marrón casi negro, cálido; nunca negro puro)
+  - esmeralda: las piedras verdes de la corona (confirmaciones; uso mínimo)
+*/
+@theme {
+  --color-sucre-rojo: #d9171a;
+  --color-sucre-rojo-oscuro: #a80f12;
+  --color-sucre-rojo-claro: #fbe3e3;
+  --color-sucre-oro: #eac102;
+  --color-sucre-oro-oscuro: #9c7a00;
+  --color-sucre-oro-claro: #fbf1c4;
+  --color-sucre-cal: #fbf9f4;
+  --color-sucre-blanco: #ffffff;
+  --color-sucre-tinta: #2b1d16;
+  --color-sucre-tinta-suave: #6b5a4e;
+  --color-sucre-esmeralda: #1f7a45;
+
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-titulo: "Cormorant Garamond", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+
+  --shadow-panel: 0 6px 24px -6px rgb(43 29 22 / 0.28), 0 1px 3px rgb(43 29 22 / 0.12);
+}
+
+body {
+  background: var(--color-sucre-cal);
+  color: var(--color-sucre-tinta);
+  font-family: var(--font-sans);
+}
+
+/* Panel flotante sobre la escena: blanco cal casi opaco, borde fino y sombra cálida. */
+@utility panel {
+  background: rgb(251 249 244 / 0.94);
+  border: 1px solid rgb(43 29 22 / 0.08);
+  border-radius: 14px;
+  box-shadow: var(--shadow-panel);
+  backdrop-filter: blur(6px);
+}
+
+/* Botón principal (rojo de la cruz) y secundario (cal con borde). */
+@utility boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 10px;
+  padding: 0.55rem 1rem;
+  font-weight: 600;
+  transition: background-color 120ms, transform 120ms, box-shadow 120ms;
+  &:active { transform: translateY(1px); }
+  &:focus-visible { outline: 3px solid var(--color-sucre-oro); outline-offset: 2px; }
+}
+@utility boton-rojo {
+  background: var(--color-sucre-rojo);
+  color: white;
+  &:hover { background: var(--color-sucre-rojo-oscuro); }
+}
+@utility boton-cal {
+  background: var(--color-sucre-cal);
+  color: var(--color-sucre-tinta);
+  border: 1px solid rgb(43 29 22 / 0.14);
+  &:hover { background: var(--color-sucre-oro-claro); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}

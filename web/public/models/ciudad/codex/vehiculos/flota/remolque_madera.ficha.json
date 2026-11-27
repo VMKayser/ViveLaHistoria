@@ -1,0 +1,67 @@
+{
+  "id": "remolque_madera",
+  "nombre": "Remolque de pasajeros de madera",
+  "triangulos": 69956,
+  "mallas": 53,
+  "materiales": 19,
+  "triangulos_degenerados": 0,
+  "limite_min_m": [
+    -2.6001,
+    -0.9835,
+    0.0
+  ],
+  "limite_max_m": [
+    3.1673,
+    0.9835,
+    2.6129
+  ],
+  "dimensiones_m": [
+    5.7674,
+    1.967,
+    2.6129
+  ],
+  "pivotes_ruedas": [
+    "rueda_trasera_derecha",
+    "rueda_trasera_izquierda",
+    "rueda_delantera_derecha",
+    "rueda_delantera_izquierda"
+  ],
+  "validacion_urbana": "Vehículo móvil local sin emplazamiento estático en manzanas.",
+  "interpretacion": [
+    "Cotas estimadas de las láminas.",
+    "La lámina muestra lanza de arrastre. Se interpretó como remolque con eje delantero pivotante.",
+    "Se interpretó el paso central entre pares de bancos."
+  ],
+  "movimiento": {
+    "velocidad_maxima": 4.0,
+    "retroceso_maximo": 1.62,
+    "aceleracion": 1.0,
+    "frenada": 2.88,
+    "direccion_maxima": 0.25,
+    "rapidez_direccion": 0.81,
+    "velocidad_demo": 2.2,
+    "radio_demo": 9.0,
+    "tipo_direccion": "tornamesa",
+    "radios_ruedas": {
+      "trasera": 0.478,
+      "delantera": 0.478
+    },
+    "enganche": {
+      "distancia_al_eje_delantero_m": 1.72
+    },
+    "radio_rueda": 0.478,
+    "eje_trasero": -1.91,
+    "eje_delantero": 1.43,
+    "semivia": 0.887
+  },
+  "referencia": "clasicos/ChatGPT Image Nov 25, 2026, 03_43_14 PM.png",
+  "normal_goma": {
+    "fuente": "ambientCG Rubber004",
+    "licencia": "CC0 1.0"
+  },
+  "clips": [
+    "rodar_adelante",
+    "rodar_atras"
+  ],
+  "angulos_direccion_verificados": 41
+}

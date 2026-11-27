@@ -1,0 +1,42 @@
+{
+  "id": "caballo_castano",
+  "nombre": "Caballo castaño de tiro",
+  "fuente": "horse.glb",
+  "escala": 0.89,
+  "centro_escaneo": [0.18, -0.045, 0.18977999687194824],
+  "articulaciones": {
+    "cuerpo": [[-0.38, 0, 1.04], [0.43, 0, 1.146]],
+    "cuello": [[0.496, 0, 1.078], [0.744, -0.017, 1.477]],
+    "nuca": [[0.744, -0.017, 1.477], [0.873, -0.008, 1.647]],
+    "cabeza": [[0.873, -0.008, 1.647], [1.173, -0.014, 1.438]],
+    "cola_1": [[-0.615, 0.024, 1.239], [-0.876, 0.047, 1.173]],
+    "cola_2": [[-0.876, 0.047, 1.173], [-1.084, 0.059, 1.012]],
+    "cola_3": [[-1.084, 0.059, 1.012], [-1.302, 0.053, 0.882]],
+    "oreja_derecha": [[0.880, -0.066, 1.689], [0.893,-0.067,1.810]],
+    "oreja_izquierda": [[0.879, 0.053, 1.690], [0.891,0.073,1.812]]
+  },
+  "patas": {
+    "mano_derecha": {
+      "puntos": [[0.558,-0.158,1.096],[0.555,-0.151,0.746],[0.907,-0.160,0.502],[0.883,-0.160,0.246],[0.804,-0.154,0.158]],
+      "apoyo": [0.539,-0.153], "angulo_escaneo": -60, "desfase_paso": 0.5, "desfase_trote": 0
+    },
+    "mano_izquierda": {
+      "puntos": [[0.548,0.158,1.095],[0.563,0.121,0.751],[0.479,0.064,0.468],[0.408,0.038,0.107],[0.476,0.029,0.006]],
+      "apoyo": [0.536,0.113], "angulo_escaneo": 0, "desfase_paso": 0, "desfase_trote": 0.5
+    },
+    "pata_derecha": {
+      "puntos": [[-0.505,-0.168,1.10],[-0.346,-0.167,0.754],[-0.614,-0.091,0.445],[-0.648,-0.064,0.107],[-0.574,-0.06,0.006]],
+      "apoyo": [-0.615,-0.125], "angulo_escaneo": 0, "desfase_paso": 0.75, "desfase_trote": 0.5
+    },
+    "pata_izquierda": {
+      "puntos": [[-0.499,0.162,1.102],[-0.346,0.174,0.755],[-0.595,0.121,0.559],[-0.301,0.139,0.286],[-0.326,0.134,0.151]],
+      "apoyo": [-0.615,0.137], "angulo_escaneo": -27, "desfase_paso": 0.25, "desfase_trote": 0
+    }
+  },
+  "clips": {
+    "reposo": {"fotogramas": 60, "zancada_m": 0, "apoyo": 1, "elevacion": 0, "desfase": "desfase_paso"},
+    "paso": {"fotogramas": 32, "zancada_m": 0.96, "apoyo": 0.63, "elevacion": 0.111, "desfase": "desfase_paso"},
+    "trote": {"fotogramas": 19, "zancada_m": 1.13, "apoyo": 0.48, "elevacion": 0.177, "desfase": "desfase_trote"},
+    "retroceso": {"fotogramas": 38, "zancada_m": -0.71, "apoyo": 0.65, "elevacion": 0.081, "desfase": "desfase_paso"}
+  }
+}

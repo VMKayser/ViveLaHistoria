@@ -1,0 +1,66 @@
+{
+  "id": "carroza_azul",
+  "nombre": "Carroza colonial cerrada",
+  "triangulos": 36714,
+  "mallas": 35,
+  "materiales": 12,
+  "triangulos_degenerados": 0,
+  "limite_min_m": [
+    -2.0602,
+    -0.912,
+    0.0
+  ],
+  "limite_max_m": [
+    3.797,
+    0.912,
+    2.5145
+  ],
+  "dimensiones_m": [
+    5.8572,
+    1.824,
+    2.5145
+  ],
+  "pivotes_ruedas": [
+    "rueda_trasera_derecha",
+    "rueda_trasera_izquierda",
+    "rueda_delantera_derecha",
+    "rueda_delantera_izquierda"
+  ],
+  "validacion_urbana": "Vehículo móvil local sin emplazamiento estático en manzanas.",
+  "interpretacion": [
+    "Cotas estimadas de la lámina",
+    "Asiento interior y herrajes inferiores interpretados",
+    "Lanza y tiro para un caballo interpretados"
+  ],
+  "dimensiones_sin_varas_m": [
+    4.1102,
+    1.824,
+    2.5145
+  ],
+  "movimiento": {
+    "tipo_direccion": "tornamesa",
+    "velocidad_maxima": 2.65,
+    "retroceso_maximo": 0.7,
+    "aceleracion": 0.85,
+    "frenada": 1.45,
+    "direccion_maxima": 0.29,
+    "rapidez_direccion": 0.58,
+    "radio_rueda": 0.7,
+    "eje_trasero": -1.18,
+    "eje_delantero": 1.28,
+    "semivia": 0.79,
+    "radios_ruedas": {
+      "trasera": 0.7,
+      "delantera": 0.55
+    },
+    "enganche": {
+      "distancia_al_eje_delantero_m": 2.22,
+      "inicio_varas_desde_eje_m": 0.72
+    }
+  },
+  "clips": [
+    "rodar_adelante",
+    "rodar_atras"
+  ],
+  "varas": "Ocultar el nodo completo varas_caballo para inspeccionar sin caballo"
+}

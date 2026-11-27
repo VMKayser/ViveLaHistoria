@@ -1,0 +1,19 @@
+{
+  "id": "caballo_rome",
+  "nombre": "ROME Galope",
+  "fuente": "caballo_rome_galope_apache2.glb",
+  "escala": 0.01,
+  "avance_desde_lanza_m": 0.36,
+  "variante_predeterminada": "alazan",
+  "variantes": {
+    "alazan": {"nombre": "Alazán", "pelaje": "#a65c38", "crin": "#3d1e17"},
+    "castano": {"nombre": "Castaño", "pelaje": "#734331", "crin": "#312426"},
+    "tordo": {"nombre": "Tordo", "pelaje": "#b9b2a9", "crin": "#666367"},
+    "negro": {"nombre": "Negro", "pelaje": "#38333a", "crin": "#272329"}
+  },
+  "clips": {
+    "reposo": {"duracion_s": 1, "zancada_m": 0},
+    "paso": {"duracion_s": 1.25, "zancada_m": 0.94},
+    "galope": {"duracion_s": 1.5, "zancada_m": 2.55}
+  }
+}

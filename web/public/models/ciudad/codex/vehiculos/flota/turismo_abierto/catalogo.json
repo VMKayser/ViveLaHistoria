@@ -1,0 +1,22 @@
+{
+  "titulo": "Turismo abierto clásico",
+  "vehiculos": [
+    {
+      "id": "turismo_abierto",
+      "nombre": "Turismo abierto clásico",
+      "largo": 4,
+      "ancho": 1.69,
+      "alto": 1.88,
+      "ejes": [
+        -1.43,
+        1.48
+      ],
+      "radio_rueda": 0.431,
+      "semivia_ruedas": 0.773,
+      "triangulos": 66301,
+      "glb": "../turismo_abierto.glb",
+      "blend": "../turismo_abierto.blend",
+      "ficha": "../turismo_abierto.ficha.json"
+    }
+  ]
+}
