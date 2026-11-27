@@ -1,154 +1,88 @@
-#!/usr/bin/env python3
-"""Descarga los recursos gráficos libres del juego y registra su origen y licencia.
+"""Descarga los assets CC0 de Poly Haven que usa la escena de 1809.
 
-Fuentes:
-- Poly Haven (https://polyhaven.com): texturas PBR, modelos 3D y cielos HDRI, licencia CC0.
-- Wikimedia Commons: retrato de Bolívar de José Gil de Castro, dominio público.
-
-Uso (desde la raíz del repositorio):
-    python3 herramientas/descargar_assets.py
-
-Deja todo en juego/assets/ y escribe juego/assets/LICENCIAS.md.
-Es idempotente: no vuelve a descargar archivos que ya existen.
+Uso:  python3 -I herramientas/descargar_assets.py
+Todo lo de Poly Haven es CC0 (dominio público): https://polyhaven.com/license
+Escribe godot/CREDITOS.md con la lista de lo descargado.
 """
-
-from __future__ import annotations
-
+import hashlib
 import json
-import subprocess
 import sys
-import time
 import urllib.request
 from pathlib import Path
 
-RAIZ = Path(__file__).resolve().parent.parent
-ASSETS = RAIZ / "juego" / "assets"
-AGENTE = "ViveLaHistoria-hackathon/1.0"
+RAIZ = Path(__file__).resolve().parent.parent / "godot" / "assets"
+UA = {"User-Agent": "ciudad-charcas-asset-fetch/0.1"}
 
-# id de Poly Haven -> (resolución, uso en el juego)
+# id de Poly Haven -> (carpeta local, resolución)
 TEXTURAS = {
-    "white_stucco": ("2k", "Muros encalados de la sala y el patio"),
-    "cobblestone_floor_04": ("2k", "Empedrado del patio"),
-    "square_brick_floor": ("2k", "Piso de baldosa de la Sala Mayor"),
-    "dark_wooden_planks": ("1k", "Tablas del techo (artesonado)"),
-    "rough_wood": ("1k", "Vigas del techo y barandas"),
-    "wood_table_worn": ("1k", "Madera de muebles y coro"),
-    "large_sandstone_blocks_01": ("1k", "Piedra de columnas, pileta y escalones"),
-    "clay_roof_tiles": ("1k", "Teja colonial del alero de la galería"),
+    "cobblestone_floor_05": ("empedrado", "2k"),
+    "white_stucco_02": ("revoque_blanco", "2k"),
+    "yellow_plaster_02": ("revoque_ocre", "1k"),
+    "clay_roof_tiles_02": ("tejas", "1k"),
+    "weathered_brown_planks": ("madera_balcon", "1k"),
+    "dark_planks": ("madera_puerta", "1k"),
+    "rustic_stone_wall_02": ("piedra", "1k"),
+    "stone_tiles_02": ("losa", "1k"),
+    "white_rough_plaster": ("piedra_revocada", "1k"),
+}
+# Mapas que usa Godot (normal en convención OpenGL).
+MAPAS = {"Diffuse": "color", "nor_gl": "normal", "arm": "orm"}  # orm = oclusión, rugosidad, metal
+
+CIELOS = {
+    "kloppenheim_06_puresky": ("atardecer", "2k"),
+    "kloppenheim_02_puresky": ("noche", "2k"),
 }
 
-MODELOS = {
-    "gallinera_chair": "Sillas talladas de los diputados",
-    "WoodenChair_01": "Sillón del presidente de la Asamblea",
-    "WoodenTable_01": "Mesa de la Secretaría",
-    "brass_candleholders": "Candelabros sobre la mesa de la presidencia",
-    "Chandelier_03": "Arañas de velas de la Sala Mayor",
-    "large_castle_door": "Puerta de madera de la Sala Mayor",
-    "wooden_lantern_01": "Faroles del patio",
-    "planter_pot_clay": "Macetas de barro del patio",
-    "potted_plant_02": "Plantas del patio",
-}
-
-HDRI = ("kloofendal_48d_partly_cloudy_puresky", "2k", "Cielo de la escena")
-
-RETRATO = {
-    "archivo": "arte/bolivar_gil_de_castro.jpg",
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/"
-           "Jos%C3%A9_Gil_de_Castro_-_Sim%C3%B3n_Bol%C3%ADvar_-_Google_Art_Project.jpg/"
-           "1280px-Jos%C3%A9_Gil_de_Castro_-_Sim%C3%B3n_Bol%C3%ADvar_-_Google_Art_Project.jpg",
-    "pagina": "https://commons.wikimedia.org/wiki/File:Jos%C3%A9_Gil_de_Castro_-_Sim%C3%B3n_Bol%C3%ADvar_-_Google_Art_Project.jpg",
-}
+PROPS = ["jug_01", "ceramic_pot", "painted_wooden_bench"]
 
 
-def descargar(url: str, destino: Path) -> None:
-    """Descarga con curl: reintenta y reanuda si la conexión se corta."""
-    if destino.exists() and destino.stat().st_size > 0:
+def pedir_json(url):
+    with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60) as r:
+        return json.load(r)
+
+
+def bajar(url, destino: Path, md5=None):
+    if destino.exists() and (md5 is None or hashlib.md5(destino.read_bytes()).hexdigest() == md5):
         return
     destino.parent.mkdir(parents=True, exist_ok=True)
-    parcial = destino.with_name(destino.name + ".parcial")
-    comando = ["curl", "-sSfL", "--retry", "8", "--retry-all-errors", "--retry-delay", "3",
-               "--connect-timeout", "30", "--speed-limit", "20000", "--speed-time", "15", "-C", "-", "-A", AGENTE, "-o", str(parcial), url]
-    for _ in range(6):
-        if subprocess.run(comando).returncode == 0:
-            parcial.rename(destino)
-            print(f"  {destino.relative_to(RAIZ)}")
-            return
-    sys.exit(f"No se pudo descargar {url}")
+    with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=300) as r:
+        datos = r.read()
+    if md5 and hashlib.md5(datos).hexdigest() != md5:
+        sys.exit(f"md5 no coincide: {url}")
+    destino.write_bytes(datos)
+    print(f"  {destino.relative_to(RAIZ.parent)}  ({len(datos) // 1024} KB)")
 
 
-def archivos_polyhaven(asset_id: str) -> dict:
-    for intento in range(5):
-        try:
-            pedido = urllib.request.Request(f"https://api.polyhaven.com/files/{asset_id}", headers={"User-Agent": AGENTE})
-            with urllib.request.urlopen(pedido, timeout=60) as respuesta:
-                return json.load(respuesta)
-        except OSError as error:
-            print(f"  reintento {intento + 1} para {asset_id}: {error}")
-            time.sleep(3)
-    sys.exit(f"No se pudo consultar Poly Haven para {asset_id}")
+def main():
+    creditos = []
+    for pid, (nombre, res) in TEXTURAS.items():
+        archivos = pedir_json(f"https://api.polyhaven.com/files/{pid}")
+        for mapa, sufijo in MAPAS.items():
+            if mapa not in archivos:
+                continue
+            f = archivos[mapa][res]["jpg"]
+            bajar(f["url"], RAIZ / "texturas" / nombre / f"{nombre}_{sufijo}.jpg", f.get("md5"))
+        creditos.append(f"- Textura `{nombre}`: [{pid}](https://polyhaven.com/a/{pid})")
 
+    for pid, (nombre, res) in CIELOS.items():
+        f = pedir_json(f"https://api.polyhaven.com/files/{pid}")["hdri"][res]["hdr"]
+        bajar(f["url"], RAIZ / "cielos" / f"{nombre}.hdr", f.get("md5"))
+        creditos.append(f"- Cielo `{nombre}`: [{pid}](https://polyhaven.com/a/{pid})")
 
-def bajar_textura(asset_id: str, resolucion: str) -> None:
-    archivos = archivos_polyhaven(asset_id)
-    mapas = {"Diffuse": "albedo", "nor_gl": "normal", "arm": "arm"}
-    for mapa, nombre in mapas.items():
-        if mapa not in archivos:
-            sys.exit(f"La textura {asset_id} no tiene el mapa {mapa}")
-        url = archivos[mapa][resolucion]["jpg"]["url"]
-        descargar(url, ASSETS / "texturas" / asset_id / f"{nombre}.jpg")
+    for pid in PROPS:
+        g = pedir_json(f"https://api.polyhaven.com/files/{pid}")["gltf"]["1k"]["gltf"]
+        carpeta = RAIZ / "props" / pid
+        bajar(g["url"], carpeta / f"{pid}.gltf", g.get("md5"))
+        for rel, inc in g.get("include", {}).items():
+            bajar(inc["url"], carpeta / rel, inc.get("md5"))
+        creditos.append(f"- Modelo `{pid}`: [{pid}](https://polyhaven.com/a/{pid})")
 
-
-def bajar_modelo(asset_id: str) -> None:
-    gltf = archivos_polyhaven(asset_id)["gltf"]["1k"]["gltf"]
-    carpeta = ASSETS / "modelos" / asset_id
-    descargar(gltf["url"], carpeta / f"{asset_id}.gltf")
-    for ruta_relativa, datos in gltf.get("include", {}).items():
-        descargar(datos["url"], carpeta / ruta_relativa)
-
-
-def escribir_licencias() -> None:
-    filas_texturas = "\n".join(
-        f"| `texturas/{i}/` | {uso} | [Poly Haven](https://polyhaven.com/a/{i}) | CC0 |"
-        for i, (_, uso) in TEXTURAS.items())
-    filas_modelos = "\n".join(
-        f"| `modelos/{i}/` | {uso} | [Poly Haven](https://polyhaven.com/a/{i}) | CC0 |"
-        for i, uso in MODELOS.items())
-    texto = f"""# Licencias de los recursos gráficos
-
-Generado por `herramientas/descargar_assets.py`. Todo lo listado aquí se puede usar,
-modificar y redistribuir, incluso con fines comerciales.
-
-| Archivo | Uso en el juego | Origen | Licencia |
-| --- | --- | --- | --- |
-{filas_texturas}
-{filas_modelos}
-| `cielo/{HDRI[0]}.hdr` | {HDRI[2]} | [Poly Haven](https://polyhaven.com/a/{HDRI[0]}) | CC0 |
-| `{RETRATO['archivo']}` | Retrato de Bolívar en el Salón de la Independencia | [Wikimedia Commons]({RETRATO['pagina']}) | Dominio público |
-
-Nota sobre el retrato: es una de las versiones que José Gil de Castro pintó de Bolívar
-(ca. 1823, según Wikimedia Commons). El ejemplar que se exhibe en la Casa de la Libertad
-puede ser otra versión; el juego lo usa como referencia visual, no como reproducción exacta.
-
-Los modelos 3D propios del equipo (Blender) se agregan a esta tabla con su autor y licencia.
-"""
-    (ASSETS / "LICENCIAS.md").write_text(texto, encoding="utf-8")
-
-
-def main() -> None:
-    print("Texturas")
-    for asset_id, (resolucion, _) in TEXTURAS.items():
-        bajar_textura(asset_id, resolucion)
-    print("Modelos")
-    for asset_id in MODELOS:
-        bajar_modelo(asset_id)
-    print("Cielo")
-    hdri_id, resolucion, _ = HDRI
-    url = archivos_polyhaven(hdri_id)["hdri"][resolucion]["hdr"]["url"]
-    descargar(url, ASSETS / "cielo" / f"{hdri_id}.hdr")
-    print("Retrato")
-    descargar(RETRATO["url"], ASSETS / RETRATO["archivo"])
-    escribir_licencias()
-    print("Listo: juego/assets/LICENCIAS.md")
+    (RAIZ.parent / "CREDITOS.md").write_text(
+        "# Créditos\n\nAssets de [Poly Haven](https://polyhaven.com), licencia CC0 (dominio público).\n\n"
+        + "\n".join(creditos) + "\n",
+        encoding="utf-8",
+    )
+    print("listo")
 
 
 if __name__ == "__main__":
