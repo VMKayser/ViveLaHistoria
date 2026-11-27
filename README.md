@@ -10,10 +10,10 @@ Hackathon Regional 2026 · Sede Sucre · Sector Patrimonio y educación.
 
 | Parte | Estado |
 | --- | --- |
-| Escena 1: La Asamblea de 1825 | Jugable de inicio a fin en *greybox* (bloques provisionales) |
+| Escena 1: La Asamblea de 1825 | Jugable de inicio a fin, con arquitectura de Blender, texturas PBR y luz horneada |
 | Sistema de fuentes y fichas | Listo: 10 fuentes (5 oficiales), 20 fichas |
 | Escenas 2 (Juana Azurduy, 1816) y 3 (Universidad, 1809) | Fichas cargadas; jugabilidad pendiente |
-| Modelos 3D realistas (Blender) | En curso, a cargo del equipo de modelado |
+| Personajes y brazos del jugador | Provisionales (cápsulas); listos para recibir los modelos del equipo |
 | Diálogo libre con IA (RAG) | Pendiente |
 
 ## Cómo ejecutarlo
@@ -41,7 +41,7 @@ Controles: `WASD` moverse · `Shift` correr · `Espacio` saltar · `E` usar · `
 # Valida fuentes, fichas y escenas (sale con código 1 si hay errores)
 godot --headless --path juego --script res://tests/validar_datos.gd
 
-# Recorre la Escena 1 completa simulando al jugador (28 comprobaciones)
+# Recorre la Escena 1 completa simulando al jugador (29 comprobaciones, incluida la colisión del piso)
 godot --headless --path juego res://tests/prueba_flujo.tscn
 ```
 
@@ -75,18 +75,26 @@ Luego corre `validar_datos.gd`: avisa si la ficha cita una fuente que no existe 
 ## Estructura
 
 ```
+blender/
+  construir_casa_libertad.py  arquitectura, horneado con Cycles y exportación .glb
+  casa_libertad.blend         escena para seguir modelando
+herramientas/                 descarga de recursos, generador del nivel, optimización web
 juego/
+  assets/                     texturas, muebles, cielo, retrato, arquitectura (ver LICENCIAS.md)
+  materiales/                 materiales PBR (.tres)
+  shaders/                    shader de arquitectura con luz horneada
   data/
     fuentes.json            catálogo de fuentes (oficiales primero)
     fichas.json             datos históricos, cada uno con sus fuentes
     escenas/asamblea_1825.json   misiones, personajes, diálogos y decisiones
   escenas/
     jugador.tscn            controlador en primera persona con mano visible
-    niveles/asamblea_1825.tscn   nivel greybox de la Sala Mayor y el patio
+    niveles/asamblea_1825.tscn   nivel de la Sala Mayor y el patio (generado por herramientas/generar_nivel.py)
   scripts/
     autoload/               Controles, Fuentes (repositorio), EstadoJuego (eventos)
     jugador/                movimiento, salto, carrera, mano, interacción
     interaccion/            objetos que se toman, se observan, personajes, zonas, entregas
+    arquitectura/           arcadas, repetidor (vigas, sillas, barandas) y materiales horneados
     misiones/               gestor de misiones y validador de escenas
     ui/                     HUD, fichas con fuentes, diálogos, decisiones, diario
   tests/                    validación de datos y prueba de flujo completo
@@ -94,12 +102,42 @@ juego/
 
 Las escenas son **data-driven**: misiones, diálogos y decisiones se editan en el JSON sin tocar código.
 
-## Integrar modelos de Blender
+## Gráficos
 
-1. Exporta en glTF (`.glb`) y copia el archivo dentro de `juego/modelos/`.
-2. En el nivel, arrastra el `.glb` como hijo del objeto o personaje que reemplaza y borra el nodo `Modelo` provisional.
-3. Si el nodo no tiene `CollisionShape3D`, el script crea una caja de colisión a partir del modelo.
-4. Para el entorno, reemplaza los nodos de `Geometria` por el modelo de la sala con colisión (en Blender, sufijo `-col` en las mallas de colisión).
-5. Anota la licencia de cada modelo descargado en `juego/modelos/LICENCIAS.md`.
+El renderizador web de Godot (*Compatibility*, WebGL 2) no calcula luz rebotada. Por eso la iluminación global se hornea en Blender con Cycles y Godot la combina con el sol en tiempo real.
 
-Renderizado: la exportación web usa el renderizador *Compatibility* (WebGL 2). El realismo depende sobre todo de texturas PBR, iluminación horneada (*lightmaps*) y buena exposición.
+```
+herramientas/descargar_assets.py   →  juego/assets/  (texturas PBR, muebles, cielo HDRI, retrato; CC0 o dominio público)
+blender/construir_casa_libertad.py →  juego/assets/arquitectura/casa_libertad.glb + luz_horneada.png
+herramientas/generar_nivel.py      →  juego/escenas/niveles/asamblea_1825.tscn
+herramientas/optimizar_importacion.py → compresión de GPU y mipmaps para web
+```
+
+| Capa | Cómo se logra |
+| --- | --- |
+| Arquitectura (patio, claustro con arcos, galería, Sala Mayor, artesonado, coro) | Una sola malla de Blender con colisión: 1.110 vértices y 10 materiales (unas 10 llamadas de dibujo) |
+| Luz del cielo, rebotes del sol y velas | Horneada con Cycles (GPU OptiX, unos 35 s) en un mapa de 2048 px |
+| Sol, sombras de personajes y relieve | En tiempo real en Godot (`juego/shaders/arquitectura_horneada.gdshader`) |
+| Texturas | PBR de Poly Haven a escala real, proyección triplanar en coordenadas de mundo |
+| Muebles | Sillas talladas, solio, mesas, candelabros, arañas, puertas, faroles y macetas de Poly Haven |
+| Exportación web | De 130 MB a 47 MB con compresión S3TC/BC5/BC7, mipmaps y límites de resolución |
+
+**Rehacer la arquitectura y la luz** (tras cambiar `blender/construir_casa_libertad.py`):
+
+```bash
+blender -b --factory-startup --python blender/construir_casa_libertad.py
+python3 herramientas/optimizar_importacion.py
+godot --headless --path juego --import
+```
+
+Las coordenadas de `construir_casa_libertad.py` y `generar_nivel.py` son las mismas. Si se mueve un muro en uno, hay que moverlo en el otro. `generar_nivel.py` reescribe la escena completa, así que no conviene correrlo si alguien editó el `.tscn` a mano.
+
+**Capturas para revisar los gráficos:** `godot --path juego res://tests/capturas.tscn` abre una ventana unos segundos y guarda 6 vistas en `build/capturas/`.
+
+### Integrar modelos propios de Blender
+
+1. Exporta en glTF (`.glb`) dentro de `juego/assets/modelos/<nombre>/`.
+2. **Personajes:** en el nodo del personaje (`Personajes/Serrano`, etc.), asigna el `.glb` a la propiedad `modelo`. Reemplaza la cápsula provisional y reproduce en bucle la animación `idle` si existe.
+3. **Brazos del jugador:** reemplaza `BrazoProvisional` dentro de `escenas/jugador.tscn`.
+4. **Objetos:** arrástralo como hijo del objeto y borra el nodo `Modelo`. Si no tiene `CollisionShape3D`, se crea una caja que envuelve todo el modelo.
+5. Agrega cada recurso con su autor y licencia a `juego/assets/LICENCIAS.md`.

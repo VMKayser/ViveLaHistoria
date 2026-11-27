@@ -8,12 +8,17 @@ extends Interactuable
 ## Firmas de diputados que deben existir antes de que este personaje firme.
 @export var firmas_requeridas := 0
 @export var objeto_para_firmar := "acta"
+## Modelo 3D del personaje (.glb de Blender). Reemplaza al hijo "Modelo" provisional.
+@export var modelo: PackedScene
+## Animación que se reproduce en bucle si el modelo trae un AnimationPlayer.
+@export var animacion_reposo := "idle"
 
 var es_ficticio := false
 var _etiqueta: Label3D
 
 
 func _ready() -> void:
+	_cargar_modelo()
 	super()
 	verbo = "Hablar con"
 	add_to_group("personajes")
@@ -55,14 +60,37 @@ func _puede_firmar(jugador: Jugador) -> bool:
 		and EstadoJuego.cantidad(tipo_firma, id_interaccion) == 0
 
 
+func _cargar_modelo() -> void:
+	if modelo == null:
+		return
+	var provisional := get_node_or_null("Modelo")
+	if provisional != null:
+		remove_child(provisional)
+		provisional.queue_free()
+	var instancia := modelo.instantiate()
+	instancia.name = "Modelo"
+	add_child(instancia)
+	var reproductor := instancia.find_child("AnimationPlayer", true, false) as AnimationPlayer
+	if reproductor == null:
+		return
+	var nombre := animacion_reposo if reproductor.has_animation(animacion_reposo) else ""
+	if nombre.is_empty() and not reproductor.get_animation_list().is_empty():
+		nombre = reproductor.get_animation_list()[0]
+	if not nombre.is_empty():
+		reproductor.get_animation(nombre).loop_mode = Animation.LOOP_LINEAR
+		reproductor.play(nombre)
+
+
 func _crear_etiqueta(rol: String) -> void:
 	if _etiqueta == null:
 		_etiqueta = Label3D.new()
 		_etiqueta.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		_etiqueta.font_size = 36
-		_etiqueta.pixel_size = 0.004
-		_etiqueta.outline_size = 10
-		_etiqueta.position = Vector3(0.0, 2.15, 0.0)
+		_etiqueta.font_size = 30
+		_etiqueta.pixel_size = 0.0022
+		_etiqueta.outline_size = 8
+		_etiqueta.position = Vector3(0.0, 2.05, 0.0)
+		_etiqueta.visibility_range_end = 9.0
+		_etiqueta.visibility_range_end_margin = 1.0
 		add_child(_etiqueta)
 	var texto := nombre_visible
 	if not rol.is_empty():

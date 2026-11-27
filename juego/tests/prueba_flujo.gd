@@ -26,6 +26,11 @@ func _ready() -> void:
 	var serrano: Personaje = nivel.get_node("Personajes/Serrano")
 	gestor.escena_completada.connect(func(_datos: Dictionary) -> void: _escena_completada = true)
 
+	# Física: el jugador debe quedar parado sobre el piso (colisión de la arquitectura)
+	for i in 90:
+		await get_tree().physics_frame
+	_comprobar(jugador.is_on_floor() and jugador.global_position.y > -0.2, "El jugador queda parado sobre el piso del patio")
+
 	# Misión 1: llegar a la Sala Mayor
 	_comprobar(_mision(gestor) == "m1_llegada", "La escena empieza en la misión 1")
 	_comprobar(not acta.puede_interactuar(jugador), "El Acta no se puede tomar antes de la misión de firmas")
