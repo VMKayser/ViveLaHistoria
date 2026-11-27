@@ -18,7 +18,7 @@ func puede_interactuar(jugador: Jugador) -> bool:
 
 
 func texto_para(jugador: Jugador) -> String:
-	return "[E] Dejar %s en %s" % [jugador.objeto_en_mano.nombre_visible, nombre_visible]
+	return tr("[E] Dejar %s en %s") % [jugador.objeto_en_mano.nombre_visible, nombre_visible]
 
 
 func interactuar(jugador: Jugador) -> void:
@@ -27,4 +27,4 @@ func interactuar(jugador: Jugador) -> void:
 		return
 	objeto.colocar_en(_soporte if _soporte != null else self)
 	EstadoJuego.registrar("entregar", id_interaccion)
-	EstadoJuego.aviso.emit("Dejaste %s en %s." % [objeto.nombre_visible, nombre_visible])
+	EstadoJuego.aviso.emit(tr("Dejaste %s en %s.") % [objeto.nombre_visible, nombre_visible])

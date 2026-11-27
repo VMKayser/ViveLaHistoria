@@ -104,7 +104,7 @@ func _revisar() -> void:
 	for estado: Dictionary in estados:
 		if not estado["cumplido"]:
 			return
-	EstadoJuego.aviso.emit("Misión cumplida: %s" % mision.get("titulo", ""))
+	EstadoJuego.aviso.emit(tr("Misión cumplida: %s") % mision.get("titulo", ""))
 	_activar(_indice + 1)
 
 
@@ -120,7 +120,7 @@ func _fallar() -> void:
 	get_tree().call_group("jugador", "soltar_objeto_en_mano")
 	get_tree().call_group("restaurables", "restaurar_si_id", ids_tomados)
 	mision_fallida.emit(mision)
-	EstadoJuego.aviso.emit("Se acabó el tiempo. La misión vuelve a empezar.")
+	EstadoJuego.aviso.emit(tr("Se acabó el tiempo. La misión vuelve a empezar."))
 	_tiempo_restante = float(mision.get("tiempo_limite", 0))
 	_revisar()
 

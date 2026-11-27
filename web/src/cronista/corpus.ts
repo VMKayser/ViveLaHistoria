@@ -7,6 +7,8 @@ import path from "node:path";
 export type Fragmento = {
   id: string;
   tipo: "ficha" | "catalogo" | "lugar";
+  /** Idioma del texto: las fichas existen en "es" y "en" (juego/data/en/); el resto está en castellano. */
+  idioma: "es" | "en";
   titulo: string;
   texto: string;
   /** Cómo se cita: "Casa de la Libertad: Salón de la Independencia" o "Querejazu, pág. PDF 159". */
@@ -45,16 +47,18 @@ export function palabras(texto: string): string[] {
     .filter((p) => !VACIAS.has(p));
 }
 
-function leerFichas(): Fragmento[] {
+function leerFichas(idioma: "es" | "en"): Fragmento[] {
   const fuentes = new Map<string, { titulo: string; institucion: string; url: string }>();
   const f = JSON.parse(readFileSync(path.join(RAIZ, "juego/data/fuentes.json"), "utf-8"));
   for (const x of f.fuentes ?? f) fuentes.set(x.id, x);
-  const d = JSON.parse(readFileSync(path.join(RAIZ, "juego/data/fichas.json"), "utf-8"));
+  const ruta = idioma === "en" ? "juego/data/en/fichas.json" : "juego/data/fichas.json";
+  const d = JSON.parse(readFileSync(path.join(RAIZ, ruta), "utf-8"));
   return (d.fichas ?? d).map((ficha: { id: string; titulo: string; texto: string; fuentes: string[] }) => {
     const primera = fuentes.get(ficha.fuentes?.[0] ?? "");
     return {
-      id: ficha.id,
+      id: idioma === "en" ? `${ficha.id}@en` : ficha.id,
       tipo: "ficha",
+      idioma,
       titulo: ficha.titulo,
       texto: ficha.texto,
       fuente: primera ? `${primera.institucion}: ${primera.titulo}` : "Ficha del juego",
@@ -74,6 +78,7 @@ function leerCatalogo(): Fragmento[] {
       salida.push({
         id: x.id,
         tipo: "catalogo",
+        idioma: "es",
         titulo: extra || (LIBROS[x.libro] ?? x.libro),
         texto: x.cita ? `${x.resumen} «${x.cita}»` : x.resumen,
         fuente: `${LIBROS[x.libro] ?? x.libro}, pág. PDF ${x.pag_pdf}`,
@@ -97,6 +102,7 @@ function leerLugares(): Fragmento[] {
       salida.push({
         id: `${archivo.replace(/\.md$/, "")}#${++n}`,
         tipo: "lugar",
+        idioma: "es",
         titulo: `${lugar} (${fila[1]})`,
         texto: fila[2].replace(/\*\*/g, ""),
         fuente: `Notas de ${lugar}${fila[3] ? ` · ${fila[3]}` : ""}`,
@@ -110,7 +116,7 @@ type Indice = { fragmentos: Fragmento[]; terminos: Map<string, number>[]; largos
 let indice: Indice | null = null;
 
 function construir(): Indice {
-  const fragmentos = [...leerFichas(), ...leerCatalogo(), ...leerLugares()];
+  const fragmentos = [...leerFichas("es"), ...leerFichas("en"), ...leerCatalogo(), ...leerLugares()];
   const terminos = fragmentos.map((f) => {
     const m = new Map<string, number>();
     // el título pesa doble
@@ -124,13 +130,15 @@ function construir(): Indice {
 }
 
 /** Los k fragmentos más pertinentes para la pregunta (BM25, k1 = 1,2, b = 0,75). Las fichas verificadas pesan un 30 % más. */
-export function buscar(pregunta: string, k = 6): Resultado[] {
+export function buscar(pregunta: string, k = 6, idioma: "es" | "en" = "es"): Resultado[] {
   indice ??= construir();
   const { fragmentos, terminos, largos, df, medio } = indice;
   const q = [...new Set(palabras(pregunta))];
   const N = fragmentos.length;
   const res: Resultado[] = [];
   for (let i = 0; i < N; i++) {
+    // cada ficha existe en los dos idiomas: se usa solo la del idioma de la pregunta (el catálogo y las notas, solo en castellano)
+    if (fragmentos[i].tipo === "ficha" && fragmentos[i].idioma !== idioma) continue;
     let s = 0;
     let tocadas = 0;
     for (const p of q) {

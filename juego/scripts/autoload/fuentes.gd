@@ -25,11 +25,18 @@ const ESTADOS_FICHA := {
 const CAMPOS_FUENTE := ["titulo", "institucion", "tipo", "url", "consultado"]
 const CAMPOS_FICHA := ["titulo", "texto", "estado", "fuentes", "escenas"]
 
+const IDIOMAS := ["es", "en"]
+const PREFERENCIA_IDIOMA := "user://idioma.cfg"
+
+## Idioma de los datos y de la interfaz: "es" (original) o "en" (data/en/ y traducciones/interfaz.csv).
+var idioma := "es"
 var _fuentes: Dictionary = {}
 var _fichas: Dictionary = {}
 
 
 func _ready() -> void:
+	idioma = _idioma_inicial()
+	TranslationServer.set_locale(idioma)
 	cargar()
 	for error in validar():
 		push_error("[Fuentes] " + error)
@@ -42,6 +49,45 @@ func cargar() -> void:
 		_fuentes[str(fuente.get("id", ""))] = fuente
 	for ficha: Dictionary in leer_json(RUTA_FICHAS).get("fichas", []):
 		_fichas[str(ficha.get("id", ""))] = ficha
+
+
+## --en o --idioma=en en la línea de comandos, ?lang=en en la web, JUEGO_IDIOMA o la última elección guardada.
+func _idioma_inicial() -> String:
+	for argumento in OS.get_cmdline_user_args():
+		if argumento == "--en":
+			return "en"
+		if argumento.begins_with("--idioma=") and IDIOMAS.has(argumento.trim_prefix("--idioma=")):
+			return argumento.trim_prefix("--idioma=")
+	if OS.has_feature("web"):
+		var web: Variant = JavaScriptBridge.eval("(new URLSearchParams(window.location.search)).get('lang')", true)
+		if web != null and IDIOMAS.has(str(web)):
+			return str(web)
+	if IDIOMAS.has(OS.get_environment("JUEGO_IDIOMA")):
+		return OS.get_environment("JUEGO_IDIOMA")
+	var preferencia := ConfigFile.new()
+	if preferencia.load(PREFERENCIA_IDIOMA) == OK and IDIOMAS.has(str(preferencia.get_value("juego", "idioma", "es"))):
+		return str(preferencia.get_value("juego", "idioma", "es"))
+	return "es"
+
+
+## Cambia el idioma, lo recuerda y recarga las fichas. La escena se recarga desde la interfaz.
+func cambiar_idioma(nuevo: String) -> void:
+	if not IDIOMAS.has(nuevo):
+		return
+	idioma = nuevo
+	TranslationServer.set_locale(nuevo)
+	var preferencia := ConfigFile.new()
+	preferencia.set_value("juego", "idioma", nuevo)
+	preferencia.save(PREFERENCIA_IDIOMA)
+	cargar()
+
+
+## La versión traducida de un archivo de datos (data/<idioma>/<archivo>) si existe; si no, el original.
+func ruta_localizada(ruta: String) -> String:
+	if idioma == "es":
+		return ruta
+	var traducida := "res://data/%s/%s" % [idioma, ruta.get_file()]
+	return traducida if FileAccess.file_exists(traducida) else ruta
 
 
 func tiene_ficha(id: String) -> bool:
@@ -91,11 +137,11 @@ func fuentes_de_fichas(ids_fichas: Array) -> Array:
 
 
 func etiqueta_tipo(fuente: Dictionary) -> String:
-	return TIPOS_FUENTE.get(fuente.get("tipo", ""), "Fuente")
+	return tr(TIPOS_FUENTE.get(fuente.get("tipo", ""), "Fuente"))
 
 
 func etiqueta_estado(ficha: Dictionary) -> String:
-	return ESTADOS_FICHA.get(ficha.get("estado", ""), "Sin estado")
+	return tr(ESTADOS_FICHA.get(ficha.get("estado", ""), "Sin estado"))
 
 
 func esta_aprobada(ficha: Dictionary) -> bool:
@@ -137,6 +183,7 @@ func validar() -> PackedStringArray:
 
 
 func leer_json(ruta: String) -> Dictionary:
+	ruta = ruta_localizada(ruta)
 	var archivo := FileAccess.open(ruta, FileAccess.READ)
 	if archivo == null:
 		push_error("[Fuentes] No se pudo abrir %s" % ruta)

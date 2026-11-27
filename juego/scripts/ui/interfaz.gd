@@ -85,8 +85,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func abrir_cronista() -> void:
 	var caja := _caja()
-	caja.add_child(_etiqueta("EL CRONISTA", 14, COLOR_DORADO))
-	caja.add_child(_parrafo("Pregúntame por la Asamblea de 1825, la Casa de la Libertad o la historia de Charcas. Respondo solo con lo que dicen mis fuentes, y te digo cuáles son.", 19, COLOR_TENUE))
+	caja.add_child(_etiqueta(tr("EL CRONISTA"), 14, COLOR_DORADO))
+	caja.add_child(_parrafo(tr("Pregúntame por la Asamblea de 1825, la Casa de la Libertad o la historia de Charcas. Respondo solo con lo que dicen mis fuentes, y te digo cuáles son."), 19, COLOR_TENUE))
 	var conversacion := VBoxContainer.new()
 	conversacion.add_theme_constant_override("separation", 10)
 	caja.add_child(conversacion)
@@ -95,16 +95,16 @@ func abrir_cronista() -> void:
 	var fila := HBoxContainer.new()
 	fila.add_theme_constant_override("separation", 10)
 	var entrada := LineEdit.new()
-	entrada.placeholder_text = "Escribe tu pregunta y presiona Enter"
+	entrada.placeholder_text = tr("Escribe tu pregunta y presiona Enter")
 	entrada.max_length = 300
 	entrada.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	entrada.custom_minimum_size = Vector2(0, 44)
 	fila.add_child(entrada)
 	var enviar := func() -> void: _preguntar_al_cronista(entrada, conversacion)
 	entrada.text_submitted.connect(func(_t: String) -> void: enviar.call())
-	fila.add_child(_boton("Preguntar", enviar))
+	fila.add_child(_boton(tr("Preguntar"), enviar))
 	caja.add_child(fila)
-	caja.add_child(_boton("Cerrar (Esc)", _cerrar_cronista))
+	caja.add_child(_boton(tr("Cerrar (Esc)"), _cerrar_cronista))
 	_abrir_modal(caja, true)
 	_cronista_abierto = true
 	entrada.grab_focus.call_deferred()
@@ -125,10 +125,10 @@ func _preguntar_al_cronista(entrada: LineEdit, conversacion: VBoxContainer) -> v
 	var tuya := {"quien": "tu", "texto": pregunta, "fuentes": []}
 	_historial_cronista.append(tuya)
 	_agregar_mensaje(conversacion, tuya)
-	var pensando := _parrafo("El cronista busca en sus fuentes…", 18, COLOR_TENUE)
+	var pensando := _parrafo(tr("El cronista busca en sus fuentes…"), 18, COLOR_TENUE)
 	conversacion.add_child(pensando)
 	_cronista_hablando(true)
-	var datos := await _cliente_cronista.preguntar(pregunta)
+	var datos := await _cliente_cronista.preguntar(pregunta, Fuentes.idioma)
 	if not is_instance_valid(conversacion):
 		return   # se cerró la ventana mientras respondía
 	pensando.queue_free()
@@ -144,7 +144,7 @@ func _agregar_mensaje(conversacion: VBoxContainer, mensaje: Dictionary) -> void:
 	var es_cronista := str(mensaje.get("quien", "")) == "cronista"
 	var texto := _texto_enriquecido(20)
 	texto.custom_minimum_size.x = 700
-	var quien := "[color=%s][b]El cronista:[/b][/color] " % HEX_DORADO if es_cronista else "[b]Tú:[/b] "
+	var quien := ("[color=%s][b]%s[/b][/color] " % [HEX_DORADO, tr("El cronista:")]) if es_cronista else "[b]%s[/b] " % tr("Tú:")
 	var bb := quien + _escapar(str(mensaje.get("texto", "")))
 	for fuente: Dictionary in mensaje.get("fuentes", []):
 		var detalle := "[%d] %s" % [int(fuente.get("n", 0)), _escapar(str(fuente.get("fuente", "")))]
@@ -175,23 +175,23 @@ func mostrar_ficha(ficha_id: String, al_cerrar: Callable = Callable()) -> void:
 	EstadoJuego.desbloquear_ficha(ficha_id)
 
 	var caja := _caja()
-	caja.add_child(_etiqueta("FICHA HISTÓRICA", 14, COLOR_TENUE))
+	caja.add_child(_etiqueta(tr("FICHA HISTÓRICA"), 14, COLOR_TENUE))
 	caja.add_child(_parrafo(str(ficha.get("titulo", "")), 30, COLOR_TEXTO))
 	caja.add_child(_insignia_estado(ficha))
 
 	var cuerpo := _texto_enriquecido(20)
 	var bb := _escapar(str(ficha.get("texto", "")))
 	if ficha.has("cita"):
-		bb += "\n\n[color=%s][i]Texto de la fuente: “%s”[/i][/color]" % [HEX_TENUE, _escapar(str(ficha["cita"]))]
+		bb += "\n\n[color=%s][i]%s “%s”[/i][/color]" % [HEX_TENUE, tr("Texto de la fuente:"), _escapar(str(ficha["cita"]))]
 	if ficha.has("discrepancia"):
-		bb += "\n\n[color=%s][b]Las fuentes no coinciden.[/b] %s[/color]" % [HEX_ESTADO["fuentes_difieren"], _escapar(str(ficha["discrepancia"]))]
+		bb += "\n\n[color=%s][b]%s[/b] %s[/color]" % [HEX_ESTADO["fuentes_difieren"], tr("Las fuentes no coinciden."), _escapar(str(ficha["discrepancia"]))]
 	if ficha.has("nota"):
-		bb += "\n\n[color=%s]Nota: %s[/color]" % [HEX_TENUE, _escapar(str(ficha["nota"]))]
+		bb += "\n\n[color=%s]%s %s[/color]" % [HEX_TENUE, tr("Nota:"), _escapar(str(ficha["nota"]))]
 	cuerpo.text = bb
 	caja.add_child(cuerpo)
 
 	caja.add_child(HSeparator.new())
-	caja.add_child(_etiqueta("Fuentes", 18, COLOR_DORADO))
+	caja.add_child(_etiqueta(tr("Fuentes"), 18, COLOR_DORADO))
 	caja.add_child(_lista_fuentes(Fuentes.fuentes_de(ficha)))
 	caja.add_child(_etiqueta(_texto_revision(ficha), 14, COLOR_TENUE))
 
@@ -200,7 +200,7 @@ func mostrar_ficha(ficha_id: String, al_cerrar: Callable = Callable()) -> void:
 			al_cerrar.call()
 		else:
 			_cerrar_modal()
-	caja.add_child(_boton("Volver" if al_cerrar.is_valid() else "Cerrar", al_presionar))
+	caja.add_child(_boton(tr("Volver") if al_cerrar.is_valid() else tr("Cerrar"), al_presionar))
 	_abrir_modal(caja, true)
 
 
@@ -217,7 +217,7 @@ func abrir_decision(id_decision: String) -> void:
 		_cerrar_modal()
 		return
 	var caja := _caja()
-	caja.add_child(_etiqueta("DECISIÓN", 14, COLOR_TENUE))
+	caja.add_child(_etiqueta(tr("DECISIÓN"), 14, COLOR_TENUE))
 	caja.add_child(_parrafo(str(decision.get("pregunta", "")), 28, COLOR_TEXTO))
 	caja.add_child(_parrafo(str(decision.get("contexto", "")), 18, COLOR_TENUE))
 	for opcion: Dictionary in decision.get("opciones", []):
@@ -246,24 +246,32 @@ func avisar(texto: String) -> void:
 func _mostrar_bienvenida() -> void:
 	var datos := gestor.datos
 	var caja := _caja()
-	caja.add_child(_etiqueta("VIVE LA HISTORIA · CASA DE LA LIBERTAD", 14, COLOR_TENUE))
+	caja.add_child(_etiqueta(tr("VIVE LA HISTORIA · CASA DE LA LIBERTAD"), 14, COLOR_TENUE))
 	caja.add_child(_parrafo(str(datos.get("titulo", "")), 34, COLOR_TEXTO))
 	caja.add_child(_parrafo(str(datos.get("subtitulo", "")), 18, COLOR_DORADO))
 	caja.add_child(_parrafo(str(datos.get("aviso_recreacion", "")), 17, COLOR_TENUE))
 	caja.add_child(HSeparator.new())
 	var controles := _texto_enriquecido(17)
-	controles.text = "[b]WASD[/b] moverse   [b]Shift[/b] correr   [b]Espacio[/b] saltar   [b]E[/b] usar\n[b]R[/b] inspeccionar lo que tienes en la mano   [b]Tab[/b] diario de fichas y fuentes\n[b]C[/b] pregúntale al cronista, que camina contigo\nHaz clic en la pantalla para controlar la cámara. [b]Esc[/b] libera el ratón."
+	controles.text = "\n".join([tr("[b]WASD[/b] moverse   [b]Shift[/b] correr   [b]Espacio[/b] saltar   [b]E[/b] usar"),
+		tr("[b]R[/b] inspeccionar lo que tienes en la mano   [b]Tab[/b] diario de fichas y fuentes"),
+		tr("[b]C[/b] pregúntale al cronista, que camina contigo"),
+		tr("Haz clic en la pantalla para controlar la cámara. [b]Esc[/b] libera el ratón.")])
 	caja.add_child(controles)
-	caja.add_child(_boton("Comenzar", _cerrar_modal))
+	# Idioma: cambia los datos (data/en/) y la interfaz, y recarga la escena
+	var otro := "en" if Fuentes.idioma == "es" else "es"
+	caja.add_child(_boton("English" if otro == "en" else "Español", func() -> void:
+		Fuentes.cambiar_idioma(otro)
+		get_tree().reload_current_scene()))
+	caja.add_child(_boton(tr("Comenzar"), _cerrar_modal))
 	_abrir_modal(caja)
 
 
 func _mostrar_diario() -> void:
 	var caja := _caja()
-	caja.add_child(_etiqueta("DIARIO", 14, COLOR_TENUE))
-	caja.add_child(_parrafo("Fichas desbloqueadas: %d" % EstadoJuego.fichas_desbloqueadas.size(), 28, COLOR_TEXTO))
+	caja.add_child(_etiqueta(tr("DIARIO"), 14, COLOR_TENUE))
+	caja.add_child(_parrafo(tr("Fichas desbloqueadas: %d") % EstadoJuego.fichas_desbloqueadas.size(), 28, COLOR_TEXTO))
 	if EstadoJuego.fichas_desbloqueadas.is_empty():
-		caja.add_child(_parrafo("Todavía no hay fichas. Habla con los personajes y observa los objetos.", 18, COLOR_TENUE))
+		caja.add_child(_parrafo(tr("Todavía no hay fichas. Habla con los personajes y observa los objetos."), 18, COLOR_TENUE))
 	else:
 		var lista := _texto_enriquecido(19)
 		var bb := ""
@@ -279,32 +287,32 @@ func _mostrar_diario() -> void:
 				mostrar_ficha(enlace.trim_prefix("ficha:"), _mostrar_diario))
 		caja.add_child(lista)
 		caja.add_child(HSeparator.new())
-		caja.add_child(_etiqueta("Fuentes citadas", 18, COLOR_DORADO))
+		caja.add_child(_etiqueta(tr("Fuentes citadas"), 18, COLOR_DORADO))
 		caja.add_child(_lista_fuentes(Fuentes.fuentes_de_fichas(EstadoJuego.fichas_desbloqueadas)))
-	caja.add_child(_boton("Cerrar", _cerrar_modal))
+	caja.add_child(_boton(tr("Cerrar"), _cerrar_modal))
 	_abrir_modal(caja, true)
 	_diario_abierto = true
 
 
 func _mostrar_final(escena: Dictionary) -> void:
 	_tiempo.text = ""
-	_titulo_mision.text = "Escena completada"
+	_titulo_mision.text = tr("Escena completada")
 	_objetivos.text = ""
 	var cierre: Dictionary = escena.get("cierre", {})
 	var caja := _caja()
-	caja.add_child(_etiqueta("ESCENA COMPLETADA", 14, COLOR_TENUE))
+	caja.add_child(_etiqueta(tr("ESCENA COMPLETADA"), 14, COLOR_TENUE))
 	caja.add_child(_parrafo(str(cierre.get("titulo", "")), 32, COLOR_TEXTO))
 	caja.add_child(_parrafo(str(cierre.get("texto", "")), 19, COLOR_TEXTO))
 
 	caja.add_child(HSeparator.new())
-	caja.add_child(_etiqueta("Tus decisiones frente a lo que pasó", 18, COLOR_DORADO))
+	caja.add_child(_etiqueta(tr("Tus decisiones frente a lo que pasó"), 18, COLOR_DORADO))
 	var resumen := _texto_enriquecido(18)
 	var bb := ""
 	var decisiones: Dictionary = escena.get("decisiones", {})
 	for id_decision: String in decisiones:
 		var decision: Dictionary = decisiones[id_decision]
 		var elegida := str(EstadoJuego.decisiones.get(id_decision, ""))
-		var texto_elegido := "sin responder"
+		var texto_elegido := tr("sin responder")
 		for opcion: Dictionary in decision.get("opciones", []):
 			if str(opcion.get("id", "")) == elegida:
 				texto_elegido = str(opcion.get("texto", ""))
@@ -320,15 +328,15 @@ func _mostrar_final(escena: Dictionary) -> void:
 	var fuentes := Fuentes.fuentes_de_fichas(EstadoJuego.fichas_desbloqueadas)
 	var oficiales := fuentes.filter(func(f: Dictionary) -> bool: return f.get("tipo", "") == "oficial").size()
 	caja.add_child(HSeparator.new())
-	caja.add_child(_etiqueta("Fuentes de esta escena", 18, COLOR_DORADO))
-	caja.add_child(_parrafo("%d fichas desbloqueadas · %d fuentes citadas (%d oficiales)" % [
+	caja.add_child(_etiqueta(tr("Fuentes de esta escena"), 18, COLOR_DORADO))
+	caja.add_child(_parrafo(tr("%d fichas desbloqueadas · %d fuentes citadas (%d oficiales)") % [
 		EstadoJuego.fichas_desbloqueadas.size(), fuentes.size(), oficiales], 16, COLOR_TENUE))
 	caja.add_child(_lista_fuentes(fuentes))
 
 	var reiniciar := func() -> void:
 		EstadoJuego.reiniciar()
 		get_tree().reload_current_scene()
-	caja.add_child(_boton("Jugar de nuevo", reiniciar))
+	caja.add_child(_boton(tr("Jugar de nuevo"), reiniciar))
 	_abrir_modal(caja, true)
 
 
@@ -346,7 +354,7 @@ func _mostrar_linea(id_personaje: String, variante: Dictionary, indice: int) -> 
 	caja.add_child(_parrafo(str(info.get("nombre", id_personaje)), 26, COLOR_DORADO))
 	var rol := str(info.get("rol", ""))
 	if bool(info.get("ficticio", false)):
-		rol += " · personaje ficticio"
+		rol += " · " + tr("personaje ficticio")
 	caja.add_child(_etiqueta(rol, 15, COLOR_TENUE))
 	caja.add_child(_parrafo(str(linea.get("texto", "")), 22, COLOR_TEXTO))
 	caja.add_child(HSeparator.new())
@@ -355,16 +363,16 @@ func _mostrar_linea(id_personaje: String, variante: Dictionary, indice: int) -> 
 	botones.add_theme_constant_override("separation", 12)
 	var id_ficha := str(linea.get("ficha", ""))
 	if id_ficha.is_empty():
-		caja.add_child(_parrafo("Recreación: esta línea no es un dato histórico.", 14, COLOR_TENUE))
+		caja.add_child(_parrafo(tr("Recreación: esta línea no es un dato histórico."), 14, COLOR_TENUE))
 	else:
 		EstadoJuego.desbloquear_ficha(id_ficha)
 		var ficha := Fuentes.obtener_ficha(id_ficha)
 		var fuentes := Fuentes.fuentes_de(ficha)
 		var origen := str(fuentes[0].get("institucion", "")) if not fuentes.is_empty() else ""
-		caja.add_child(_parrafo("Diálogo recreado. Dato histórico respaldado por: %s" % origen, 14, COLOR_TENUE))
-		botones.add_child(_boton("Ver ficha y fuente", func() -> void:
+		caja.add_child(_parrafo(tr("Diálogo recreado. Dato histórico respaldado por: %s") % origen, 14, COLOR_TENUE))
+		botones.add_child(_boton(tr("Ver ficha y fuente"), func() -> void:
 			mostrar_ficha(id_ficha, _mostrar_linea.bind(id_personaje, variante, indice))))
-	botones.add_child(_boton("Continuar", _mostrar_linea.bind(id_personaje, variante, indice + 1)))
+	botones.add_child(_boton(tr("Continuar"), _mostrar_linea.bind(id_personaje, variante, indice + 1)))
 	caja.add_child(botones)
 	_abrir_modal(caja)
 
@@ -377,7 +385,7 @@ func _terminar_dialogo(id_personaje: String, variante: Dictionary) -> void:
 		var datos_objeto := gestor.objeto(id_objeto)
 		EstadoJuego.registrar("tomar", id_objeto)
 		EstadoJuego.desbloquear_ficha(str(datos_objeto.get("ficha", "")))
-		avisar("Recibiste: %s" % datos_objeto.get("nombre", id_objeto))
+		avisar(tr("Recibiste: %s") % datos_objeto.get("nombre", id_objeto))
 	if fin.has("decision") and not EstadoJuego.decisiones.has(str(fin["decision"])):
 		abrir_decision(str(fin["decision"]))
 
@@ -385,7 +393,7 @@ func _terminar_dialogo(id_personaje: String, variante: Dictionary) -> void:
 func _elegir(id_decision: String, decision: Dictionary, opcion: Dictionary) -> void:
 	EstadoJuego.tomar_decision(id_decision, str(opcion.get("id", "")))
 	var caja := _caja()
-	caja.add_child(_etiqueta("TU DECISIÓN", 14, COLOR_TENUE))
+	caja.add_child(_etiqueta(tr("TU DECISIÓN"), 14, COLOR_TENUE))
 	caja.add_child(_parrafo(str(opcion.get("texto", "")), 28, COLOR_TEXTO))
 	caja.add_child(_parrafo(str(opcion.get("reaccion", "")), 19, COLOR_TEXTO))
 	var continuar := func() -> void:
@@ -394,7 +402,7 @@ func _elegir(id_decision: String, decision: Dictionary, opcion: Dictionary) -> v
 			_cerrar_modal()
 		else:
 			abrir_decision(siguiente)
-	caja.add_child(_boton("Lo que realmente pasó", func() -> void:
+	caja.add_child(_boton(tr("Lo que realmente pasó"), func() -> void:
 		mostrar_ficha(str(decision.get("ficha_resultado", "")), continuar)))
 	_abrir_modal(caja)
 
@@ -416,13 +424,13 @@ func _al_actualizar_mision(mision: Dictionary, objetivos: Array) -> void:
 
 func _al_actualizar_tiempo(segundos: float) -> void:
 	var total := ceili(segundos)
-	_tiempo.text = "Tiempo %d:%02d" % [total / 60, total % 60]
+	_tiempo.text = tr("Tiempo %d:%02d") % [total / 60, total % 60]
 	_tiempo.add_theme_color_override("font_color", Color(0.95, 0.4, 0.35) if total <= 30 else COLOR_TEXTO)
 
 
 func _al_desbloquear_ficha(ficha_id: String) -> void:
 	var ficha := Fuentes.obtener_ficha(ficha_id)
-	avisar("Nueva ficha en el diario: %s  [Tab]" % ficha.get("titulo", ficha_id))
+	avisar(tr("Nueva ficha en el diario: %s  [Tab]") % ficha.get("titulo", ficha_id))
 
 
 # --- Construcción --------------------------------------------------------------
@@ -557,7 +565,7 @@ func _lista_fuentes(fuentes: Array) -> RichTextLabel:
 			detalle += " (%s)" % _fecha(str(fuente["publicado"]))
 		bb += "[color=%s][b]%s[/b][/color]  %s\n" % [HEX_TIPO_FUENTE.get(tipo, HEX_TENUE), Fuentes.etiqueta_tipo(fuente).to_upper(), _escapar(str(fuente.get("institucion", "")))]
 		bb += "[url=%s]%s[/url]\n" % [fuente.get("url", ""), _escapar(detalle)]
-		bb += "[color=%s]%s · consultado el %s[/color]\n\n" % [HEX_TENUE, str(fuente.get("url", "")).trim_prefix("https://"), _fecha(str(fuente.get("consultado", "")))]
+		bb += "[color=%s]%s · %s %s[/color]\n\n" % [HEX_TENUE, str(fuente.get("url", "")).trim_prefix("https://"), tr("consultado el"), _fecha(str(fuente.get("consultado", "")))]
 	lista.text = bb.strip_edges()
 	lista.meta_clicked.connect(func(meta: Variant) -> void:
 		var enlace := str(meta)
@@ -577,8 +585,8 @@ func _insignia_estado(ficha: Dictionary) -> Control:
 func _texto_revision(ficha: Dictionary) -> String:
 	var revision: Dictionary = ficha.get("revision", {})
 	if Fuentes.esta_aprobada(ficha):
-		return "Revisada por %s el %s." % [revision.get("revisor", ""), _fecha(str(revision.get("fecha", "")))]
-	return "Revisión docente pendiente."
+		return tr("Revisada por %s el %s.") % [revision.get("revisor", ""), _fecha(str(revision.get("fecha", "")))]
+	return tr("Revisión docente pendiente.")
 
 
 func _caja() -> VBoxContainer:

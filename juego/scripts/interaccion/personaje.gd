@@ -97,18 +97,18 @@ func configurar(datos: Dictionary) -> void:
 
 func texto_para(jugador: Jugador) -> String:
 	if _puede_firmar(jugador):
-		return "[E] Pedir la firma de %s" % nombre_visible
-	return "[E] Hablar con %s" % nombre_visible
+		return tr("[E] Pedir la firma de %s") % nombre_visible
+	return tr("[E] Hablar con %s") % nombre_visible
 
 
 func interactuar(jugador: Jugador) -> void:
 	if _puede_firmar(jugador):
 		var firmadas := EstadoJuego.cantidad("firma", "*")
 		if firmadas < firmas_requeridas:
-			EstadoJuego.aviso.emit("%s: primero consiga %d firmas de diputados (lleva %d)." % [nombre_visible, firmas_requeridas, firmadas])
+			EstadoJuego.aviso.emit(tr("%s: primero consiga %d firmas de diputados (lleva %d).") % [nombre_visible, firmas_requeridas, firmadas])
 			return
 		EstadoJuego.registrar(tipo_firma, id_interaccion)
-		EstadoJuego.aviso.emit("%s firmó el Acta." % nombre_visible)
+		EstadoJuego.aviso.emit(tr("%s firmó el Acta.") % nombre_visible)
 		return
 	EstadoJuego.solicitud_dialogo.emit(id_interaccion)
 
@@ -156,5 +156,5 @@ func _crear_etiqueta(rol: String) -> void:
 	if not rol.is_empty():
 		texto += "\n" + rol
 	if es_ficticio:
-		texto += "\n(personaje ficticio)"
+		texto += "\n(%s)" % tr("personaje ficticio")
 	_etiqueta.text = texto
