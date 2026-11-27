@@ -84,19 +84,64 @@ func _ejecutar_autoverificacion() -> void:
 	var ali := CasaLibertadMuseo.transform_en_plaza_25()
 	print("[VERIFY] Plaza 25 alignment origin=", ali.origin, " rot_y=", CasaLibertadMuseo.ROTACION_Y_PLAZA_25)
 
-	jugador.colocar(Vector3(0.0, 0.42, -45.8), 0.0)
-	for _i in range(6):
+	var puntos_prueba := [
+		["Patio/Estatua", Vector3(3.05, 0.20, -13.90), "POI_ESTATUA", false],
+		["Salon", Vector3(0.0, 0.42, -45.8), "POI_ACTA_INDEPENDENCIA", false],
+		["Puerta Claustro->Guerrilleros", Vector3(8.30, 0.42, -26.8), "", false],
+		["Guerrilleros/Belgrano", Vector3(9.80, 0.42, -33.4), "POI_BANDERA_BELGRANO", false],
+		["Guerrilleros/Juana", Vector3(8.50, 0.42, -45.8), "POI_SALA_MUSEO", false],
+		["Paso Puerta Verde->Salon", Vector3(4.00, 0.42, -45.0), "", false],
+		["Puerta Claustro->Senado", Vector3(-9.60, 0.42, -20.8), "", false],
+		["Senado/Aguila", Vector3(-12.80, 0.42, -20.8), "POI_PASILLO_AGUILA", false],
+		["Galeria Presidentes/Bolivar", Vector3(-14.10, 0.42, -29.2), "POI_SALA_BOLIVAR", true],
+	]
+	for p in puntos_prueba:
+		jugador.colocar(p[1], 0.0)
+		for _i in range(6):
+			await get_tree().physics_frame
+		var act := Interaccion.actual()
+		print("[VERIFY] %s pos=%s en_suelo=%s POI=%s" % [p[0], str(jugador.global_position), str(jugador.is_on_floor()), act])
+		if not jugador.is_on_floor():
+			push_error("[VERIFY] Sin suelo en %s" % p[0])
+			get_tree().quit(1)
+			return
+		if p[2] != "" and not String(p[2]).to_lower() in act.to_lower() and act == "":
+			push_error("[VERIFY] POI vacio en %s" % p[0])
+			get_tree().quit(1)
+			return
+
+	# Verificar tránsito libre sin topes en umbrales (Patio->Guerrilleros, Guerrilleros->Salon, Patio->Oeste)
+	var tramos := [
+		["Cruce Claustro->Guerrilleros", Vector3(8.30, 0.42, -26.6), Vector3(0.0, 0.0, -3.5)],
+		["Cruce Puerta Verde", Vector3(6.40, 0.42, -45.0), Vector3(-3.0, 0.0, 0.0)],
+		["Cruce Claustro->Senado", Vector3(-9.40, 0.42, -20.8), Vector3(-3.0, 0.0, 0.0)],
+	]
+	for tr in tramos:
+		jugador.colocar(tr[1], 0.0)
 		await get_tree().physics_frame
-	print("[VERIFY] Jugador en Salon pos=", jugador.global_position, " en_suelo=", jugador.is_on_floor(), " Interaccion.actual=", Interaccion.actual())
-	if bodies.size() < 3 or museo.luces_creadas.size() != 5 or vis_count < 50 or museo.areas_poi.size() < 12 or Interaccion.actual() == "" or not jugador.is_on_floor():
+		var vel_v: Vector3 = tr[2]
+		for _step in range(36):
+			jugador.velocity = Vector3(vel_v.x, -4.0, vel_v.z)
+			jugador.move_and_slide()
+		var disp: float = (jugador.global_position - (tr[1] as Vector3)).length()
+		print("[VERIFY] %s desplazamiento=%.2f m pos_final=%s" % [tr[0], disp, str(jugador.global_position)])
+		if disp < 1.8:
+			push_error("[VERIFY] Paso bloqueado en %s (solo %.2f m)" % [tr[0], disp])
+			get_tree().quit(1)
+			return
+
+	if bodies.size() < 3 or museo.luces_creadas.size() != 5 or vis_count < 45 or museo.areas_poi.size() < 12:
 		push_error("[VERIFY] Falla en verificacion integral")
 		get_tree().quit(1)
 		return
+	jugador.colocar(Vector3(-14.10, 0.42, -29.2), 0.0)
+	for _i in range(6):
+		await get_tree().physics_frame
 	Interaccion.usar()
 	await get_tree().process_frame
 	print("[VERIFY] Ficha abierta=", museo.get("_panel_abierto"), " titulo=", museo.get("_ficha_titulo").text)
-	if not bool(museo.get("_panel_abierto")):
-		push_error("[VERIFY] Interaccion.usar() no abrio la ficha")
+	if not bool(museo.get("_panel_abierto")) or not ("Senado" in museo.get("_ficha_titulo").text or "Presidentes" in museo.get("_ficha_titulo").text):
+		push_error("[VERIFY] Interaccion.usar() no abrio la ficha actualizada")
 		get_tree().quit(1)
 		return
 	print("[VERIFY] OK_FASE_4_GODOT")

@@ -340,45 +340,46 @@ def main():
     paste_sub(atlas, make_bandera_belgrano(), 5, 1)                           # bandera_belgrano
     # Escudo Nacional de Bolivia circular/ovalado en medallon limpio sobre pared estuco
     S = SUB * 2
-    cx, cy = S // 2, int(S * 0.54)
+    cx, cy = S // 2, S // 2
     bg_hi = Image.new("RGB", (S, S), (242, 236, 226))
     d_esc = ImageDraw.Draw(bg_hi)
-    # Banderas laterales cruzadas (tricolor boliviano) detras del ovalo
+    # Banderas laterales cruzadas (tricolor boliviano) detras del ovalo (con amplio margen limpio)
     for side in (-1, 1):
         for idx_f, col_f in enumerate(((192, 34, 34), (218, 176, 36), (34, 118, 52))):
-            y_band = cy - int(S * 0.14) + idx_f * int(S * 0.085)
+            y_band = cy - int(S * 0.11) + idx_f * int(S * 0.072)
             pts_f = [
-                (cx + side * int(S * 0.10), y_band),
-                (cx + side * int(S * 0.36), y_band - int(S * 0.05)),
-                (cx + side * int(S * 0.34), y_band + int(S * 0.085)),
-                (cx + side * int(S * 0.08), y_band + int(S * 0.08)),
+                (cx + side * int(S * 0.09), y_band),
+                (cx + side * int(S * 0.30), y_band - int(S * 0.04)),
+                (cx + side * int(S * 0.28), y_band + int(S * 0.072)),
+                (cx + side * int(S * 0.07), y_band + int(S * 0.068)),
             ]
             d_esc.polygon(pts_f, fill=col_f)
     # Ramas de laurel y olivo debajo
-    d_esc.arc([cx - int(S * 0.30), cy - int(S * 0.14), cx + int(S * 0.30), cy + int(S * 0.34)],
-              start=15, end=165, fill=(46, 98, 44), width=max(4, S // 28))
-    # Condor andino coronando el ovalo superior (alas extendidas y cuello blanco)
-    d_esc.polygon([(cx - int(S * 0.28), cy - int(S * 0.31)), (cx - int(S * 0.05), cy - int(S * 0.23)),
-                   (cx, cy - int(S * 0.27)), (cx + int(S * 0.05), cy - int(S * 0.23)),
-                   (cx + int(S * 0.28), cy - int(S * 0.31)), (cx + int(S * 0.16), cy - int(S * 0.18)),
-                   (cx - int(S * 0.16), cy - int(S * 0.18))], fill=(46, 36, 30))
-    d_esc.ellipse([cx - int(S * 0.03), cy - int(S * 0.33), cx + int(S * 0.03), cy - int(S * 0.25)],
+    d_esc.arc([cx - int(S * 0.25), cy - int(S * 0.11), cx + int(S * 0.25), cy + int(S * 0.28)],
+              start=15, end=165, fill=(46, 98, 44), width=max(4, S // 30))
+    # Condor andino coronando el ovalo superior (alas extendidas y cuello blanco, sin tocar borde)
+    d_esc.polygon([(cx - int(S * 0.22), cy - int(S * 0.24)), (cx - int(S * 0.04), cy - int(S * 0.18)),
+                   (cx, cy - int(S * 0.21)), (cx + int(S * 0.04), cy - int(S * 0.18)),
+                   (cx + int(S * 0.22), cy - int(S * 0.24)), (cx + int(S * 0.13), cy - int(S * 0.14)),
+                   (cx - int(S * 0.13), cy - int(S * 0.14))], fill=(46, 36, 30))
+    d_esc.ellipse([cx - int(S * 0.025), cy - int(S * 0.26), cx + int(S * 0.025), cy - int(S * 0.20)],
                   fill=(226, 222, 212))
     # Marco dorado exterior e interior azul cielo del ovalo
-    ow, oh = int(S * 0.20), int(S * 0.25)
-    d_esc.ellipse([cx - ow - 8, cy - oh - 8, cx + ow + 8, cy + oh + 8],
+    ow, oh = int(S * 0.17), int(S * 0.21)
+    d_esc.ellipse([cx - ow - 7, cy - oh - 7, cx + ow + 7, cy + oh + 7],
                   fill=(188, 148, 52), outline=(92, 68, 28), width=3)
     d_esc.ellipse([cx - ow, cy - oh, cx + ow, cy + oh], fill=(42, 92, 164))
     # Cielo andino y Cerro Rico de Potosi con sol naciente
-    d_esc.chord([cx - ow + 6, cy - oh + 6, cx + ow - 6, cy + oh - 6],
+    d_esc.chord([cx - ow + 5, cy - oh + 5, cx + ow - 5, cy + oh - 5],
                 start=178, end=362, fill=(138, 192, 232))
-    d_esc.ellipse([cx - int(S * 0.055), cy - int(S * 0.17), cx + int(S * 0.055), cy - int(S * 0.06)],
+    d_esc.ellipse([cx - int(S * 0.045), cy - int(S * 0.14), cx + int(S * 0.045), cy - int(S * 0.05)],
                   fill=(242, 206, 74))
-    d_esc.polygon([(cx - ow + 8, cy + int(S * 0.09)), (cx - int(S * 0.03), cy - int(S * 0.08)),
-                   (cx + ow - 8, cy + int(S * 0.09))], fill=(142, 82, 54))
-    d_esc.chord([cx - ow + 8, cy - int(S * 0.02), cx + ow - 8, cy + oh - 8],
+    d_esc.polygon([(cx - ow + 6, cy + int(S * 0.07)), (cx - int(S * 0.02), cy - int(S * 0.06)),
+                   (cx + ow - 6, cy + int(S * 0.07))], fill=(142, 82, 54))
+    d_esc.chord([cx - ow + 6, cy - int(S * 0.02), cx + ow - 6, cy + oh - 6],
                 start=0, end=180, fill=(76, 134, 62))
-    # Ribete ovalado inferior suave sobre pared clara
+    # Margen perimetral estuco limpio para evitar sangrado de mipmaps desde subceldas vecinas
+    d_esc.rectangle([0, 0, S - 1, S - 1], outline=(242, 236, 226), width=20)
     bg_bol = bg_hi.resize((SUB, SUB), Image.Resampling.LANCZOS)
     paste_sub(atlas, bg_bol, 6, 1)                                          # escudo_bolivia limpio en pared blanca
     paste_sub(atlas, make_balcon_y_vereda(), 7, 1)                          # madera_balcon (sup) + vereda_gris (inf)

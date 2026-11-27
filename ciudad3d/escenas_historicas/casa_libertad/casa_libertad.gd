@@ -23,25 +23,25 @@ const FICHAS_POI := {
 	"POI_ENTRADA_PORTON": {
 		"titulo": "Portada Barroca y Portón de Cedro",
 		"subtitulo": "Fachada principal · Siglo XVIII–1809",
-		"radio": 2.4,
+		"radio": 2.2,
 		"texto": "Portada tallada en piedra arenisca rosada con columnas salomónicas, pináculos en jarrón y el escudo de la Universidad Real y Pontificia de San Francisco Xavier. Su portón de cedro nativo tachonado en bronce da acceso al zaguán empedrado."
 	},
 	"POI_PATIO_FUENTE": {
 		"titulo": "Patio del Claustro Jesuítico",
 		"subtitulo": "Arquitectura colonial · Claustro de 5 arcos",
-		"radio": 2.6,
+		"radio": 2.0,
 		"texto": "Corazón del antiguo Colegio Azul de los jesuitas y luego sede universitaria de Charcas. Sus galerías de arcos de medio punto sobre columnas de piedra rodean la fuente central ochavada y las bancas de estudio."
 	},
 	"POI_ESTATUA": {
-		"titulo": "El Flechero (Guerrero Indígena)",
-		"subtitulo": "Monumento escultórico · Claustro Principal",
-		"radio": 2.4,
-		"texto": "Escultura en bronce oscuro que rinde homenaje a la resistencia indígena originaria frente a la conquista y su aporte a las luchas libertarias de Charcas y del Alto Perú."
+		"titulo": "Monumento a Apiaguaiki Tumpa",
+		"subtitulo": "Líder guaraní de Kuruyuki · Claustro Principal",
+		"radio": 1.6,
+		"texto": "Escultura en bronce oscuro dedicada a Apiaguaiki Tumpa, líder indígena guaraní de la resistencia chaqueña de 1892 (reconocible por su tocado ceremonial de jaguar), en homenaje a la lucha por la tierra y la dignidad de los pueblos originarios."
 	},
 	"POI_PORTADA_SALON": {
 		"titulo": "Ingreso al Aula Magna Universitaria",
 		"subtitulo": "Antigua Capilla Doméstica Jesuítica",
-		"radio": 2.2,
+		"radio": 1.9,
 		"texto": "Eje monumental del claustro hacia la antigua capilla doméstica de la Compañía de Jesús, convertida en Aula Magna de la Academia Carolina donde se formaron los doctores revolucionarios de mayo de 1809."
 	},
 	"POI_ACTA_INDEPENDENCIA": {
@@ -58,50 +58,50 @@ const FICHAS_POI := {
 	},
 	"POI_SALA_MUSEO": {
 		"titulo": "Sala de los Guerrilleros de la Independencia",
-		"subtitulo": "Juana Azurduy y las Republiquetas (1809–1825)",
-		"radio": 1.45,
-		"texto": "Sala dedicada a los héroes de la guerra de guerrillas altoperuana. Destaca el cofre de madera tallada que guarda los restos y memoria de la heroína mariscal Juana Azurduy de Padilla y su esposo Manuel Ascencio Padilla."
+		"subtitulo": "Juana Azurduy, sables y Republiquetas (1809–1825)",
+		"radio": 1.80,
+		"texto": "Sala dedicada a los héroes de la guerra de guerrillas altoperuana con acceso directo desde el claustro y hacia el Salón de la Independencia. Preside el retrato y el cofre de madera tallada de la mariscal Juana Azurduy (cubierto con las banderas de Bolivia y Argentina), junto a sables de honor, cañón de montaña, Bandera de Macha y la memoria de Casimiro Olañeta."
 	},
 	"POI_CANON": {
 		"titulo": "Cañón Histórico de Montaña",
 		"subtitulo": "Artillería de campaña · Guerra de la Independencia",
-		"radio": 1.35,
+		"radio": 1.55,
 		"texto": "Pieza de artillería ligera empleada en los valles y quebradas del Alto Perú durante los quince años de combate por la emancipación americana frente a las tropas realistas."
 	},
 	"POI_BANDERA_BELGRANO": {
-		"titulo": "Templete de la Bandera de Macha",
-		"subtitulo": "Estandarte del Ejército del Norte · Manuel Belgrano",
-		"radio": 1.45,
-		"texto": "Vitrina ceremonial del pabellón celeste y blanco resguardado en los muros de Titiri (Macha, Potosí) tras las campañas de Vilcapugio y Ayohuma de 1813 bajo el mando de Manuel Belgrano, junto a la bandera de la Republiqueta."
+		"titulo": "Bandera de Macha y Casimiro Olañeta",
+		"subtitulo": "Ejército del Norte · Rincón Conmemorativo",
+		"radio": 1.65,
+		"texto": "Exhibición del histórico estandarte celeste y blanco de Manuel Belgrano oculto en Titiri (Macha, Potosí) tras Vilcapugio y Ayohuma (1813), junto al pilar conmemorativo dedicado a Casimiro Olañeta y los combatientes altoperuanos."
 	},
 	"POI_PASILLO_AGUILA": {
-		"titulo": "Pasillo del Águila y Galería Norte",
-		"subtitulo": "Conexión museográfica · Madera colonial",
-		"radio": 2.1,
-		"texto": "Galería en pendiente suave con vigas verde colonial y retratos próceres. En su centro se exhibe el cofre histórico sostenido sobre un pedestal con el águila bicéfala/heráldica tallada en madera con alas desplegadas."
+		"titulo": "Antesala y Pedestal del Águila Tallada",
+		"subtitulo": "Ingreso desde el Claustro · Ala Oeste",
+		"radio": 1.65,
+		"texto": "Acceso directo desde la galería oeste del claustro hacia el Antiguo Senado. Recibe al visitante el cofre histórico sostenido sobre un pedestal con un águila heráldica tallada en madera de cedro con las alas desplegadas."
 	},
 	"POI_SALA_BOLIVAR": {
-		"titulo": "Sala de Simón Bolívar",
-		"subtitulo": "Busto Monumental y Símbolos Patrios",
-		"radio": 2.4,
-		"texto": "Recinto de homenaje al Libertador Simón Bolívar, primer presidente del país. En la tarima central reposa su busto de bronce bajo el Escudo Nacional de Bolivia y los estandartes de la Tricolor, la Wiphala y Belgrano."
+		"titulo": "Salón del Antiguo Senado y Galería de los Presidentes",
+		"subtitulo": "Retratos Presidenciales, Bastones de Mando y Busto de Bolívar",
+		"radio": 2.10,
+		"texto": "Largo salón histórico que albergó sesiones del Senado y hoy conserva la galería de retratos al óleo donados por las familias de los presidentes de Bolivia, vitrinas con bastones de mando presidenciales, un piano de época y, sobre la tarima norte, el busto monumental de Simón Bolívar bajo el Escudo Nacional."
 	},
 	"POI_SALA_VIRREINAL": {
 		"titulo": "Sala Virreinal (Ala Oeste)",
-		"subtitulo": "Periodo Colonial · Siglos XVI–XVIII",
-		"radio": 1.9,
-		"texto": "Acceso a la sala dedicada a la Real Audiencia de Charcas, la platería de Potosí y el arte religioso barroco chuquisaqueño de la época virreinal (sala anexa cerrada durante este recorrido)."
+		"subtitulo": "Real Audiencia de Charcas y Mapa de 1776",
+		"radio": 1.70,
+		"texto": "Acceso tradicional desde el claustro oeste a la sala dedicada a la Real Audiencia de Charcas, mapas de 1776, sillones virreinales de cuero y arte barroco chuquisaqueño (sala anexa cerrada en este recorrido)."
 	},
 	"POI_SALA_HONOR": {
-		"titulo": "Salón de Honor y Galerias Históricas",
-		"subtitulo": "Ala Oeste · Siglos XIX–XX",
-		"radio": 1.9,
-		"texto": "Salón de recepción diplomática que conserva mobiliario republicano, retratos presidenciales y condecoraciones de la historia constitucional boliviana en Sucre (acceso cerrado en esta visita)."
+		"titulo": "Salón de Honor y Archivo Historiográfico",
+		"subtitulo": "Ala Este · Siglos XIX–XX",
+		"radio": 1.70,
+		"texto": "Salón institucional que conserva mobiliario republicano y condecoraciones de la historia constitucional boliviana en Sucre (acceso reservado durante esta visita)."
 	},
 	"POI_BIBLIOTECA": {
 		"titulo": "Biblioteca y Archivo Histórico",
 		"subtitulo": "Fondo Documental · Academia Carolina",
-		"radio": 1.9,
+		"radio": 1.70,
 		"texto": "Custodia volúmenes jurídicos y filosóficos de la Universidad Real y Pontificia de San Francisco Xavier que nutrieron el pensamiento ilustrado del 25 de Mayo de 1809 (sala reservada)."
 	}
 }
@@ -213,7 +213,7 @@ func _optimizar_materiales_y_visibilidad() -> void:
 		var nom_malla := String(mi.mesh.resource_name) if mi.mesh != null else ""
 		var rango := 0.0
 		var margen := 4.0
-		if _empieza_con(nom, ["CL_Sala_Guerrilleros", "CL_Pasillo_Aguila", "CL_Sala_Bolivar"]):
+		if _empieza_con(nom, ["CL_Sala_Guerrilleros", "CL_Sala_Bolivar"]):
 			rango = 48.0
 			margen = 5.0
 		elif _empieza_con(nom, ["CL_Estatua_Flechero", "CL_Busto_Bolivar", "CL_Arana"]) or nom_malla.begins_with("M_Arana_Cristal"):
@@ -264,11 +264,11 @@ func _instanciar_luces() -> void:
 			luz.light_energy = 2.7 if es_salon_principal else 2.3
 			luz.omni_range = 18.0
 		elif "GUERRILLEROS" in m.name:
-			luz.light_energy = 2.3
-			luz.omni_range = 14.0
+			luz.light_energy = 2.4
+			luz.omni_range = 16.0
 		else:
-			luz.light_energy = 2.5
-			luz.omni_range = 14.5
+			luz.light_energy = 2.6
+			luz.omni_range = 16.5
 
 		# En WebGL Compatibility las OmniLight3D van sin sombra, salvo opcionalmente la luz principal del Salón en PC.
 		luz.shadow_enabled = sombra_salon_principal and es_salon_principal and not OS.has_feature("mobile") and not OS.has_feature("web")

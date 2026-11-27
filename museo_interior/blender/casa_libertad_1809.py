@@ -192,7 +192,7 @@ ATLAS_REGIONS = {
     "cuadro_pasillo":   _sub128(3, 1, pad=0.012),
     "empedrado_rombo":  _sub128(4, 1, pad=0.012),
     "bandera_belgrano": _sub128(5, 1, pad=0.012),
-    "escudo_bolivia":   _sub128(6, 1, pad=0.004),
+    "escudo_bolivia":   _sub128(6, 1, pad=0.015),
     "madera_balcon":    (7 * 0.125 + 0.010, 0.0625 + 0.008, 8 * 0.125 - 0.010, 0.125 - 0.008),
     "vereda_gris":      (7 * 0.125 + 0.010, 0.008,          8 * 0.125 - 0.010, 0.0625 - 0.008),
 }
@@ -1356,25 +1356,37 @@ def build_claustro(col, kit: dict[str, bpy.types.Mesh]):
     mb.add_box(-px_half - 0.16, -px_half + 0.16, y_p0, y_p1, Z_PATIO, Z_GALERIA + 0.22, "piedra")
     mb.add_box(px_half - 0.16, px_half + 0.16, y_p0, y_p1, Z_PATIO, Z_GALERIA + 0.22, "piedra")
 
-    # Muro Oeste, Muro Este continuo y tramos del Muro Norte flanqueando el Salon
+    # Muro Oeste (abierto en Y=19.46..22.14 sin solapamiento con jambas/dintel),
+    # Muro Este continuo y Muro Norte (abierto en X=7.00..9.60 sin solapamiento)
     sx_out_cl = SALON_ANCHO_EXT * 0.5
-    mb.add_box(-cx_half, -cx_half + CLAUSTRO_MURO, y_cl0, y_cl1, 0.0, GALERIA_ALTO_CUMBRERA, "muro")
+    mb.add_box(-cx_half, -cx_half + CLAUSTRO_MURO, y_cl0, SALA_LAT_PUERTA_Y0 - 0.14, 0.0, GALERIA_ALTO_CUMBRERA, "muro")
+    mb.add_box(-cx_half, -cx_half + CLAUSTRO_MURO, SALA_LAT_PUERTA_Y1 + 0.14, y_cl1, 0.0, GALERIA_ALTO_CUMBRERA, "muro")
+    mb.add_box(-cx_half, -cx_half + CLAUSTRO_MURO, SALA_LAT_PUERTA_Y0 - 0.14, SALA_LAT_PUERTA_Y1 + 0.14, Z_GALERIA + SALA_LAT_PUERTA_H + 0.22, GALERIA_ALTO_CUMBRERA, "muro")
     mb.add_box(cx_half - CLAUSTRO_MURO, cx_half, y_cl0, y_cl1, 0.0, GALERIA_ALTO_CUMBRERA, "muro")
+
     mb.add_box(-cx_half, -sx_out_cl, y_cl1 - CLAUSTRO_MURO, y_cl1, 0.0, GALERIA_ALTO_CUMBRERA, "muro")
-    mb.add_box(sx_out_cl, cx_half, y_cl1 - CLAUSTRO_MURO, y_cl1, 0.0, GALERIA_ALTO_CUMBRERA, "muro")
+    mb.add_box(sx_out_cl, 7.00, y_cl1 - CLAUSTRO_MURO, y_cl1, 0.0, GALERIA_ALTO_CUMBRERA, "muro")
+    mb.add_box(9.60, cx_half, y_cl1 - CLAUSTRO_MURO, y_cl1, 0.0, GALERIA_ALTO_CUMBRERA, "muro")
+    mb.add_box(7.00, 9.60, y_cl1 - CLAUSTRO_MURO, y_cl1, Z_GALERIA + 3.22, GALERIA_ALTO_CUMBRERA, "muro")
 
-    # Marco de piedra + dintel de madera + 2 hojas abiertas hacia dentro en el paso a la Sala Lateral
-    mb.add_box(cx_half - CLAUSTRO_MURO - 0.08, cx_half + 0.04, SALA_LAT_PUERTA_Y0 - 0.14, SALA_LAT_PUERTA_Y0, Z_GALERIA, Z_GALERIA + SALA_LAT_PUERTA_H, "piedra")
-    mb.add_box(cx_half - CLAUSTRO_MURO - 0.08, cx_half + 0.04, SALA_LAT_PUERTA_Y1, SALA_LAT_PUERTA_Y1 + 0.14, Z_GALERIA, Z_GALERIA + SALA_LAT_PUERTA_H, "piedra")
-    mb.add_box(cx_half - CLAUSTRO_MURO - 0.10, cx_half + 0.06, SALA_LAT_PUERTA_Y0 - 0.22, SALA_LAT_PUERTA_Y1 + 0.22, Z_GALERIA + SALA_LAT_PUERTA_H, Z_GALERIA + SALA_LAT_PUERTA_H + 0.22, "madera")
-    # Hojas abiertas hacia adentro (+X)
-    mb.add_box(cx_half + 0.05, cx_half + 1.15, SALA_LAT_PUERTA_Y0 + 0.02, SALA_LAT_PUERTA_Y0 + 0.12, Z_GALERIA, Z_GALERIA + SALA_LAT_PUERTA_H - 0.05, "madera")
-    mb.add_box(cx_half + 0.05, cx_half + 1.15, SALA_LAT_PUERTA_Y1 - 0.12, SALA_LAT_PUERTA_Y1 - 0.02, Z_GALERIA, Z_GALERIA + SALA_LAT_PUERTA_H - 0.05, "madera")
+    # Portada abierta Oeste hacia Salon del Antiguo Senado / Galeria de los Presidentes (-X)
+    mb.add_box(-cx_half - 0.04, -cx_half + CLAUSTRO_MURO + 0.08, SALA_LAT_PUERTA_Y0 - 0.14, SALA_LAT_PUERTA_Y0, 0.0, Z_GALERIA + SALA_LAT_PUERTA_H, "piedra")
+    mb.add_box(-cx_half - 0.04, -cx_half + CLAUSTRO_MURO + 0.08, SALA_LAT_PUERTA_Y1, SALA_LAT_PUERTA_Y1 + 0.14, 0.0, Z_GALERIA + SALA_LAT_PUERTA_H, "piedra")
+    mb.add_box(-cx_half - 0.06, -cx_half + CLAUSTRO_MURO + 0.10, SALA_LAT_PUERTA_Y0 - 0.14, SALA_LAT_PUERTA_Y1 + 0.14, Z_GALERIA + SALA_LAT_PUERTA_H, Z_GALERIA + SALA_LAT_PUERTA_H + 0.22, "madera")
+    mb.add_box(-cx_half - 1.15, -cx_half - 0.05, SALA_LAT_PUERTA_Y0 - 0.08, SALA_LAT_PUERTA_Y0 + 0.02, Z_GALERIA, Z_GALERIA + SALA_LAT_PUERTA_H - 0.05, "madera")
+    mb.add_box(-cx_half - 1.15, -cx_half - 0.05, SALA_LAT_PUERTA_Y1 - 0.02, SALA_LAT_PUERTA_Y1 + 0.08, Z_GALERIA, Z_GALERIA + SALA_LAT_PUERTA_H - 0.05, "madera")
 
-    # Zocalo bajo de piedra en las paredes interiores de los corredores (detalle realista)
-    mb.add_box(-cx_half + CLAUSTRO_MURO, -cx_half + CLAUSTRO_MURO + 0.03, y_cl0, y_cl1, Z_GALERIA, Z_GALERIA + 0.34, "piedra")
-    mb.add_box(cx_half - CLAUSTRO_MURO - 0.03, cx_half - CLAUSTRO_MURO, y_cl0, SALA_LAT_PUERTA_Y0, Z_GALERIA, Z_GALERIA + 0.34, "piedra")
-    mb.add_box(cx_half - CLAUSTRO_MURO - 0.03, cx_half - CLAUSTRO_MURO, SALA_LAT_PUERTA_Y1, y_cl1, Z_GALERIA, Z_GALERIA + 0.34, "piedra")
+    # Portada abierta Norte-Este hacia Sala de los Guerrilleros (+Y, piedra limpia sin caras coplanares)
+    mb.add_box(7.00, 7.10, y_cl1 - CLAUSTRO_MURO - 0.02, y_cl1 + 0.02, 0.0, Z_GALERIA + 3.05, "piedra")
+    mb.add_box(9.50, 9.60, y_cl1 - CLAUSTRO_MURO - 0.02, y_cl1 + 0.02, 0.0, Z_GALERIA + 3.05, "piedra")
+    mb.add_box(7.00, 9.60, y_cl1 - CLAUSTRO_MURO - 0.03, y_cl1 + 0.03, Z_GALERIA + 3.05, Z_GALERIA + 3.22, "piedra")
+    mb.add_box(7.04, 7.14, y_cl1 + 0.05, y_cl1 + 1.12, Z_GALERIA, Z_GALERIA + 3.00, "madera")
+    mb.add_box(9.46, 9.56, y_cl1 + 0.05, y_cl1 + 1.12, Z_GALERIA, Z_GALERIA + 3.00, "madera")
+
+    # Zocalo bajo de piedra en las paredes interiores de los corredores
+    mb.add_box(-cx_half + CLAUSTRO_MURO, -cx_half + CLAUSTRO_MURO + 0.03, y_cl0, SALA_LAT_PUERTA_Y0 - 0.14, Z_GALERIA, Z_GALERIA + 0.34, "piedra")
+    mb.add_box(-cx_half + CLAUSTRO_MURO, -cx_half + CLAUSTRO_MURO + 0.03, SALA_LAT_PUERTA_Y1 + 0.14, y_cl1, Z_GALERIA, Z_GALERIA + 0.34, "piedra")
+    mb.add_box(cx_half - CLAUSTRO_MURO - 0.03, cx_half - CLAUSTRO_MURO, y_cl0, y_cl1, Z_GALERIA, Z_GALERIA + 0.34, "piedra")
     hz_zag_cl = ZAGUAN_ANCHO * 0.5
     mb.add_box(-cx_half + CLAUSTRO_MURO, -hz_zag_cl, y_cl0, y_cl0 + 0.03, Z_GALERIA, Z_GALERIA + 0.34, "piedra")
     mb.add_box(hz_zag_cl, cx_half - CLAUSTRO_MURO, y_cl0, y_cl0 + 0.03, Z_GALERIA, Z_GALERIA + 0.34, "piedra")
@@ -1488,12 +1500,11 @@ def build_claustro(col, kit: dict[str, bpy.types.Mesh]):
         spawn_instance(col, f"CL_Arco_Oeste_{i+1:02d}", kit["arco_claustro"], (-px_half, my, Z_GALERIA), 90.0)
         spawn_instance(col, f"CL_Arco_Este_{i+1:02d}", kit["arco_claustro"], (px_half, my, Z_GALERIA), -90.0)
 
-    # Puertas cerradas detalladas (excepto Y=20.80 Este que se abrio hacia la Sala Museografica)
+    # Puertas cerradas detalladas (Oeste Y=20.80 abierta a Galeria de Presidentes; Norte-Este X=8.30 abierta a Guerrilleros)
     spawn_instance(col, "CL_Puerta_Oeste_01", kit["puerta_cerrada"], (-cx_half + CLAUSTRO_MURO, 13.6, Z_GALERIA), -90.0)
-    spawn_instance(col, "CL_Puerta_Oeste_02", kit["puerta_cerrada"], (-cx_half + CLAUSTRO_MURO, 20.8, Z_GALERIA), -90.0)
     spawn_instance(col, "CL_Puerta_Este_01", kit["puerta_cerrada"], (cx_half - CLAUSTRO_MURO, 13.6, Z_GALERIA), 90.0)
+    spawn_instance(col, "CL_Puerta_Este_02", kit["puerta_cerrada"], (cx_half - CLAUSTRO_MURO, 20.8, Z_GALERIA), 90.0)
     spawn_instance(col, "CL_Puerta_Norte_Izq", kit["puerta_cerrada"], (-8.2, y_cl1 - CLAUSTRO_MURO - 0.13, Z_GALERIA), 0.0)
-    spawn_instance(col, "CL_Puerta_Norte_Der", kit["puerta_cerrada"], (8.2, y_cl1 - CLAUSTRO_MURO - 0.13, Z_GALERIA), 0.0)
 
     # Ventana con reja a la izquierda de la portada del Salon + ventanas galeria sur + faroles centrales
     spawn_instance(col, "CL_Ventana_Entrada_Salon", kit["ventana_baja"], (-3.6, y_cl1 - 0.02, 1.35), 0.0)
@@ -1582,19 +1593,17 @@ def build_salon_independencia(col, kit: dict[str, bpy.types.Mesh]):
         y_cursor = wy + win_hw
     mb.add_box(-sx_out, -sx_in, y_cursor, sy_in1, win_z0, win_z1, "muro")
 
-    # Paso abierto en arco (2.40 x 3.05 m) hacia Sala de los Guerrilleros con cancela verde calada
+    # Paso abierto en arco limpio (2.40 x 3.05 m) hacia Sala de los Guerrilleros con hojas verdes abiertas
     mb.add_box(sx_in, sx_out, sy_in0, 43.80, 0.0, win_z0, "muro")
     mb.add_box(sx_in, sx_out, 46.20, sy_in1, 0.0, win_z0, "muro")
     mb.add_box(sx_in, sx_out, 43.80, 46.20, Z_SALON_PISO + 3.05, win_z0, "muro")
-    # Marco + montante calado verde-dorado + 2 hojas abiertas hacia la Sala de los Guerrilleros
-    mb.add_box(sx_in, sx_out, 43.80, 43.92, Z_SALON_PISO, Z_SALON_PISO + 3.05, "atlas_museo", "verde_bar")
-    mb.add_box(sx_in, sx_out, 46.08, 46.20, Z_SALON_PISO, Z_SALON_PISO + 3.05, "atlas_museo", "verde_bar")
-    mb.add_box(sx_in + 0.12, sx_out - 0.12, 43.92, 46.08, Z_SALON_PISO + 2.48, Z_SALON_PISO + 2.56, "oro_bronce")
-    for kz in range(5):
-        kx_y = 44.15 + kz * 0.42
-        mb.add_box(sx_in + 0.18, sx_out - 0.18, kx_y - 0.03, kx_y + 0.03, Z_SALON_PISO + 2.56, Z_SALON_PISO + 3.05, "atlas_museo", "verde_bar")
-    mb.add_box(sx_out + 0.04, sx_out + 1.05, 43.92, 44.02, Z_SALON_PISO, Z_SALON_PISO + 2.48, "atlas_museo", "verde_bar")
-    mb.add_box(sx_out + 0.04, sx_out + 1.05, 45.98, 46.08, Z_SALON_PISO, Z_SALON_PISO + 2.48, "atlas_museo", "verde_bar")
+    # Marco completo verde colonial + dintel corrido sin barrotes sueltos + 2 hojas abiertas hacia Guerrilleros
+    mb.add_box(sx_in - 0.01, sx_out + 0.01, 43.80, 43.92, Z_SALON_PISO, Z_SALON_PISO + 3.05, "atlas_museo", "verde_bar")
+    mb.add_box(sx_in - 0.01, sx_out + 0.01, 46.08, 46.20, Z_SALON_PISO, Z_SALON_PISO + 3.05, "atlas_museo", "verde_bar")
+    mb.add_box(sx_in - 0.01, sx_out + 0.01, 43.80, 46.20, Z_SALON_PISO + 2.86, Z_SALON_PISO + 3.06, "atlas_museo", "verde_bar")
+    mb.add_box(sx_in - 0.02, sx_out + 0.02, 43.86, 46.14, Z_SALON_PISO + 2.82, Z_SALON_PISO + 2.87, "oro_bronce")
+    mb.add_box(sx_out + 0.04, sx_out + 1.05, 43.92, 44.02, Z_SALON_PISO, Z_SALON_PISO + 2.80, "atlas_museo", "verde_bar")
+    mb.add_box(sx_out + 0.04, sx_out + 1.05, 45.98, 46.08, Z_SALON_PISO, Z_SALON_PISO + 2.80, "atlas_museo", "verde_bar")
     mb.add_box(sx_in, sx_out, sy_in0, sy_in1, win_z1, SALON_ALTO_MURO, "muro")
     y_cursor = sy_in0
     for wy in [33.50, 39.20]:
@@ -1772,17 +1781,22 @@ def build_salon_independencia(col, kit: dict[str, bpy.types.Mesh]):
 # 4. NUEVA SALA MUSEOGRAFICA LATERAL NAVEGABLE (SALA GUERRILLEROS / VIRREINAL)
 # ---------------------------------------------------------------------------
 
-def _add_eagle_pedestal(mb: MeshBuilder, ax: float, ay: float, z0: float):
+def _add_eagle_pedestal(mb: MeshBuilder, ax: float, ay: float, z0: float, face_east: bool = False):
     """Pedestal del Aguila tallada en madera con alas curvas y perfil de plumas (~420 tris)."""
+    def _pt(dx: float, dy: float, dz: float) -> tuple[float, float, float]:
+        # Por defecto mira hacia -Y; face_east=True lo rota +90 deg para mirar al Claustro (+X)
+        return (ax - dy, ay + dx, z0 + dz) if face_east else (ax + dx, ay + dy, z0 + dz)
+
     # Base escalonada octagonal tallada
     mb.add_cylinder(ax, ay, z0, z0 + 0.08, 0.38, 0.34, 8, "madera", cap_bot=False)
     mb.add_cylinder(ax, ay, z0 + 0.08, z0 + 0.22, 0.32, 0.22, 8, "madera", cap_top=False, cap_bot=False)
     # Penacho / roca base + cuerpo musculoso del aguila
     mb.add_cylinder(ax, ay, z0 + 0.22, z0 + 0.56, 0.16, 0.19, 10, "madera", cap_top=False, cap_bot=False)
     mb.add_cylinder(ax, ay, z0 + 0.56, z0 + 0.88, 0.19, 0.13, 10, "madera", cap_top=False, cap_bot=False)
-    # Cuello y cabeza esculpida con pico curvo hacia el frente (-Y)
-    mb.add_cylinder(ax, ay - 0.02, z0 + 0.88, z0 + 1.00, 0.09, 0.075, 8, "madera", cap_top=False, cap_bot=False)
-    mb.add_beam((ax, ay - 0.04, z0 + 0.99), (ax, ay - 0.19, z0 + 0.94), 0.042, 6, "madera")
+    # Cuello y cabeza esculpida con pico curvo hacia el frente
+    cx_h, cy_h, _ = _pt(0.0, -0.02, 0.0)
+    mb.add_cylinder(cx_h, cy_h, z0 + 0.88, z0 + 1.00, 0.09, 0.075, 8, "madera", cap_top=False, cap_bot=False)
+    mb.add_beam(_pt(0.0, -0.04, 0.99), _pt(0.0, -0.19, 0.94), 0.042, 6, "madera")
     # Alas desplegadas y curvadas hacia abajo (5 plumas escalonadas en arco por ala)
     for sgn in (-1.0, 1.0):
         wing_pts = [
@@ -1794,14 +1808,16 @@ def _add_eagle_pedestal(mb: MeshBuilder, ax: float, ay: float, z0: float):
             (0.36, 0.32, 0.024),
         ]
         for (px0, pz0, r0), (px1, pz1, r1) in zip(wing_pts, wing_pts[1:]):
-            mb.add_beam((ax + sgn * px0, ay + 0.02, z0 + pz0), (ax + sgn * px1, ay + 0.04, z0 + pz1), (r0 + r1) * 0.5, 5, "madera")
-        # Hileras de plumas colgantes debajo del arco del ala
+            mb.add_beam(_pt(sgn * px0, 0.02, pz0), _pt(sgn * px1, 0.04, pz1), (r0 + r1) * 0.5, 5, "madera")
         for fx, fz_top, fz_bot in ((0.22, 0.86, 0.48), (0.31, 0.80, 0.42), (0.40, 0.68, 0.34)):
-            mb.add_beam((ax + sgn * fx, ay + 0.03, z0 + fz_top), (ax + sgn * (fx + 0.03), ay + 0.05, z0 + fz_bot), 0.026, 4, "madera")
+            mb.add_beam(_pt(sgn * fx, 0.03, fz_top), _pt(sgn * (fx + 0.03), 0.05, fz_bot), 0.026, 4, "madera")
     # Bandeja y cofre historico encima
-    mb.add_box(ax - 0.38, ax + 0.38, ay - 0.25, ay + 0.25, z0 + 0.96, z0 + 1.02, "madera")
-    mb.add_box(ax - 0.28, ax + 0.28, ay - 0.18, ay + 0.18, z0 + 1.02, z0 + 1.24, "madera")
-    mb.add_box(ax - 0.30, ax + 0.30, ay - 0.19, ay + 0.19, z0 + 1.24, z0 + 1.30, "oro_bronce")
+    hx, hy = (0.25, 0.38) if face_east else (0.38, 0.25)
+    chx, chy = (0.18, 0.28) if face_east else (0.28, 0.18)
+    ochx, ochy = (0.19, 0.30) if face_east else (0.30, 0.19)
+    mb.add_box(ax - hx, ax + hx, ay - hy, ay + hy, z0 + 0.96, z0 + 1.02, "madera")
+    mb.add_box(ax - chx, ax + chx, ay - chy, ay + chy, z0 + 1.02, z0 + 1.24, "madera")
+    mb.add_box(ax - ochx, ax + ochx, ay - ochy, ay + ochy, z0 + 1.24, z0 + 1.30, "oro_bronce")
 
 
 def _build_bolivar_bust_mesh() -> bpy.types.Mesh:
@@ -1843,25 +1859,25 @@ def _build_bolivar_bust_mesh() -> bpy.types.Mesh:
     def _ell(rx: float, ry: float, n: int = 12):
         return [(math.cos(2.0 * math.pi * k / n) * rx, math.sin(2.0 * math.pi * k / n) * ry) for k in range(n)]
 
-    # 1. Pedestal arquitectonico en piedra clara (0.00 .. 1.08 m) — separa el busto oscuro
-    _add_loft([(0.00, _sq(0.37, 0.37)), (0.14, _sq(0.37, 0.37)), (0.24, _sq(0.27, 0.27))],
+    # 1. Pedestal arquitectonico en piedra clara (0.00 .. 1.12 m) — base solida para busto monumental
+    _add_loft([(0.00, _sq(0.42, 0.42)), (0.16, _sq(0.42, 0.42)), (0.26, _sq(0.30, 0.30))],
               mat_idx=1, cap_bot=True, cap_top=True, smooth=False)
-    _add_loft([(0.22, _oct(0.245)), (0.94, _oct(0.210)), (1.01, _oct(0.265))],
+    _add_loft([(0.24, _oct(0.275)), (0.98, _oct(0.235)), (1.05, _oct(0.295))],
               mat_idx=1, cap_bot=False, cap_top=True, smooth=False)
-    _add_loft([(1.01, _sq(0.295, 0.295)), (1.08, _sq(0.295, 0.295))],
+    _add_loft([(1.05, _sq(0.335, 0.335)), (1.12, _sq(0.335, 0.335))],
               mat_idx=1, cap_bot=True, cap_top=True, smooth=False)
 
-    # 2. Socle circular torneado en bronce oscuro (1.08 .. 1.25 m)
-    _add_loft([(1.08, _ell(0.215, 0.205)), (1.13, _ell(0.165, 0.155)), (1.19, _ell(0.130, 0.120)), (1.25, _ell(0.150, 0.135))],
+    # 2. Socle circular torneado en bronce oscuro (1.12 .. 1.32 m)
+    _add_loft([(1.12, _ell(0.260, 0.245)), (1.18, _ell(0.200, 0.188)), (1.25, _ell(0.158, 0.148)), (1.32, _ell(0.182, 0.168))],
               mat_idx=0, cap_bot=True, cap_top=False, smooth=True)
 
-    # 3. Torso heroico con casaca militar 1825, cuello alto en V y hombros anchos (1.25 .. 1.67 m)
+    # 3. Torso heroico monumental con casaca militar 1825, cuello alto en V y hombros anchos (1.32 .. 1.86 m)
     chest_rings = [
-        (1.25, 0.155, 0.130),
-        (1.36, 0.355, 0.200),
-        (1.49, 0.445, 0.210),
-        (1.58, 0.255, 0.170),
-        (1.67, 0.140, 0.130),
+        (1.32, 0.195, 0.165),
+        (1.46, 0.445, 0.250),
+        (1.63, 0.560, 0.265),
+        (1.74, 0.320, 0.215),
+        (1.86, 0.175, 0.162),
     ]
     prev_ring = None
     for rz, rx, ry in chest_rings:
@@ -1869,9 +1885,9 @@ def _build_bolivar_bust_mesh() -> bpy.types.Mesh:
         for k in range(14):
             ang = 2.0 * math.pi * k / 14.0
             ca, sa = math.cos(ang), math.sin(ang)
-            dip = -0.065 * max(0.0, -sa) if rz >= 1.56 else 0.0
-            if rz <= 1.38 and sa < -0.35:
-                ry_cur = ry * 1.06
+            dip = -0.075 * max(0.0, -sa) if rz >= 1.72 else 0.0
+            if rz <= 1.48 and sa < -0.35:
+                ry_cur = ry * 1.07
             else:
                 ry_cur = ry
             ring.append(bm.verts.new((ca * rx, sa * ry_cur, rz + dip)))
@@ -1887,70 +1903,61 @@ def _build_bolivar_bust_mesh() -> bpy.types.Mesh:
     f_cap = bm.faces.new(prev_ring)
     f_cap.material_index = 0
 
-    # 4. Charreteras, solapas en V y medalla pectoral en oro_bronce (dan lectura historica)
+    # 4. Charreteras, solapas en V y medalla pectoral en oro_bronce (escala monumental)
     before_gold = set(bm.faces)
     for sgn in (-1.0, 1.0):
-        _bm_add_tube(bm, Vector((sgn * 0.22, 0.0, 1.54)), Vector((sgn * 0.445, 0.0, 1.46)), 0.052, 0.076, segs=8)
-        # Ribete diagonal de casaca en V sobre el pecho (-Y)
-        _bm_add_tube(bm, Vector((sgn * 0.105, -0.130, 1.58)), Vector((sgn * 0.020, -0.205, 1.37)), 0.016, 0.014, segs=5)
-    # Condecoracion pectoral octogonal
-    _bm_add_tube(bm, Vector((-0.145, -0.195, 1.445)), Vector((-0.155, -0.225, 1.445)), 0.042, 0.036, segs=6)
+        _bm_add_tube(bm, Vector((sgn * 0.275, 0.0, 1.69)), Vector((sgn * 0.555, 0.0, 1.59)), 0.064, 0.094, segs=8)
+        _bm_add_tube(bm, Vector((sgn * 0.130, -0.162, 1.74)), Vector((sgn * 0.025, -0.255, 1.48)), 0.019, 0.017, segs=5)
+    _bm_add_tube(bm, Vector((-0.180, -0.244, 1.57)), Vector((-0.194, -0.280, 1.57)), 0.052, 0.044, segs=6)
     for f in bm.faces:
         if f not in before_gold:
             f.material_index = 2
 
-    # 5. Cuello anatomico esbelto (1.60 .. 1.84 m)
+    # 5. Cuello anatomico (1.78 .. 2.06 m)
     before_neck = set(bm.faces)
-    _bm_add_tube(bm, Vector((0.0, -0.015, 1.60)), Vector((0.0, -0.025, 1.84)), 0.105, 0.088, segs=10)
+    _bm_add_tube(bm, Vector((0.0, -0.020, 1.78)), Vector((0.0, -0.032, 2.06)), 0.128, 0.108, segs=10)
     for f in bm.faces:
         if f not in before_neck:
             f.material_index = 0
 
-    # 6. Cabeza clasica proporcionada (22x15 ~ 616 tris): rostro enjuto, nariz aguilena, cabello romantico y patillas
-    uv_ret = bmesh.ops.create_uvsphere(bm, u_segments=22, v_segments=15, radius=0.195)
+    # 6. Cabeza clasica monumental proporcionada (22x15 ~ 616 tris)
+    uv_ret = bmesh.ops.create_uvsphere(bm, u_segments=22, v_segments=15, radius=0.238)
     for v in uv_ret["verts"]:
         p = v.co
-        nx, ny, nz = p.x / 0.195, p.y / 0.195, p.z / 0.195
+        nx, ny, nz = p.x / 0.238, p.y / 0.238, p.z / 0.238
         jaw_taper = 0.72 + 0.28 * max(0.0, min(1.0, (nz + 0.58) / 0.88))
         sx = p.x * 0.80 * jaw_taper
         sy = p.y * 0.98
         sz = p.z * 1.18
 
         if ny < -0.10:
-            # Frente alta y arco superciliar definido
-            sy -= 0.014 * math.exp(-((nz - 0.44) / 0.22) ** 2) * max(0.0, 1.0 - (nx / 0.75) ** 2)
-            sy -= 0.028 * math.exp(-((nz - 0.18) / 0.10) ** 2) * max(0.0, 1.0 - (nx / 0.68) ** 2)
-            # Cuencas oculares profundas
+            sy -= 0.017 * math.exp(-((nz - 0.44) / 0.22) ** 2) * max(0.0, 1.0 - (nx / 0.75) ** 2)
+            sy -= 0.034 * math.exp(-((nz - 0.18) / 0.10) ** 2) * max(0.0, 1.0 - (nx / 0.68) ** 2)
             for ex in (-0.28, 0.28):
                 eye_d = ((nx - ex) / 0.15) ** 2 + ((nz - 0.05) / 0.11) ** 2
-                sy += 0.032 * math.exp(-eye_d)
-            # Nariz aguilena prominente y recta de Bolivar
+                sy += 0.038 * math.exp(-eye_d)
             if -0.24 < nz < 0.22:
                 nose_w = math.exp(-((nx / 0.105) ** 2))
                 nose_p = max(0.0, 1.0 - ((nz + 0.02) / 0.22) ** 2)
-                sy -= 0.068 * nose_w * (nose_p ** 0.70)
-            # Pomulos marcados y mejillas enjutas
+                sy -= 0.082 * nose_w * (nose_p ** 0.70)
             for cx_p in (-0.40, 0.40):
-                sy -= 0.020 * math.exp(-(((nx - cx_p) / 0.17) ** 2 + ((nz + 0.04) / 0.14) ** 2))
-                sy += 0.016 * math.exp(-(((nx - cx_p * 0.85) / 0.18) ** 2 + ((nz + 0.24) / 0.14) ** 2))
-            # Labios firmes y menton anguloso proyectado
-            sy -= 0.014 * math.exp(-(((nx / 0.16) ** 2 + ((nz + 0.28) / 0.06) ** 2)))
-            sy += 0.018 * math.exp(-(((nx / 0.18) ** 2 + ((nz + 0.40) / 0.07) ** 2)))
-            sy -= 0.032 * math.exp(-(((nx / 0.20) ** 2 + ((nz + 0.58) / 0.15) ** 2)))
+                sy -= 0.024 * math.exp(-(((nx - cx_p) / 0.17) ** 2 + ((nz + 0.04) / 0.14) ** 2))
+                sy += 0.020 * math.exp(-(((nx - cx_p * 0.85) / 0.18) ** 2 + ((nz + 0.24) / 0.14) ** 2))
+            sy -= 0.017 * math.exp(-(((nx / 0.16) ** 2 + ((nz + 0.28) / 0.06) ** 2)))
+            sy += 0.022 * math.exp(-(((nx / 0.18) ** 2 + ((nz + 0.40) / 0.07) ** 2)))
+            sy -= 0.038 * math.exp(-(((nx / 0.20) ** 2 + ((nz + 0.58) / 0.15) ** 2)))
 
-        # Orejas esculpidas en los flancos
         if abs(nx) > 0.76 and -0.22 < nz < 0.14 and -0.14 < ny < 0.24:
             ear_f = math.exp(-(((nz + 0.04) / 0.14) ** 2 + ((ny - 0.04) / 0.14) ** 2))
-            sx += math.copysign(0.024, nx) * ear_f
+            sx += math.copysign(0.030, nx) * ear_f
 
-        # Cabello romantico ondulado en coronilla, nuca y patillas laterales
         if nz > 0.34 or ny > 0.02 or (abs(nx) > 0.62 and nz > -0.34):
-            curl = 0.018 * (math.sin(nx * 14.0) * math.cos(nz * 10.0) + 0.65 * math.cos(ny * 12.0))
-            sx += nx * (0.026 + curl)
-            sy += ny * (0.024 + curl)
-            sz += max(0.0, nz) * (0.028 + curl * 0.9)
+            curl = 0.022 * (math.sin(nx * 14.0) * math.cos(nz * 10.0) + 0.65 * math.cos(ny * 12.0))
+            sx += nx * (0.032 + curl)
+            sy += ny * (0.030 + curl)
+            sz += max(0.0, nz) * (0.034 + curl * 0.9)
 
-        v.co = Vector((sx, sy - 0.025, sz + 1.98))
+        v.co = Vector((sx, sy - 0.030, sz + 2.24))
 
     bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-4)
     bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
@@ -1978,42 +1985,41 @@ def _build_bolivar_bust_mesh() -> bpy.types.Mesh:
 
 
 def build_sala_lateral_museo(col, kit: dict[str, bpy.types.Mesh]):
-    """Sala de los Guerrilleros (6.20 x 8.60 m) conectada al Salon (cuarto.jpg + canon_real)."""
+    """Sala de los Guerrilleros cerrada (6.20 x 19.60 m) con acceso directo desde Claustro y Salon."""
     x0 = SALON_ANCHO_EXT * 0.5                # 5.40 (pegada al muro Este del Salon)
     x1 = x0 + 6.20                            # 11.60
     x_out = x1 + 0.50                         # 12.10
-    y0 = 39.20
-    y1 = y0 + 8.60                            # 47.80
-    y_out0 = y0 - 0.50                        # 38.70
+    y0 = CLAUSTRO_Y0 + CLAUSTRO_FONDO_EXT     # 28.20 (acceso directo desde galeria Norte-Este X=7.10..9.50)
+    y1 = 47.80
     y_out1 = y1 + 0.50                        # 48.30
     z_top = 4.80
     z_ridge = 6.30
 
     mb = MeshBuilder("CL_Sala_Guerrilleros")
     mb.add_box(x0, x1, y0, y1, 0.0, Z_SALON_PISO, "piso")
-    mb.add_box(x0, x1, y0, y0 + 0.05, Z_SALON_PISO, Z_SALON_PISO + 0.30, "piedra")
+    # Zocalos piedra Norte, Sur (flanqueando puerta del claustro) y Este
     mb.add_box(x0, x1, y1 - 0.05, y1, Z_SALON_PISO, Z_SALON_PISO + 0.30, "piedra")
+    mb.add_box(x0, 7.00, y0, y0 + 0.05, Z_SALON_PISO, Z_SALON_PISO + 0.30, "piedra")
+    mb.add_box(9.60, x1, y0, y0 + 0.05, Z_SALON_PISO, Z_SALON_PISO + 0.30, "piedra")
+    mb.add_box(x1 - 0.05, x1, y0, y1, Z_SALON_PISO, Z_SALON_PISO + 0.30, "piedra")
 
-    # Muros Sur, Norte y Este (con vano abierto hacia Pasillo del Aguila en Y: 42.30..44.70)
-    mb.add_box(x0, x_out, y_out0, y0, 0.0, z_top, "muro")
+    # Muros exteriores completamente cerrados: Norte, Este continuo y remate Sur-Este (X=11.00..12.10)
     mb.add_box(x0, x_out, y1, y_out1, 0.0, z_top, "muro")
-    mb.add_box(x1, x_out, y0, 42.30, 0.0, z_top, "muro")
-    mb.add_box(x1, x_out, 44.70, y1, 0.0, z_top, "muro")
-    mb.add_box(x1, x_out, 42.30, 44.70, Z_SALON_PISO + 3.00, z_top, "muro")
-    mb.add_box(x1 - 0.04, x_out + 0.04, 42.20, 44.80, Z_SALON_PISO + 3.00, Z_SALON_PISO + 3.18, "madera")
+    mb.add_box(x1, x_out, y0, y1, 0.0, z_top, "muro")
+    mb.add_box(CLAUSTRO_ANCHO_EXT * 0.5, x_out, y0 - 0.60, y0, 0.0, z_top, "muro")
 
-    # Techo de teja exterior + artesonado casetonado verde azulado interior
+    # Techo de teja exterior (sin invadir el muro del claustro ni el del Salon) + artesonado verde azulado interior
     xm = (x0 + x_out) * 0.5
-    mb.add_sloped_box((x0 - 0.15, y_out0 - 0.25, z_top), (xm, y_out0 - 0.25, z_ridge), (xm, y_out1 + 0.25, z_ridge), (x0 - 0.15, y_out1 + 0.25, z_top), 0.18, "teja")
-    mb.add_sloped_box((xm, y_out0 - 0.25, z_ridge), (x_out + 0.15, y_out0 - 0.25, z_top), (x_out + 0.15, y_out1 + 0.25, z_top), (xm, y_out1 + 0.25, z_ridge), 0.18, "teja")
+    mb.add_sloped_box((x0, y0, z_top), (xm, y0, z_ridge), (xm, y_out1 + 0.25, z_ridge), (x0, y_out1 + 0.25, z_top), 0.18, "teja")
+    mb.add_sloped_box((xm, y0, z_ridge), (x_out + 0.15, y0, z_top), (x_out + 0.15, y_out1 + 0.25, z_top), (xm, y_out1 + 0.25, z_ridge), 0.18, "teja")
     mb.add_box(x0, x1, y0, y1, z_top - 0.14, z_top, "atlas_museo", "azul_verde")
-    for k in range(6):
-        vy = y0 + 0.85 + k * 1.38
+    for k in range(14):
+        vy = y0 + 0.75 + k * 1.38
         mb.add_box(x0, x1, vy - 0.08, vy + 0.08, z_top - 0.30, z_top - 0.14, "madera")
     for vx in (x0 + 1.5, x0 + 3.1, x0 + 4.7):
         mb.add_box(vx - 0.06, vx + 0.06, y0, y1, z_top - 0.22, z_top - 0.14, "madera")
 
-    # Muro Norte (Juana Azurduy grande + mesa con cofre cubierto de banderas + vitrina roja escalonada)
+    # Muro Norte (Juana Azurduy grande + altar con cofre cubierto con banderas Bolivia y Argentina + vitrina roja)
     add_beveled_frame_painting(mb, x0 + 3.10, y1, 2.75, 2.15, 1.85, "-Y", "juana_grande", frame_w=0.085, depth=0.065)
     mx_c, my_c = x0 + 3.10, y1 - 0.45
     mb.add_box(mx_c - 0.72, mx_c + 0.72, my_c - 0.34, my_c + 0.34, Z_SALON_PISO + 0.72, Z_SALON_PISO + 0.80, "madera")
@@ -2021,28 +2027,44 @@ def build_sala_lateral_museo(col, kit: dict[str, bpy.types.Mesh]):
         for ly in (my_c - 0.28, my_c + 0.24):
             mb.add_box(lx, lx + 0.05, ly, ly + 0.05, Z_SALON_PISO, Z_SALON_PISO + 0.72, "madera")
     mb.add_box(mx_c - 0.44, mx_c + 0.44, my_c - 0.24, my_c + 0.24, Z_SALON_PISO + 0.80, Z_SALON_PISO + 1.18, "madera")
-    mb.add_box(mx_c - 0.45, mx_c - 0.15, my_c - 0.25, my_c + 0.25, Z_SALON_PISO + 0.82, Z_SALON_PISO + 1.22, "atlas_museo", "wiphala")
-    mb.add_box(mx_c - 0.15, mx_c + 0.45, my_c - 0.25, my_c + 0.25, Z_SALON_PISO + 0.82, Z_SALON_PISO + 1.22, "atlas_museo", "bandera")
+    mb.add_box(mx_c - 0.45, mx_c, my_c - 0.25, my_c + 0.25, Z_SALON_PISO + 0.82, Z_SALON_PISO + 1.22, "atlas_museo", "bandera")
+    mb.add_box(mx_c, mx_c + 0.45, my_c - 0.25, my_c + 0.25, Z_SALON_PISO + 0.82, Z_SALON_PISO + 1.22, "atlas_museo", "bandera_belgrano")
     mb.add_box(mx_c - 0.62, mx_c + 0.62, my_c - 0.92, my_c - 0.38, Z_SALON_PISO, Z_SALON_PISO + 0.36, "atlas_museo", "rojo")
     mb.add_box(mx_c - 0.24, mx_c + 0.24, my_c - 0.82, my_c - 0.44, Z_SALON_PISO + 0.36, Z_SALON_PISO + 0.56, "atlas_museo", "rojo")
     add_vitrine_glass_box(mb, mx_c - 0.58, mx_c + 0.58, my_c - 0.88, my_c - 0.42, Z_SALON_PISO + 0.36, Z_SALON_PISO + 0.84)
 
-    # Muro Oeste (junto a cancela): retratos de Padilla/Moto Mendez/Camargo + consola con cofre
-    add_beveled_frame_painting(mb, x0, y0 + 2.10, 2.50, 1.15, 1.50, "+X", "guerrillera", frame_w=0.06, depth=0.06)
-    add_beveled_frame_painting(mb, x0, y0 + 3.55, 2.50, 1.45, 1.10, "+X", "batalla", frame_w=0.06, depth=0.06)
-    mb.add_box(x0 + 0.05, x0 + 0.55, y0 + 2.85, y0 + 4.15, Z_SALON_PISO + 0.72, Z_SALON_PISO + 0.78, "madera")
-    mb.add_box(x0 + 0.12, x0 + 0.46, y0 + 3.25, y0 + 3.75, Z_SALON_PISO, Z_SALON_PISO + 0.32, "madera")
+    # Muro Oeste (Sur a Norte antes de la cancela verde Y=43.8..46.2): Padilla, Casimiro Olaneta y consola con 4 patas
+    add_beveled_frame_painting(mb, x0, 32.00, 2.52, 1.25, 1.55, "+X", "guerrillera", frame_w=0.06, depth=0.06)
+    add_beveled_frame_painting(mb, x0, 35.40, 2.52, 1.10, 1.42, "+X", "cuadro_pasillo", frame_w=0.06, depth=0.06)
+    mb.add_box(x0, x0 + 0.03, 35.22, 35.58, 1.62, 1.72, "oro_bronce")
+    add_beveled_frame_painting(mb, x0, 39.60, 2.52, 1.15, 1.48, "+X", "guerrillera", frame_w=0.06, depth=0.06)
+    add_beveled_frame_painting(mb, x0, 41.35, 2.52, 1.40, 1.12, "+X", "batalla", frame_w=0.06, depth=0.06)
 
-    # Muro Sur: Templete de la Bandera de Belgrano (07:18)
-    bx_t = x0 + 3.10
-    mb.add_box(bx_t - 0.95, bx_t + 0.95, y0, y0 + 0.48, Z_SALON_PISO, Z_SALON_PISO + 0.86, "piso")
-    mb.add_box(bx_t - 0.88, bx_t + 0.88, y0 + 0.06, y0 + 0.44, Z_SALON_PISO + 0.86, Z_SALON_PISO + 0.92, "madera")
+    # Consola de madera apoyada firmemente en 4 patas hasta el piso + cofre tallado encima
+    cs_y0, cs_y1 = 40.30, 41.60
+    mb.add_box(x0 + 0.04, x0 + 0.56, cs_y0, cs_y1, Z_SALON_PISO + 0.72, Z_SALON_PISO + 0.78, "madera")
+    for lx in (x0 + 0.07, x0 + 0.48):
+        for ly in (cs_y0 + 0.04, cs_y1 - 0.09):
+            mb.add_box(lx, lx + 0.05, ly, ly + 0.05, Z_SALON_PISO, Z_SALON_PISO + 0.72, "madera")
+    mb.add_box(x0 + 0.08, x0 + 0.50, cs_y0 + 0.06, cs_y1 - 0.06, Z_SALON_PISO + 0.16, Z_SALON_PISO + 0.20, "madera")
+    mb.add_box(x0 + 0.14, x0 + 0.46, 40.70, 41.20, Z_SALON_PISO + 0.78, Z_SALON_PISO + 1.04, "madera")
+
+    # Muro Este: Templete de la Bandera de Macha (Belgrano) + cuadros historicos
+    by_t = 33.40
+    mb.add_box(x1 - 0.54, x1, by_t - 0.96, by_t + 0.96, Z_SALON_PISO, Z_SALON_PISO + 0.86, "piso")
+    mb.add_box(x1 - 0.50, x1 - 0.04, by_t - 0.88, by_t + 0.88, Z_SALON_PISO + 0.86, Z_SALON_PISO + 0.92, "madera")
     u0, v0, u1, v1 = cell_uv("bandera_belgrano")
-    mb.add_quad((bx_t - 0.72, y0 + 0.12, Z_SALON_PISO + 0.94), (bx_t + 0.72, y0 + 0.12, Z_SALON_PISO + 0.94), (bx_t + 0.72, y0 + 0.38, Z_SALON_PISO + 0.94), (bx_t - 0.72, y0 + 0.38, Z_SALON_PISO + 0.94), "atlas_museo", (u0, v0, u1, v1))
-    add_vitrine_glass_box(mb, bx_t - 0.82, bx_t + 0.82, y0 + 0.08, y0 + 0.42, Z_SALON_PISO + 0.92, Z_SALON_PISO + 1.24)
+    mb.add_quad((x1 - 0.44, by_t - 0.74, Z_SALON_PISO + 0.94), (x1 - 0.44, by_t + 0.74, Z_SALON_PISO + 0.94),
+                (x1 - 0.12, by_t + 0.74, Z_SALON_PISO + 0.94), (x1 - 0.12, by_t - 0.74, Z_SALON_PISO + 0.94),
+                "atlas_museo", (u0, v0, u1, v1))
+    add_vitrine_glass_box(mb, x1 - 0.48, x1 - 0.08, by_t - 0.82, by_t + 0.82, Z_SALON_PISO + 0.92, Z_SALON_PISO + 1.24)
+    add_beveled_frame_painting(mb, x1, by_t, 2.55, 1.35, 1.10, "-X", "batalla", frame_w=0.06, depth=0.06)
+    add_beveled_frame_painting(mb, x1, 38.80, 2.55, 1.15, 1.45, "-X", "ret_sup_izq", frame_w=0.06, depth=0.06)
+    add_beveled_frame_painting(mb, x1, 43.00, 2.55, 0.95, 1.40, "-X", "espadas", frame_w=0.06, depth=0.06)
+    add_beveled_frame_painting(mb, x1, 46.20, 2.55, 1.10, 1.38, "-X", "cuadro_pasillo", frame_w=0.06, depth=0.06)
 
     # Canon de montana al centro sobre pedestal de madera + 4 vidrios bajos sin tapa (tubo sobresale arriba)
-    cx_c, cy_c = x0 + 3.10, y0 + 3.80
+    cx_c, cy_c = x0 + 3.10, 42.40
     mb.add_box(cx_c - 0.82, cx_c + 0.82, cy_c - 0.46, cy_c + 0.46, Z_SALON_PISO, Z_SALON_PISO + 0.56, "madera")
     mb.add_box(cx_c - 0.56, cx_c + 0.56, cy_c - 0.22, cy_c + 0.22, Z_SALON_PISO + 0.56, Z_SALON_PISO + 0.82, "madera")
     mb.add_beam((cx_c - 0.82, cy_c, Z_SALON_PISO + 1.08), (cx_c + 0.74, cy_c, Z_SALON_PISO + 0.86), 0.115, 10, "hierro")
@@ -2056,108 +2078,135 @@ def build_sala_lateral_museo(col, kit: dict[str, bpy.types.Mesh]):
     mb.to_object(col, "CL_Sala_Guerrilleros")
     spawn_instance(col, "CL_Silla_Guerrilleros_01", kit["silla_presidio"], (x0 + 1.15, y1 - 0.55, Z_SALON_PISO), 180.0)
     spawn_instance(col, "CL_Silla_Guerrilleros_02", kit["silla_presidio"], (x0 + 5.05, y1 - 0.55, Z_SALON_PISO), 180.0)
-    spawn_instance(col, "CL_Arana_Guerrilleros", kit["arana_cristal"], (x0 + 3.10, y0 + 4.30, z_top - 1.35), 0.0)
-
-
-def build_pasillo_aguila(col, kit: dict[str, bpy.types.Mesh]):
-    """Pasillo del Aguila (~2.60 x 8.50 m, pasillo1.jpg) con vigas verde oscuro y aguila tallada."""
-    x0 = 11.60
-    x1 = 14.20
-    x_out = x1 + 0.45
-    y0 = 39.20
-    y1 = 47.70
-    z_eave = 4.20
-    z_ridge = 5.10
-
-    mb = MeshBuilder("CL_Pasillo_Aguila")
-    mb.add_box(x0, x1, y0, y1, 0.0, Z_SALON_PISO, "piso")
-    mb.add_box(x0, x_out, y0 - 0.45, y0, 0.0, z_eave, "muro")
-    mb.add_box(x1, x_out, y0, y1, 0.0, z_ridge, "muro")
-    # Techo inclinado exterior de teja + cielorraso y vigas en verde oscuro (pasillo1.jpg)
-    mb.add_sloped_box((x0, y0, z_eave), (x_out, y0, z_ridge), (x_out, y1, z_ridge), (x0, y1, z_eave), 0.16, "teja")
-    mb.add_sloped_box((x0, y0, z_eave - 0.02), (x1, y0, z_ridge - 0.02), (x1, y1, z_ridge - 0.02), (x0, y1, z_eave - 0.02), 0.02, "madera")
-    for k in range(8):
-        vy = y0 + 0.65 + k * 1.05
-        mb.add_box(x0, x1, vy - 0.05, vy + 0.05, z_eave - 0.16, z_eave - 0.04, "atlas_museo", "verde_bar")
-        mb.add_sloped_box((x0, vy - 0.055, z_eave - 0.15), (x1, vy - 0.055, z_ridge - 0.15), (x1, vy + 0.055, z_ridge - 0.15), (x0, vy + 0.055, z_eave - 0.15), 0.13, "atlas_museo", "verde_bar")
-
-    for py, ckey in ((41.40, "cuadro_pasillo"), (45.20, "guerrillera")):
-        add_beveled_frame_painting(mb, x1, py, 2.35, 1.05, 1.35, "-X", ckey, frame_w=0.055, depth=0.055)
-        mb.add_disc_y(x1 - 0.04, py, 1.25, 0.22, 0.04, 10, "piedra", facing_neg_y=False)
-
-    _add_eagle_pedestal(mb, (x0 + x1) * 0.5, 43.50, Z_SALON_PISO)
-
-    mb.to_object(col, "CL_Pasillo_Aguila")
-    spawn_instance(col, "CL_Silla_Pasillo_01", kit["silla_presidio"], (x1 - 0.45, 40.40, Z_SALON_PISO), 90.0)
-    spawn_instance(col, "CL_Arana_Pasillo", kit["arana_cristal"], ((x0 + x1) * 0.5, 43.50, z_eave - 0.28), 0.0)
+    spawn_instance(col, "CL_Arana_Guerrilleros", kit["arana_cristal"], (x0 + 3.10, 42.40, z_top - 1.35), 0.0)
 
 
 def build_sala_bolivar(col, kit: dict[str, bpy.types.Mesh]):
-    """Sala del Busto Monumental de Bolivar (6.20 x 8.00 m, cuarto2.jpg) completa y equilibrada."""
-    x0 = 9.80
-    x1 = 16.00
-    y0 = 47.70
-    y1 = 55.70
+    """Salon del Antiguo Senado / Galeria de los Presidentes (6.20 x 14.40 m, ala Oeste desde el patio)."""
+    x0 = -CLAUSTRO_ANCHO_EXT * 0.5 - 6.20     # -17.20
+    x1 = -CLAUSTRO_ANCHO_EXT * 0.5            # -11.00 (pegada al muro Oeste del claustro)
+    x_out = x0 - 0.45                         # -17.65
+    xm = (x0 + x1) * 0.5                      # -14.10
+    y0 = 18.80
+    y1 = 33.20
+    y_out0 = y0 - 0.45                        # 18.35
+    y_out1 = y1 + 0.45                        # 33.65
+    y_cl_n = CLAUSTRO_Y0 + CLAUSTRO_FONDO_EXT # 28.20
     z_top = 5.40
     z_ridge = 6.80
 
     mb = MeshBuilder("CL_Sala_Bolivar")
     mb.add_box(x0, x1, y0, y1, 0.0, Z_SALON_PISO, "piso")
-    mb.add_box(x0, 11.60, y0 - 0.45, y0, 0.0, z_top, "muro")
-    mb.add_box(14.20, x1, y0 - 0.45, y0, 0.0, z_top, "muro")
-    mb.add_box(11.60, 14.20, y0 - 0.45, y0, Z_SALON_PISO + 3.00, z_top, "muro")
-    mb.add_box(x0 - 0.45, x0, y0, y1, 0.0, z_top, "muro")
-    mb.add_box(x1, x1 + 0.45, y0, y1, 0.0, z_top, "muro")
-    mb.add_box(x0 - 0.45, x1 + 0.45, y1, y1 + 0.45, 0.0, z_top, "muro")
 
-    xm = (x0 + x1) * 0.5
-    mb.add_sloped_box((x0 - 0.50, y0 - 0.50, z_top), (xm, y0 - 0.50, z_ridge), (xm, y1 + 0.50, z_ridge), (x0 - 0.50, y1 + 0.50, z_top), 0.18, "teja")
-    mb.add_sloped_box((xm, y0 - 0.50, z_ridge), (x1 + 0.50, y0 - 0.50, z_top), (x1 + 0.50, y1 + 0.50, z_top), (xm, y1 + 0.50, z_ridge), 0.18, "teja")
+    # Muros perimetrales (Oeste, Sur, Norte y tramo Este mas alla del claustro en Y=28.20..33.65)
+    mb.add_box(x_out, x0, y_out0, y_out1, 0.0, z_top, "muro")
+    mb.add_box(x0, x1, y_out0, y0, 0.0, z_top, "muro")
+    mb.add_box(x0, x1, y1, y_out1, 0.0, z_top, "muro")
+    mb.add_box(x1, x1 + 0.45, y_cl_n, y_out1, 0.0, z_top, "muro")
+
+    # Zocalos interiores de piedra
+    mb.add_box(x0, x0 + 0.04, y0, y1, Z_SALON_PISO, Z_SALON_PISO + 0.30, "piedra")
+    mb.add_box(x0, x1, y0, y0 + 0.04, Z_SALON_PISO, Z_SALON_PISO + 0.30, "piedra")
+    mb.add_box(x1 - 0.04, x1, y_cl_n, y1, Z_SALON_PISO, Z_SALON_PISO + 0.30, "piedra")
+
+    # Cubierta exterior de teja (enrasada en X=-11.00 sin entrar al claustro) + cielorraso con vigas oscuras
+    mb.add_sloped_box((x_out - 0.15, y_out0 - 0.25, z_top), (xm, y_out0 - 0.25, z_ridge), (xm, y_out1 + 0.25, z_ridge), (x_out - 0.15, y_out1 + 0.25, z_top), 0.18, "teja")
+    mb.add_sloped_box((xm, y_out0 - 0.25, z_ridge), (x1, y_out0 - 0.25, z_top), (x1, y_out1 + 0.25, z_top), (xm, y_out1 + 0.25, z_ridge), 0.18, "teja")
     mb.add_box(x0, x1, y0, y1, z_top - 0.12, z_top, "madera")
+    for vy in (20.10, 21.80, 23.50, 25.20, 26.90, 28.60, 30.30, 32.00):
+        mb.add_box(x0, x1, vy - 0.07, vy + 0.07, z_top - 0.26, z_top - 0.12, "madera")
 
-    # Tarima escalonada de ladrillo con bordes blancos (cuarto2.jpg)
-    mb.add_box(x0, x1, 52.80, y1, Z_SALON_PISO, Z_SALON_PISO + 0.18, "piso")
-    mb.add_box(x0, x1, 52.76, 52.84, Z_SALON_PISO, Z_SALON_PISO + 0.19, "muro")
-    mb.add_box(x0, x1, 53.60, y1, Z_SALON_PISO + 0.18, Z_SALON_PISO + 0.36, "piso")
-    mb.add_box(x0, x1, 53.56, 53.64, Z_SALON_PISO + 0.18, Z_SALON_PISO + 0.37, "muro")
+    # Antesala directa del patio: Pedestal del Aguila tallada mirando hacia el Claustro (+X)
+    _add_eagle_pedestal(mb, xm, 20.80, Z_SALON_PISO, face_east=True)
+
+    # Piano antiguo pegado al muro izquierdo (Oeste, Y=25.00..26.80, mirando +X) con 4 patas solidas
+    mb.add_box(x0 + 0.06, x0 + 0.72, 25.00, 26.80, Z_SALON_PISO + 0.72, Z_SALON_PISO + 1.08, "madera")
+    mb.add_box(x0 + 0.64, x0 + 0.92, 25.02, 26.78, Z_SALON_PISO + 0.70, Z_SALON_PISO + 0.79, "madera")
+    u0, v0, u1, v1 = cell_uv("piano_teclas")
+    mb.add_quad((x0 + 0.93, 25.08, Z_SALON_PISO + 0.76), (x0 + 0.93, 26.72, Z_SALON_PISO + 0.76),
+                (x0 + 0.72, 26.72, Z_SALON_PISO + 0.80), (x0 + 0.72, 25.08, Z_SALON_PISO + 0.80),
+                "atlas_museo", (u0, v0, u1, v1))
+    mb.add_box(x0 + 0.08, x0 + 0.42, 25.40, 26.40, Z_SALON_PISO + 1.08, Z_SALON_PISO + 1.32, "madera")
+    for lx in (x0 + 0.12, x0 + 0.82):
+        for ly in (25.08, 26.64):
+            mb.add_box(lx, lx + 0.06, ly, ly + 0.06, Z_SALON_PISO, Z_SALON_PISO + 0.72, "madera")
+    mb.add_box(x0 + 0.18, x0 + 0.42, 25.75, 26.05, Z_SALON_PISO + 0.04, Z_SALON_PISO + 0.10, "oro_bronce")
+
+    # 2 Vitrinas de bastones presidenciales junto al muro Este (dejan > 4 m de paso central libre)
+    v1_x0, v1_x1, v1_y0, v1_y1 = x1 - 0.88, x1 - 0.04, 24.40, 25.55
+    mb.add_box(v1_x0, v1_x1, v1_y0, v1_y1, Z_SALON_PISO, Z_SALON_PISO + 0.76, "madera")
+    for bk in range(4):
+        by_b = v1_y0 + 0.22 + bk * 0.23
+        mb.add_cylinder(x1 - 0.46, by_b, Z_SALON_PISO + 0.82, Z_SALON_PISO + 1.50, 0.016, 0.013, 6, "madera")
+        mb.add_cylinder(x1 - 0.46, by_b, Z_SALON_PISO + 1.50, Z_SALON_PISO + 1.57, 0.022, 0.018, 6, "oro_bronce")
+    add_vitrine_glass_box(mb, v1_x0 + 0.03, v1_x1 - 0.03, v1_y0 + 0.03, v1_y1 - 0.03, Z_SALON_PISO + 0.76, Z_SALON_PISO + 1.66)
+
+    v2_x0, v2_x1, v2_y0, v2_y1 = x1 - 0.88, x1 - 0.04, 27.95, 29.20
+    mb.add_box(v2_x0, v2_x1, v2_y0, v2_y1, Z_SALON_PISO, Z_SALON_PISO + 0.78, "madera")
+    mb.add_box(v2_x0 + 0.08, v2_x1 - 0.08, v2_y0 + 0.08, v2_y1 - 0.08, Z_SALON_PISO + 0.78, Z_SALON_PISO + 0.82, "atlas_museo", "rojo")
+    mb.add_beam((x1 - 0.46, v2_y0 + 0.22, Z_SALON_PISO + 0.86), (x1 - 0.46, v2_y1 - 0.22, Z_SALON_PISO + 0.86), 0.018, 6, "madera")
+    mb.add_beam((x1 - 0.46, v2_y1 - 0.22, Z_SALON_PISO + 0.86), (x1 - 0.46, v2_y1 - 0.14, Z_SALON_PISO + 0.86), 0.024, 6, "oro_bronce")
+    add_vitrine_glass_box(mb, v2_x0 + 0.03, v2_x1 - 0.03, v2_y0 + 0.03, v2_y1 - 0.03, Z_SALON_PISO + 0.82, Z_SALON_PISO + 1.18)
+
+    # 10 Retratos presidenciales enmarcados + placa dorada (sin solaparse con puerta Oeste, piano ni tarima)
+    west_portraits = (
+        (20.40, "bolivar"),
+        (22.10, "sucre"),
+        (23.80, "santacruz"),
+        (27.90, "cuadro_pasillo"),
+        (29.55, "ret_sup_izq"),
+    )
+    east_portraits = (
+        (23.20, "ret_sup_der"),
+        (24.85, "ballivian"),
+        (26.45, "bolivar"),
+        (28.05, "sucre"),
+        (29.55, "santacruz"),
+    )
+    for py_p, ckey in west_portraits:
+        add_beveled_frame_painting(mb, x0, py_p, 2.58, 1.00, 1.32, "+X", ckey, frame_w=0.055, depth=0.05)
+        mb.add_box(x0, x0 + 0.03, py_p - 0.15, py_p + 0.15, 1.70, 1.79, "oro_bronce")
+    for py_p, ckey in east_portraits:
+        add_beveled_frame_painting(mb, x1, py_p, 2.58, 1.00, 1.32, "-X", ckey, frame_w=0.055, depth=0.05)
+        mb.add_box(x1 - 0.03, x1, py_p - 0.15, py_p + 0.15, 1.70, 1.79, "oro_bronce")
+
+    # Tarima escalonada de ladrillo con bordes blancos al fondo Norte (cuarto2.jpg / 28m13s)
+    mb.add_box(x0, x1, 30.40, y1, Z_SALON_PISO, Z_SALON_PISO + 0.18, "piso")
+    mb.add_box(x0, x1, 30.36, 30.44, Z_SALON_PISO, Z_SALON_PISO + 0.19, "muro")
+    mb.add_box(x0, x1, 31.20, y1, Z_SALON_PISO + 0.18, Z_SALON_PISO + 0.36, "piso")
+    mb.add_box(x0, x1, 31.16, 31.24, Z_SALON_PISO + 0.18, Z_SALON_PISO + 0.37, "muro")
     z_dais = Z_SALON_PISO + 0.36
 
-    # Puerta doble verde con paneles en X al fondo derecha
-    mb.add_box(x1 - 2.10, x1 - 0.50, y1 - 0.08, y1, z_dais, z_dais + 2.60, "atlas_museo", "verde_bar")
-    # Escudo Nacional de Bolivia en medallon ovalado limpio sobre el muro blanco (sin franja gris!)
-    mb.add_disc_y(xm, y1 - 0.02, 3.68, 0.46, 0.025, 16, "atlas_museo", "escudo_bolivia", facing_neg_y=True)
+    # Puerta doble verde con molduras en X al fondo derecha (Y=33.12..33.20)
+    mb.add_box(x1 - 1.45, x1 - 0.18, y1 - 0.08, y1, z_dais, z_dais + 2.55, "atlas_museo", "verde_bar")
+    mb.add_box(x1 - 1.49, x1 - 0.14, y1 - 0.10, y1 - 0.06, z_dais + 2.52, z_dais + 2.60, "madera")
+    mb.add_box(x1 - 1.49, x1 - 1.43, y1 - 0.10, y1 - 0.06, z_dais, z_dais + 2.54, "madera")
+    mb.add_box(x1 - 0.20, x1 - 0.14, y1 - 0.10, y1 - 0.06, z_dais, z_dais + 2.54, "madera")
+    mb.add_box(x1 - 0.84, x1 - 0.79, y1 - 0.10, y1 - 0.06, z_dais, z_dais + 2.54, "madera")
+    mb.add_box(x1 - 1.44, x1 - 0.19, y1 - 0.10, y1 - 0.06, z_dais + 1.12, z_dais + 1.18, "madera")
+    # Manijas de bronce
+    mb.add_box(x1 - 0.90, x1 - 0.86, y1 - 0.12, y1 - 0.08, z_dais + 1.00, z_dais + 1.10, "oro_bronce")
+    mb.add_box(x1 - 0.77, x1 - 0.73, y1 - 0.12, y1 - 0.08, z_dais + 1.00, z_dais + 1.10, "oro_bronce")
 
-    # 4 Banderas historicas diferenciadas flanqueando el busto
-    for bx, ckey in ((xm - 1.95, "wiphala"), (xm - 1.25, "bandera"), (xm + 1.25, "bandera_belgrano"), (xm + 1.95, "rojo")):
-        mb.add_cylinder(bx, 54.40, z_dais, z_dais + 2.65, 0.025, 0.020, 6, "oro_bronce")
+    # Escudo Nacional de Bolivia en medallon limpio sobre el busto de Bolivar
+    mb.add_disc_y(xm, y1 - 0.02, 3.92, 0.48, 0.025, 16, "atlas_museo", "escudo_bolivia", facing_neg_y=True, rim_mat="muro")
+
+    # 4 Banderas historicas diferenciadas flanqueando el busto monumental (sin invadir la puerta verde)
+    for bx, ckey in ((xm - 1.90, "wiphala"), (xm - 1.22, "bandera"), (xm + 0.90, "bandera_belgrano"), (xm + 1.48, "rojo")):
+        mb.add_cylinder(bx, 32.00, z_dais, z_dais + 2.65, 0.025, 0.020, 6, "oro_bronce")
         u0, v0, u1, v1 = cell_uv(ckey)
-        mb.add_quad((bx - 0.32, 54.38, z_dais + 0.90), (bx + 0.32, 54.38, z_dais + 0.90), (bx + 0.32, 54.38, z_dais + 2.40), (bx - 0.32, 54.38, z_dais + 2.40), "atlas_museo", (u0, v0, u1, v1))
-
-    # Vitrinas laterales de madera/vidrio + 3 retratos enmarcados con placa en muro izquierdo y 3 en derecho
-    for vx in (x0 + 0.95, x1 - 0.95):
-        mb.add_box(vx - 0.55, vx + 0.55, 49.40, 50.20, Z_SALON_PISO, Z_SALON_PISO + 0.85, "madera")
-        add_vitrine_glass_box(mb, vx - 0.52, vx + 0.52, 49.42, 50.18, Z_SALON_PISO + 0.85, Z_SALON_PISO + 1.45)
-    # Vitrina adicional lateral derecha pegada al muro (cuarto2.jpg)
-    mb.add_box(x1 - 0.68, x1 - 0.05, 51.00, 52.30, Z_SALON_PISO, Z_SALON_PISO + 0.78, "madera")
-    add_vitrine_glass_box(mb, x1 - 0.65, x1 - 0.08, 51.04, 52.26, Z_SALON_PISO + 0.78, Z_SALON_PISO + 1.18)
-
-    left_portraits = ((49.20, "sucre"), (51.00, "guerrillera"), (52.80, "cuadro_pasillo"))
-    right_portraits = ((49.20, "ballivian"), (51.00, "batalla"), (52.80, "ret_sup_der"))
-    for py_p, ckey in left_portraits:
-        add_beveled_frame_painting(mb, x0, py_p, 2.55, 1.05, 1.38, "+X", ckey, frame_w=0.06, depth=0.055)
-        mb.add_box(x0, x0 + 0.03, py_p - 0.16, py_p + 0.16, 1.66, 1.76, "oro_bronce")
-    for py_p, ckey in right_portraits:
-        add_beveled_frame_painting(mb, x1, py_p, 2.55, 1.05, 1.38, "-X", ckey, frame_w=0.06, depth=0.055)
-        mb.add_box(x1 - 0.03, x1, py_p - 0.16, py_p + 0.16, 1.66, 1.76, "oro_bronce")
+        mb.add_quad((bx - 0.30, 31.98, z_dais + 0.90), (bx + 0.30, 31.98, z_dais + 0.90),
+                    (bx + 0.30, 31.98, z_dais + 2.40), (bx - 0.30, 31.98, z_dais + 2.40),
+                    "atlas_museo", (u0, v0, u1, v1))
 
     mb.to_object(col, "CL_Sala_Bolivar")
 
     bust_mesh = _build_bolivar_bust_mesh()
     b_obj = bpy.data.objects.new("CL_Busto_Bolivar", bust_mesh)
-    b_obj.location = (xm, 54.30, z_dais)
+    b_obj.location = (xm, 31.90, z_dais)
     col.objects.link(b_obj)
 
-    spawn_instance(col, "CL_Arana_Sala_Bolivar", kit["arana_cristal"], (xm, 51.80, z_top - 1.25), 0.0)
+    spawn_instance(col, "CL_Arana_Sala_Bolivar", kit["arana_cristal"], (xm, 26.80, z_top - 1.25), 0.0)
 
 
 # ---------------------------------------------------------------------------
@@ -2166,26 +2215,26 @@ def build_sala_bolivar(col, kit: dict[str, bpy.types.Mesh]):
 
 def build_markers(col):
     add_empty(col, "POI_ENTRADA_PORTON", (0.0, 0.35, 1.65), "SPHERE", 0.40)
-    add_empty(col, "POI_PATIO_FUENTE", (0.0, 15.0, 1.65), "SPHERE", 0.40)
+    add_empty(col, "POI_PATIO_FUENTE", (0.0, 14.80, 1.65), "SPHERE", 0.40)
     add_empty(col, "POI_ESTATUA", (3.05, 13.90, 1.65), "SPHERE", 0.40)
     add_empty(col, "POI_PORTADA_SALON", (0.0, 27.6, 1.65), "SPHERE", 0.40)
     add_empty(col, "POI_ACTA_INDEPENDENCIA", (0.0, 45.8, 1.65), "SPHERE", 0.40)
     add_empty(col, "POI_PRESIDIO_BOLIVAR", (0.0, 48.2, 1.85), "SPHERE", 0.40)
-    add_empty(col, "POI_SALA_MUSEO", (8.50, 44.50, 1.65), "SPHERE", 0.40)
-    add_empty(col, "POI_CANON", (8.50, 43.00, 1.65), "SPHERE", 0.40)
-    add_empty(col, "POI_BANDERA_BELGRANO", (8.50, 40.00, 1.65), "SPHERE", 0.40)
-    add_empty(col, "POI_PASILLO_AGUILA", (12.90, 43.50, 1.65), "SPHERE", 0.40)
-    add_empty(col, "POI_SALA_BOLIVAR", (12.90, 52.00, 1.65), "SPHERE", 0.40)
+    add_empty(col, "POI_BANDERA_BELGRANO", (9.80, 33.40, 1.65), "SPHERE", 0.40)
+    add_empty(col, "POI_CANON", (8.50, 41.20, 1.65), "SPHERE", 0.40)
+    add_empty(col, "POI_SALA_MUSEO", (8.50, 45.80, 1.65), "SPHERE", 0.40)
+    add_empty(col, "POI_PASILLO_AGUILA", (-12.80, 20.80, 1.65), "SPHERE", 0.40)
+    add_empty(col, "POI_SALA_BOLIVAR", (-14.10, 29.20, 1.65), "SPHERE", 0.40)
     add_empty(col, "POI_SALA_VIRREINAL", (-10.20, 13.60, 1.65), "SPHERE", 0.40)
-    add_empty(col, "POI_SALA_HONOR", (-10.20, 20.80, 1.65), "SPHERE", 0.40)
+    add_empty(col, "POI_SALA_HONOR", (10.20, 13.60, 1.65), "SPHERE", 0.40)
     add_empty(col, "POI_BIBLIOTECA", (-8.20, 27.40, 1.65), "SPHERE", 0.40)
 
     luces = [
         ("LUZ_ZAGUAN_01", (0.0, 3.20, 3.65)),
         ("LUZ_SALON_ARANA_01", (0.0, 38.20, 5.20)),
         ("LUZ_SALON_ARANA_02", (0.0, 45.60, 5.20)),
-        ("LUZ_SALA_GUERRILLEROS", (8.50, 43.50, 3.80)),
-        ("LUZ_SALA_BOLIVAR", (12.90, 51.80, 4.20)),
+        ("LUZ_SALA_GUERRILLEROS", (8.50, 40.20, 3.85)),
+        ("LUZ_SALA_BOLIVAR", (-14.10, 26.80, 4.20)),
     ]
     for name, loc in luces:
         add_empty(col, name, loc, "SINGLE_ARROW", 0.45)
@@ -2228,7 +2277,7 @@ class _ColliderBoxes:
 def build_collisions(col) -> list[bpy.types.Object]:
     """Colisiones simplificadas -colonly manteniendo todos los pasos libres (>= 2.2 x 2.8 m)."""
     cb_pisos = _ColliderBoxes("CL_Col_Pisos-colonly")
-    # Acera, Zaguan, Patio, Galerias, Salon, Presidio, Guerrilleros, Pasillo Aguila, Sala Bolivar y tarimas
+    # Acera, Zaguan, Patio, Galerias, Salon, Presidio, Guerrilleros (Este) y Senado/Bolivar (Oeste + tarimas)
     cb_pisos.add_box(-13.0, 13.0, -4.50, 0.0, -0.18, Z_ACERA)
     cb_pisos.add_box(-1.60, 1.60, 0.0, 6.20, 0.0, Z_ZAGUAN)
     cb_pisos.add_box(-7.20, 7.20, 10.00, 24.40, 0.0, Z_PATIO)
@@ -2239,11 +2288,10 @@ def build_collisions(col) -> list[bpy.types.Object]:
     cb_pisos.add_box(-4.60, 4.60, 28.20, 52.80, 0.0, Z_SALON_PISO)
     cb_pisos.add_box(-4.60, 4.60, 47.95, 48.40, Z_SALON_PISO, Z_SALON_PISO + 0.22)
     cb_pisos.add_box(-4.60, 4.60, 48.40, 52.80, Z_SALON_PISO, Z_PRESIDIO)
-    cb_pisos.add_box(4.60, 11.60, 39.20, 47.80, 0.0, Z_SALON_PISO)
-    cb_pisos.add_box(11.60, 14.20, 39.20, 47.70, 0.0, Z_SALON_PISO)
-    cb_pisos.add_box(9.80, 16.00, 47.70, 55.70, 0.0, Z_SALON_PISO)
-    cb_pisos.add_box(9.80, 16.00, 52.80, 55.70, Z_SALON_PISO, Z_SALON_PISO + 0.18)
-    cb_pisos.add_box(9.80, 16.00, 53.60, 55.70, Z_SALON_PISO + 0.18, Z_SALON_PISO + 0.36)
+    cb_pisos.add_box(4.60, 11.60, 28.20, 47.80, 0.0, Z_SALON_PISO)
+    cb_pisos.add_box(-17.20, -10.40, 18.80, 33.20, 0.0, Z_SALON_PISO)
+    cb_pisos.add_box(-17.20, -11.00, 30.40, 33.20, Z_SALON_PISO, Z_SALON_PISO + 0.18)
+    cb_pisos.add_box(-17.20, -11.00, 31.20, 33.20, Z_SALON_PISO + 0.18, Z_SALON_PISO + 0.36)
 
     cb_muros = _ColliderBoxes("CL_Col_Muros-colonly")
     pw = PORTON_ANCHO * 0.5
@@ -2253,11 +2301,13 @@ def build_collisions(col) -> list[bpy.types.Object]:
     cb_muros.add_box(pw, 11.0, 0.0, 0.80, 0.0, FACHADA_ALTO)
     cb_muros.add_box(-11.0, -hz_zag, 0.80, 6.20, 0.0, FACHADA_ALTO)
     cb_muros.add_box(hz_zag, 11.0, 0.80, 6.20, 0.0, FACHADA_ALTO)
-    # Claustro muros y pretil (paso central libre) + columnas
-    cb_muros.add_box(-11.0, -10.4, 6.20, 28.20, 0.0, GALERIA_ALTO_CUMBRERA)
+    # Claustro muros (Oeste abierto en Y=19.6..22.0, Norte-Este abierto en X=7.1..9.5) y columnas
+    cb_muros.add_box(-11.0, -10.4, 6.20, SALA_LAT_PUERTA_Y0, 0.0, GALERIA_ALTO_CUMBRERA)
+    cb_muros.add_box(-11.0, -10.4, SALA_LAT_PUERTA_Y1, 28.20, 0.0, GALERIA_ALTO_CUMBRERA)
     cb_muros.add_box(10.4, 11.0, 6.20, 28.20, 0.0, GALERIA_ALTO_CUMBRERA)
     cb_muros.add_box(-11.0, -5.4, 27.60, 28.20, 0.0, GALERIA_ALTO_CUMBRERA)
-    cb_muros.add_box(5.4, 11.0, 27.60, 28.20, 0.0, GALERIA_ALTO_CUMBRERA)
+    cb_muros.add_box(5.4, 7.10, 27.60, 28.20, 0.0, GALERIA_ALTO_CUMBRERA)
+    cb_muros.add_box(9.50, 11.0, 27.60, 28.20, 0.0, GALERIA_ALTO_CUMBRERA)
     for yw in (10.0, 24.4):
         cb_muros.add_box(-7.2, -1.45, yw - 0.16, yw + 0.16, Z_PATIO, Z_GALERIA + 0.22)
         cb_muros.add_box(1.45, 7.2, yw - 0.16, yw + 0.16, Z_PATIO, Z_GALERIA + 0.22)
@@ -2278,21 +2328,17 @@ def build_collisions(col) -> list[bpy.types.Object]:
     cb_muros.add_box(4.60, 5.40, 28.80, 43.80, 0.0, SALON_ALTO_MURO)
     cb_muros.add_box(4.60, 5.40, 46.20, 52.80, 0.0, SALON_ALTO_MURO)
     cb_muros.add_box(-5.40, 5.40, 52.80, 53.60, 0.0, SALON_ALTO_MURO)
-    # Guerrilleros, Pasillo del Aguila y Sala Bolivar (pasos libres)
-    cb_muros.add_box(5.40, 12.10, 38.70, 39.20, 0.0, 4.80)
+    # Sala de Guerrilleros cerrada (Este) y Galeria Presidentes / Bolivar (Oeste)
+    cb_muros.add_box(11.00, 12.10, 27.60, 28.20, 0.0, 4.80)
+    cb_muros.add_box(11.60, 12.10, 28.20, 47.80, 0.0, 4.80)
     cb_muros.add_box(5.40, 12.10, 47.80, 48.30, 0.0, 4.80)
-    cb_muros.add_box(11.60, 12.10, 39.20, 42.30, 0.0, 4.80)
-    cb_muros.add_box(11.60, 12.10, 44.70, 47.80, 0.0, 4.80)
-    cb_muros.add_box(11.60, 14.65, 38.75, 39.20, 0.0, 4.20)
-    cb_muros.add_box(14.20, 14.65, 39.20, 47.70, 0.0, 5.10)
-    cb_muros.add_box(9.80, 11.60, 47.25, 47.70, 0.0, 5.40)
-    cb_muros.add_box(14.20, 16.00, 47.25, 47.70, 0.0, 5.40)
-    cb_muros.add_box(9.35, 9.80, 47.70, 55.70, 0.0, 5.40)
-    cb_muros.add_box(16.00, 16.45, 47.70, 55.70, 0.0, 5.40)
-    cb_muros.add_box(9.35, 16.45, 55.70, 56.15, 0.0, 5.40)
+    cb_muros.add_box(-17.65, -17.20, 18.35, 33.65, 0.0, 5.40)
+    cb_muros.add_box(-17.20, -11.00, 18.35, 18.80, 0.0, 5.40)
+    cb_muros.add_box(-17.20, -10.55, 33.20, 33.65, 0.0, 5.40)
+    cb_muros.add_box(-11.00, -10.55, 28.20, 33.20, 0.0, 5.40)
 
     cb_props = _ColliderBoxes("CL_Col_Mobiliario-colonly")
-    # Fuente, Flechero, Silleria Salon, Acta, Presidio, Piano, Canon, Cofres, Vitrinas, Aguila, Busto
+    # Fuente, Flechero, Silleria Salon, Acta, Presidio, Piano Salon
     cb_props.add_box(-1.78, 1.78, 15.42, 18.98, Z_PATIO, 2.75)
     cb_props.add_box(3.65, 5.45, 13.00, 14.80, Z_PATIO, 3.20)
     cb_props.add_box(-4.60, -2.35, 33.20, 47.40, Z_SALON_PISO, Z_SALON_PISO + 1.80)
@@ -2300,14 +2346,17 @@ def build_collisions(col) -> list[bpy.types.Object]:
     cb_props.add_box(-0.56, 0.56, 46.44, 47.56, Z_SALON_PISO, Z_SALON_PISO + 1.75)
     cb_props.add_box(-1.60, 1.60, 49.25, 50.30, Z_PRESIDIO, Z_PRESIDIO + 1.45)
     cb_props.add_box(-4.35, -3.28, 47.00, 48.70, Z_SALON_PISO, Z_SALON_PISO + 1.30)
-    # Sala Guerrilleros + Pasillo + Bolivar props
-    cb_props.add_box(7.68, 9.32, 42.54, 43.46, Z_SALON_PISO, Z_SALON_PISO + 1.25)   # canon
-    cb_props.add_box(7.78, 9.22, 46.40, 47.70, Z_SALON_PISO, Z_SALON_PISO + 1.25)   # cofre + vitrina roja
-    cb_props.add_box(7.55, 9.45, 39.20, 39.70, Z_SALON_PISO, Z_SALON_PISO + 1.25)   # templete Belgrano
-    cb_props.add_box(12.40, 13.40, 43.15, 43.85, Z_SALON_PISO, Z_SALON_PISO + 1.35) # pedestal aguila
-    cb_props.add_box(12.42, 13.38, 53.82, 54.78, Z_SALON_PISO + 0.36, 3.10)         # busto Bolivar
-    cb_props.add_box(10.20, 11.30, 49.40, 50.20, Z_SALON_PISO, Z_SALON_PISO + 1.45)
-    cb_props.add_box(14.50, 15.60, 49.40, 50.20, Z_SALON_PISO, Z_SALON_PISO + 1.45)
+    # Sala Guerrilleros (Este): canon, cofre Juana, templete Belgrano, consola Oeste
+    cb_props.add_box(7.68, 9.32, 41.94, 42.86, Z_SALON_PISO, Z_SALON_PISO + 1.25)
+    cb_props.add_box(7.78, 9.22, 46.40, 47.70, Z_SALON_PISO, Z_SALON_PISO + 1.25)
+    cb_props.add_box(11.06, 11.60, 32.44, 34.36, Z_SALON_PISO, Z_SALON_PISO + 1.25)
+    cb_props.add_box(5.44, 5.96, 40.30, 41.60, Z_SALON_PISO, Z_SALON_PISO + 1.05)
+    # Galeria Presidentes / Bolivar (Oeste): pedestal Aguila, piano, 2 vitrinas bastones, busto Bolivar
+    cb_props.add_box(-14.60, -13.60, 20.38, 21.22, Z_SALON_PISO, Z_SALON_PISO + 1.35)
+    cb_props.add_box(-17.16, -16.24, 25.00, 26.80, Z_SALON_PISO, Z_SALON_PISO + 1.32)
+    cb_props.add_box(-11.90, -11.00, 24.40, 25.55, Z_SALON_PISO, Z_SALON_PISO + 1.66)
+    cb_props.add_box(-11.90, -11.00, 27.95, 29.20, Z_SALON_PISO, Z_SALON_PISO + 1.18)
+    cb_props.add_box(-14.70, -13.50, 31.32, 32.42, Z_SALON_PISO + 0.36, 3.40)
 
     return [cb_pisos.to_object(col), cb_muros.to_object(col), cb_props.to_object(col)]
 
@@ -2355,8 +2404,8 @@ def setup_preview_lighting_and_cameras(col_cam):
         (0.0, 3.20, 3.40, 220.0),
         (0.0, 38.20, 4.90, 680.0),
         (0.0, 45.60, 4.90, 680.0),
-        (8.50, 43.50, 3.60, 540.0),
-        (12.90, 51.80, 3.65, 680.0),
+        (8.50, 40.20, 3.65, 620.0),
+        (-14.10, 26.80, 3.85, 760.0),
     )):
         pt_data = bpy.data.lights.new(f"CL_Luz_Int_{idx+1}", type="POINT")
         pt_data.energy = en
@@ -2391,9 +2440,9 @@ def setup_preview_lighting_and_cameras(col_cam):
 
     cams = [
         ("CAM_Entrada_Salon", (0.0, 19.8, 1.75), (0.0, 31.0, 2.20), 22),
-        ("CAM_Guerrilleros_Canon", (10.6, 40.4, 1.85), (6.0, 45.6, 1.75), 20),
-        ("CAM_Pasillo_Aguila", (12.9, 39.8, 1.75), (12.9, 47.0, 2.05), 20),
-        ("CAM_Sala_Bolivar", (12.9, 48.2, 1.85), (12.9, 55.2, 2.35), 20),
+        ("CAM_Guerrilleros_Canon", (10.6, 38.4, 1.85), (6.0, 45.8, 1.80), 20),
+        ("CAM_Pasillo_Aguila", (-9.4, 20.8, 1.85), (-15.0, 21.2, 1.85), 21),
+        ("CAM_Sala_Bolivar", (-14.1, 21.6, 1.85), (-14.1, 32.8, 2.35), 20),
     ]
     created = []
     for name, pos, target, lens in cams:
@@ -2441,8 +2490,7 @@ def build_all(render_previews: bool = False, do_export: bool = False):
     col_claustro = get_collection("02_Claustro_Patio", root_col)
     col_salon = get_collection("03_Salon_Independencia", root_col)
     col_sala_lat = get_collection("04_Sala_Guerrilleros", root_col)
-    col_pasillo = get_collection("04b_Pasillo_Aguila", root_col)
-    col_bolivar = get_collection("04c_Sala_Bolivar", root_col)
+    col_bolivar = get_collection("04b_Galeria_Presidentes_Bolivar", root_col)
     col_marcadores = get_collection("05_Marcadores_POI_LUZ", root_col)
     col_cam = get_collection("06_Camaras_Revision", root_col)
     col_col = get_collection("07_Colisiones", root_col)
@@ -2452,7 +2500,6 @@ def build_all(render_previews: bool = False, do_export: bool = False):
     build_claustro(col_claustro, kit)
     build_salon_independencia(col_salon, kit)
     build_sala_lateral_museo(col_sala_lat, kit)
-    build_pasillo_aguila(col_pasillo, kit)
     build_sala_bolivar(col_bolivar, kit)
     build_markers(col_marcadores)
     build_collisions(col_col)
