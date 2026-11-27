@@ -17,6 +17,7 @@ build/
 # Generados (se rehacen con los comandos del README)
 ciudad3d/datos/
 /web/public/ciudad3d/
+/web/public/asamblea/
 web/public/models/opt/
 web/public/models/raw/
 web/public/models/ciudad/claude/base_teselas/
