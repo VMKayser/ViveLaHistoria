@@ -1,0 +1,79 @@
+{
+  "id": "remolque_madera",
+  "nombre": "Remolque de pasajeros de madera",
+  "archivo_lamina": "clasicos/ChatGPT Image Nov 25, 2026, 03_43_14 PM.png",
+  "largo": 5.9,
+  "ancho": 1.91,
+  "alto": 2.58,
+  "ejes": [
+    -1.91,
+    1.43
+  ],
+  "radio_rueda": 0.478,
+  "semivia_ruedas": 0.887,
+  "ancho_rueda": 0.098,
+  "radio_aro": 0.432,
+  "radios": 12,
+  "caja": [
+    -2.54,
+    2.52,
+    0.785,
+    0.806,
+    1.515
+  ],
+  "vano_delantero": 1.869,
+  "alero": [
+    -2.6,
+    2.59,
+    0.821,
+    2.416,
+    0.144
+  ],
+  "tramos": [
+    [
+      -2.535,
+      -1.655
+    ],
+    [
+      -1.655,
+      -0.777
+    ],
+    [
+      -0.777,
+      0.106
+    ],
+    [
+      0.106,
+      0.984
+    ],
+    [
+      0.984,
+      1.869
+    ]
+  ],
+  "paleta": {
+    "carroceria": [
+      "#a78673",
+      0.67,
+      0
+    ],
+    "radios": [
+      "#c29141",
+      0.43,
+      0.14
+    ],
+    "aleta": [
+      "#51464b",
+      0.52,
+      0.15
+    ]
+  },
+  "interpretacion": [
+    "Cotas estimadas de las láminas.",
+    "La lámina muestra lanza de arrastre. Se interpretó como remolque con eje delantero pivotante.",
+    "Se interpretó el paso central entre pares de bancos."
+  ],
+  "centro_rueda_z": 0.478,
+  "referencia": "clasicos/ChatGPT Image Nov 25, 2026, 03_43_14 PM.png",
+  "tipo_direccion": "tornamesa"
+}

@@ -1,0 +1,22 @@
+{
+  "titulo": "Ford azul oscuro bicolor de doble cabina",
+  "vehiculos": [
+    {
+      "id": "ford_azul",
+      "nombre": "Ford azul oscuro bicolor de doble cabina",
+      "largo": 5.13,
+      "ancho": 1.99,
+      "alto": 2.06,
+      "ejes": [
+        -1.48,
+        1.71
+      ],
+      "radio_rueda": 0.447,
+      "semivia_ruedas": 0.835,
+      "triangulos": 92151,
+      "glb": "../ford_azul.glb",
+      "blend": "../ford_azul.blend",
+      "ficha": "../ford_azul.ficha.json"
+    }
+  ]
+}

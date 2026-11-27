@@ -1,0 +1,22 @@
+{
+  "titulo": "Model T coupé",
+  "vehiculos": [
+    {
+      "id": "model_t_coupe",
+      "nombre": "Model T coupé",
+      "largo": 3.63,
+      "ancho": 1.6,
+      "alto": 2.16,
+      "ejes": [
+        -1.2,
+        1.29
+      ],
+      "radio_rueda": 0.429,
+      "semivia_ruedas": 0.729,
+      "triangulos": 72925,
+      "glb": "../model_t_coupe.glb",
+      "blend": "../model_t_coupe.blend",
+      "ficha": "../model_t_coupe.ficha.json"
+    }
+  ]
+}

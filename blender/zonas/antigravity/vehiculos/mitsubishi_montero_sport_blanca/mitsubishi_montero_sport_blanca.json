@@ -1,0 +1,75 @@
+{
+  "id": "mitsubishi_montero_sport_blanca",
+  "nombre": "Mitsubishi Montero Sport blanca",
+  "referencia": "referencia.png",
+  "foto_origen": "../../../../../autos/02_mitsubishi_montero_sport_blanca.jpg",
+  "lamina_origen": "../../../../../autos/generadas/02_mitsubishi_montero_sport_blanca_diseno_miciudad.png",
+  "largo": 4.76,
+  "ancho": 1.85,
+  "alto": 1.88,
+  "ejes": [-1.26, 1.48],
+  "radio_rueda": 0.425,
+  "centro_rueda_z": 0.425,
+  "semivia_ruedas": 0.785,
+  "movimiento": {
+    "velocidad_maxima": 12.5,
+    "retroceso_maximo": 3.2,
+    "aceleracion": 2.3,
+    "frenada": 4.6,
+    "direccion_maxima": 0.52,
+    "rapidez_direccion": 0.90,
+    "velocidad_demo": 3.4,
+    "radio_demo": 9.5
+  },
+  "acabados": {
+    "presupuesto_triangulos": 68000,
+    "radio_esquina_frontal": 0.22,
+    "radio_esquina_trasera": 0.20,
+    "segmentos_redondeo": 3,
+    "segmentos_neumatico": 44,
+    "textura_goma": "texturas/Rubber004_1K-JPG_NormalGL.jpg",
+    "normal_goma_intensidad": 0.24
+  },
+  "colores": {
+    "carroceria": "#f3efe9",
+    "techo_oscuro": "#242730",
+    "parrilla": "#20232b",
+    "goma": "#26252a",
+    "oscuro": "#1c1e24",
+    "llanta": "#454852",
+    "plata": "#b8bec8",
+    "cromo": "#dce1e8",
+    "vidrio": "#363e4a",
+    "interior": "#32353e",
+    "tapizado": "#3e424d",
+    "faro": "#eef3fa",
+    "ambar": "#eb851e",
+    "rojo": "#cf2626",
+    "placa": "#e2dfe4"
+  },
+  "variante_predeterminada": "blanca",
+  "variantes": {
+    "blanca": {
+      "nombre": "Blanca perlada",
+      "principal": "#f3efe9"
+    },
+    "plata": {
+      "nombre": "Plata metálico",
+      "principal": "#aeb5c0"
+    },
+    "grafito": {
+      "nombre": "Gris grafito",
+      "principal": "#4c525e"
+    },
+    "guinda": {
+      "nombre": "Rojo burdeos",
+      "principal": "#7d242d"
+    }
+  },
+  "interpretacion": [
+    "Dimensiones estimadas a escala humana (4,76 × 1,85 × 1,88 m con barras de techo, batalla 2,74 m, radio de neumático 0,425 m) medidas desde la lámina de 4 vistas y fotografía original.",
+    "Frente Dynamic Shield completo: capó alto esculpido, parrilla negra superior con emblema cromado de tres diamantes, ópticas superiores afiladas, molduras cromadas envolventes en C, grupos verticales inferiores de tres niveles y protector inferior plateado.",
+    "Perfil SUV de 5 puertas con pasos de rueda musculosos blancos, estribos laterales plateados, pilares B/C en negro brillante, tercer cristal lateral ascendente con moldura cromada, barras de techo negras y llantas oscuras de aleación de 6 radios dobles.",
+    "Trasera con alerón superior, pilotos verticales largos tipo lágrima, moldura cromada de portón, difusor/protector plateado con reflectores rojos y puente diferencial inferior visible; interior sobrio con volante a la izquierda."
+  ]
+}
