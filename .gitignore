@@ -1,0 +1,14 @@
+# Godot
+juego/.godot/
+*.translation
+
+# Exportaciones
+build/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Secretos (claves de API del backend de IA)
+.env
+*.env
