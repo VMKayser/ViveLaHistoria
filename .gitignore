@@ -68,3 +68,9 @@ movil/claves/
 
 # Inventario que regenera migracion/metadatos.py
 migracion/metadatos.json
+
+# Juego de la Casa de la Libertad (reglas de VMKayser)
+Thumbs.db
+juego/.godot/
+*.translation
+*.env
