@@ -1,0 +1,16 @@
+[gd_resource type="ORMMaterial3D" load_steps=4 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/texturas/piedra/piedra_color.jpg" id="1"]
+[ext_resource type="Texture2D" path="res://assets/texturas/piedra/piedra_normal.jpg" id="2"]
+[ext_resource type="Texture2D" path="res://assets/texturas/piedra/piedra_orm.jpg" id="3"]
+
+[resource]
+resource_name = "cerro"
+albedo_texture = ExtResource("1")
+normal_texture = ExtResource("2")
+normal_enabled = true
+normal_scale = 1.0
+orm_texture = ExtResource("3")
+ao_enabled = true
+ao_light_affect = 0.4
+albedo_color = Color(0.4, 0.38, 0.28, 1)
