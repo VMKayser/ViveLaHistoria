@@ -1,4 +1,0 @@
-interface:
-  display_name: "Sucre Analog Film"
-  short_description: "Edita carpetas de fotografías con estética analógica de Sucre"
-  default_prompt: "Usa $sucre-analog-film para editar SucreAesthetic con las referencias de SucreAestheticAplied."
