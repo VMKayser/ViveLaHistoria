@@ -35,29 +35,33 @@ func activar_colision(activa: bool) -> void:
 	collision_layer = 1 if activa else 0
 
 
+## Caja de colisión que envuelve todas las mallas del modelo (sirve para .glb de varias piezas).
 func _asegurar_colision() -> void:
 	for hijo in get_children():
 		if hijo is CollisionShape3D:
 			return
-	var visual := _buscar_visual(self)
-	if visual == null:
+	var inversa := global_transform.affine_inverse()
+	var caja := AABB()
+	var hay_malla := false
+	for visual in _visuales(self):
+		var local: AABB = (inversa * visual.global_transform) * visual.get_aabb()
+		caja = local if not hay_malla else caja.merge(local)
+		hay_malla = true
+	if not hay_malla:
 		push_warning("[Interactuable] '%s' no tiene modelo ni colisión." % name)
 		return
-	var caja := visual.get_aabb()
-	var relativa: Transform3D = global_transform.affine_inverse() * visual.global_transform
 	var forma := BoxShape3D.new()
-	forma.size = (caja.size * relativa.basis.get_scale()).max(Vector3.ONE * 0.05)
+	forma.size = caja.size.max(Vector3.ONE * 0.05)
 	var colision := CollisionShape3D.new()
 	colision.shape = forma
-	colision.position = relativa * caja.get_center()
+	colision.position = caja.get_center()
 	add_child(colision)
 
 
-func _buscar_visual(nodo: Node) -> VisualInstance3D:
+func _visuales(nodo: Node) -> Array[VisualInstance3D]:
+	var lista: Array[VisualInstance3D] = []
 	for hijo in nodo.get_children():
 		if hijo is VisualInstance3D and not (hijo is Label3D):
-			return hijo
-		var encontrado := _buscar_visual(hijo)
-		if encontrado != null:
-			return encontrado
-	return null
+			lista.append(hijo)
+		lista.append_array(_visuales(hijo))
+	return lista
