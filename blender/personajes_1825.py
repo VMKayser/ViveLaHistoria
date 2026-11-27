@@ -112,6 +112,11 @@ ELENCO = {
     "diputado_peru": caballero(0.64, dict(caucasian=0.45, asian=0.5, african=0.05), "middleage_asian_male", "short02",
                                AZUL_NOCHE, AZUL_NOCHE, GRANATE, PANTALON_OSCURO, "culturalibre_male_boots",
                                ["reposo", "hablar"], peso=0.55, altura=0.47),
+    # El cronista: narrador que acompaña al jugador (personaje ficticio). Mayor, levita gris de viaje y sombrero de ala ancha.
+    "cronista": dict(caballero(0.78, dict(caucasian=0.7, asian=0.25, african=0.05), "old_caucasian_male", "short01",
+                               (0.24, 0.23, 0.22), (0.18, 0.17, 0.16), (0.55, 0.5, 0.42), PANTALON_OSCURO,
+                               "culturalibre_male_boots", ["reposo", "caminar", "hablar"], peso=0.5, altura=0.5,
+                               musculo=0.35), sombrero="ala_ancha"),
     # Diputado del Río de la Plata (personaje ficticio)
     "diputado_rioplata": caballero(0.62, dict(caucasian=0.85, asian=0.1, african=0.05), "young_caucasian_male2",
                                    "short03", GRIS_PIZARRA, GRIS_PIZARRA, BLANCO, PANTALON_GRIS, "culturalibre_male_boots",
