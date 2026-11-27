@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/jugador/jugador.gd" id="1_jugador"]
+
+[sub_resource type="CapsuleShape3D" id="forma_cuerpo"]
+radius = 0.35
+height = 1.75
+
+[sub_resource type="StandardMaterial3D" id="material_piel"]
+albedo_color = Color(0.76, 0.57, 0.45, 1)
+roughness = 0.8
+
+[sub_resource type="CapsuleMesh" id="malla_brazo"]
+material = SubResource("material_piel")
+radius = 0.045
+height = 0.42
+
+[node name="Jugador" type="CharacterBody3D"]
+script = ExtResource("1_jugador")
+
+[node name="Colision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("forma_cuerpo")
+
+[node name="Cabeza" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="Camara" type="Camera3D" parent="Cabeza"]
+current = true
+fov = 72.0
+near = 0.03
+
+[node name="RayoInteraccion" type="RayCast3D" parent="Cabeza/Camara"]
+target_position = Vector3(0, 0, -3)
+
+[node name="Mano" type="Node3D" parent="Cabeza/Camara"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26, -0.24, -0.42)
+
+[node name="BrazoProvisional" type="MeshInstance3D" parent="Cabeza/Camara/Mano"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0.12)
+mesh = SubResource("malla_brazo")
+
+[node name="PuntoAgarre" type="Marker3D" parent="Cabeza/Camara/Mano"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, 0.07, -0.12)

@@ -1,0 +1,92 @@
+{
+  "descripcion": "Catálogo de fuentes citadas por el juego. Tipos: oficial (institución responsable del patrimonio o gobierno), prensa, academica, enciclopedia. Toda ficha de data/fichas.json debe citar al menos una de estas fuentes.",
+  "fuentes": [
+    {
+      "id": "cdl_historia",
+      "titulo": "Historia",
+      "institucion": "Casa de la Libertad · Fundación Cultural del Banco Central de Bolivia",
+      "tipo": "oficial",
+      "url": "https://casadelalibertad.org.bo/historia/",
+      "consultado": "2026-11-27"
+    },
+    {
+      "id": "cdl_salon_independencia",
+      "titulo": "Salón de la Independencia",
+      "institucion": "Casa de la Libertad · Fundación Cultural del Banco Central de Bolivia",
+      "tipo": "oficial",
+      "url": "https://casadelalibertad.org.bo/salon-de-la-independencia/",
+      "consultado": "2026-11-27"
+    },
+    {
+      "id": "cdl_sala_firmantes",
+      "titulo": "Sala de los Firmantes",
+      "institucion": "Casa de la Libertad · Fundación Cultural del Banco Central de Bolivia",
+      "tipo": "oficial",
+      "url": "https://casadelalibertad.org.bo/sala-de-los-firmantes/",
+      "consultado": "2026-11-27"
+    },
+    {
+      "id": "cdl_sala_guerrilleros",
+      "titulo": "Sala de los Guerrilleros",
+      "institucion": "Casa de la Libertad · Fundación Cultural del Banco Central de Bolivia",
+      "tipo": "oficial",
+      "url": "https://casadelalibertad.org.bo/sala-de-los-guerrilleros/",
+      "consultado": "2026-11-27"
+    },
+    {
+      "id": "cdl_sobre_museo",
+      "titulo": "Sobre el museo",
+      "institucion": "Casa de la Libertad · Fundación Cultural del Banco Central de Bolivia",
+      "tipo": "oficial",
+      "url": "https://casadelalibertad.org.bo/sobre-el-museo/",
+      "consultado": "2026-11-27"
+    },
+    {
+      "id": "cds_asamblea_fundacional",
+      "titulo": "La Asamblea fundacional",
+      "institucion": "Correo del Sur (Sucre), suplemento Ecos",
+      "autor": "Juan José Toro Montoya",
+      "publicado": "2025-07-15",
+      "tipo": "prensa",
+      "url": "https://correodelsur.com/ecos/20250713/la-asamblea-fundacional.html",
+      "consultado": "2026-11-27"
+    },
+    {
+      "id": "cds_asamblea_trabada",
+      "titulo": "La Asamblea trabada",
+      "institucion": "Correo del Sur (Sucre), suplemento Ecos",
+      "autor": "Juan José Toro Montoya",
+      "publicado": "2025-07-31",
+      "tipo": "prensa",
+      "url": "https://correodelsur.com/ecos/20250713/la-asamblea-trabada.html",
+      "consultado": "2026-11-27"
+    },
+    {
+      "id": "cds_construir_patria",
+      "titulo": "A construir la patria",
+      "institucion": "Correo del Sur (Sucre), suplemento Ecos",
+      "autor": "Juan José Toro Montoya",
+      "publicado": "2025-08-20",
+      "tipo": "prensa",
+      "url": "https://correodelsur.com/ecos/20250817/a-construir-la-patria.html",
+      "consultado": "2026-11-27"
+    },
+    {
+      "id": "elpais_cuna_bolivia",
+      "titulo": "La Casa de la Libertad, la cuna de Bolivia",
+      "institucion": "El País (Tarija)",
+      "publicado": "2017-08-06",
+      "tipo": "prensa",
+      "url": "https://elpais.bo/archivo-ecos-de-tarija/20170806_263543-la-casa-de-la-libertad-la-cuna-de-bolivia.html",
+      "consultado": "2026-11-27"
+    },
+    {
+      "id": "wiki_revolucion_chuquisaca",
+      "titulo": "Chuquisaca Revolution",
+      "institucion": "Wikipedia (en inglés)",
+      "tipo": "enciclopedia",
+      "url": "https://en.wikipedia.org/wiki/Chuquisaca_Revolution",
+      "consultado": "2026-11-27"
+    }
+  ]
+}

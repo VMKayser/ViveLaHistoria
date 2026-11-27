@@ -1,0 +1,474 @@
+[gd_scene load_steps=34 format=3]
+
+[ext_resource type="Script" path="res://scripts/niveles/nivel.gd" id="1_nivel"]
+[ext_resource type="PackedScene" path="res://escenas/jugador.tscn" id="2_jugador"]
+[ext_resource type="Script" path="res://scripts/misiones/gestor_misiones.gd" id="3_gestor"]
+[ext_resource type="Script" path="res://scripts/ui/interfaz.gd" id="4_interfaz"]
+[ext_resource type="Script" path="res://scripts/interaccion/personaje.gd" id="5_personaje"]
+[ext_resource type="Script" path="res://scripts/interaccion/objeto_tomable.gd" id="6_tomable"]
+[ext_resource type="Script" path="res://scripts/interaccion/objeto_inspeccionable.gd" id="7_inspeccionable"]
+[ext_resource type="Script" path="res://scripts/interaccion/punto_entrega.gd" id="8_entrega"]
+[ext_resource type="Script" path="res://scripts/interaccion/zona_evento.gd" id="9_zona"]
+
+[sub_resource type="ProceduralSkyMaterial" id="material_cielo"]
+sky_top_color = Color(0.27, 0.45, 0.75, 1)
+sky_horizon_color = Color(0.72, 0.78, 0.86, 1)
+ground_bottom_color = Color(0.28, 0.25, 0.21, 1)
+ground_horizon_color = Color(0.72, 0.78, 0.86, 1)
+
+[sub_resource type="Sky" id="cielo"]
+sky_material = SubResource("material_cielo")
+
+[sub_resource type="Environment" id="entorno"]
+background_mode = 2
+sky = SubResource("cielo")
+ambient_light_source = 3
+ambient_light_energy = 0.7
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_exposure = 1.05
+glow_enabled = true
+glow_intensity = 0.35
+glow_bloom = 0.05
+
+[sub_resource type="StandardMaterial3D" id="mat_cal"]
+albedo_color = Color(0.93, 0.91, 0.86, 1)
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="mat_piedra"]
+albedo_color = Color(0.58, 0.55, 0.5, 1)
+roughness = 0.95
+
+[sub_resource type="StandardMaterial3D" id="mat_baldosa"]
+albedo_color = Color(0.6, 0.36, 0.25, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="mat_madera"]
+albedo_color = Color(0.37, 0.23, 0.13, 1)
+roughness = 0.7
+
+[sub_resource type="StandardMaterial3D" id="mat_madera_oscura"]
+albedo_color = Color(0.22, 0.13, 0.07, 1)
+roughness = 0.75
+
+[sub_resource type="StandardMaterial3D" id="mat_papel"]
+albedo_color = Color(0.93, 0.88, 0.74, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="mat_lienzo"]
+albedo_color = Color(0.3, 0.22, 0.16, 1)
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="mat_npc_real"]
+albedo_color = Color(0.16, 0.17, 0.26, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="mat_npc_ficticio"]
+albedo_color = Color(0.5, 0.46, 0.4, 1)
+roughness = 0.85
+
+[sub_resource type="CapsuleMesh" id="malla_npc_real"]
+material = SubResource("mat_npc_real")
+radius = 0.3
+height = 1.75
+
+[sub_resource type="CapsuleMesh" id="malla_npc_ficticio"]
+material = SubResource("mat_npc_ficticio")
+radius = 0.3
+height = 1.75
+
+[sub_resource type="BoxMesh" id="malla_credencial"]
+material = SubResource("mat_papel")
+size = Vector3(0.22, 0.02, 0.3)
+
+[sub_resource type="BoxMesh" id="malla_acta"]
+material = SubResource("mat_papel")
+size = Vector3(0.3, 0.01, 0.4)
+
+[sub_resource type="BoxMesh" id="malla_retrato"]
+material = SubResource("mat_lienzo")
+size = Vector3(1, 1.4, 0.06)
+
+[sub_resource type="BoxMesh" id="malla_placa"]
+material = SubResource("mat_madera_oscura")
+size = Vector3(0.8, 0.5, 0.04)
+
+[sub_resource type="BoxMesh" id="malla_mesa_secretaria"]
+material = SubResource("mat_madera")
+size = Vector3(1.4, 0.8, 0.8)
+
+[sub_resource type="BoxShape3D" id="forma_zona_sala"]
+size = Vector3(11.5, 3, 23)
+
+[node name="Asamblea1825" type="Node3D"]
+script = ExtResource("1_nivel")
+
+[node name="Entorno" type="WorldEnvironment" parent="."]
+environment = SubResource("entorno")
+
+[node name="Sol" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5736, 0.8192, 0, -0.8192, 0.5736, 0, 12, 0)
+light_color = Color(1, 0.96, 0.88, 1)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="Geometria" type="Node3D" parent="."]
+
+[node name="PisoPatio" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -0.6)
+use_collision = true
+size = Vector3(20.8, 0.2, 22)
+material = SubResource("mat_piedra")
+
+[node name="MuroOeste" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6, 1.5, -0.6)
+use_collision = true
+size = Vector3(0.4, 3, 22)
+material = SubResource("mat_cal")
+
+[node name="MuroEste" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6, 1.5, -0.6)
+use_collision = true
+size = Vector3(0.4, 3, 22)
+material = SubResource("mat_cal")
+
+[node name="MuroSur" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 10.6)
+use_collision = true
+size = Vector3(21.6, 3, 0.4)
+material = SubResource("mat_cal")
+
+[node name="MuroNorteOeste" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.6, 1.5, -11.8)
+use_collision = true
+size = Vector3(4.4, 3, 0.4)
+material = SubResource("mat_cal")
+
+[node name="MuroNorteEste" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.6, 1.5, -11.8)
+use_collision = true
+size = Vector3(4.4, 3, 0.4)
+material = SubResource("mat_cal")
+
+[node name="Pileta" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+use_collision = true
+size = Vector3(2.4, 0.6, 2.4)
+material = SubResource("mat_piedra")
+
+[node name="MesaCredencial" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.4, 3)
+use_collision = true
+size = Vector3(1, 0.8, 0.6)
+material = SubResource("mat_madera")
+
+[node name="Columna1" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 1.5, -8)
+use_collision = true
+size = Vector3(0.5, 3, 0.5)
+material = SubResource("mat_piedra")
+
+[node name="Columna2" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 1.5, -4)
+use_collision = true
+size = Vector3(0.5, 3, 0.5)
+material = SubResource("mat_piedra")
+
+[node name="Columna3" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 1.5, 0)
+use_collision = true
+size = Vector3(0.5, 3, 0.5)
+material = SubResource("mat_piedra")
+
+[node name="Columna4" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 1.5, 4)
+use_collision = true
+size = Vector3(0.5, 3, 0.5)
+material = SubResource("mat_piedra")
+
+[node name="Columna5" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 1.5, 8)
+use_collision = true
+size = Vector3(0.5, 3, 0.5)
+material = SubResource("mat_piedra")
+
+[node name="GaleriaAlta" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.9, 1.35, 0)
+use_collision = true
+size = Vector3(3.4, 0.3, 14)
+material = SubResource("mat_madera")
+
+[node name="Escalon1" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.25, 5.6)
+use_collision = true
+size = Vector3(0.8, 0.5, 1.6)
+material = SubResource("mat_piedra")
+
+[node name="Escalon2" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.8, 0.5, 5.6)
+use_collision = true
+size = Vector3(0.8, 1, 1.6)
+material = SubResource("mat_piedra")
+
+[node name="PisoSala" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -23.9)
+use_collision = true
+size = Vector3(12.4, 0.2, 24.6)
+material = SubResource("mat_baldosa")
+
+[node name="ParedOeste" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.2, 3.5, -24)
+use_collision = true
+size = Vector3(0.4, 7, 24.4)
+material = SubResource("mat_cal")
+
+[node name="ParedEste" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2, 3.5, -24)
+use_collision = true
+size = Vector3(0.4, 7, 24.4)
+material = SubResource("mat_cal")
+
+[node name="ParedNorte" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -36.2)
+use_collision = true
+size = Vector3(12.8, 7, 0.4)
+material = SubResource("mat_cal")
+
+[node name="ParedSurOeste" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8, 3.5, -11.8)
+use_collision = true
+size = Vector3(5.2, 7, 0.4)
+material = SubResource("mat_cal")
+
+[node name="ParedSurEste" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8, 3.5, -11.8)
+use_collision = true
+size = Vector3(5.2, 7, 0.4)
+material = SubResource("mat_cal")
+
+[node name="Dintel" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1, -11.8)
+use_collision = true
+size = Vector3(2.4, 3.8, 0.4)
+material = SubResource("mat_cal")
+
+[node name="Artesonado" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.15, -24)
+use_collision = true
+size = Vector3(12.8, 0.3, 24.8)
+material = SubResource("mat_madera_oscura")
+
+[node name="Coro" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, -13.5)
+use_collision = true
+size = Vector3(12, 0.3, 3)
+material = SubResource("mat_madera")
+
+[node name="MesaPresidencia" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -32)
+use_collision = true
+size = Vector3(4, 0.9, 1.2)
+material = SubResource("mat_madera")
+
+[node name="Solio" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -34.2)
+use_collision = true
+size = Vector3(1, 1.8, 0.8)
+material = SubResource("mat_madera_oscura")
+
+[node name="BancaOeste1" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.25, -16)
+use_collision = true
+size = Vector3(3.5, 0.5, 0.6)
+material = SubResource("mat_madera")
+
+[node name="BancaOeste2" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.25, -19)
+use_collision = true
+size = Vector3(3.5, 0.5, 0.6)
+material = SubResource("mat_madera")
+
+[node name="BancaOeste3" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.25, -22)
+use_collision = true
+size = Vector3(3.5, 0.5, 0.6)
+material = SubResource("mat_madera")
+
+[node name="BancaOeste4" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.25, -25)
+use_collision = true
+size = Vector3(3.5, 0.5, 0.6)
+material = SubResource("mat_madera")
+
+[node name="BancaEste1" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.25, -16)
+use_collision = true
+size = Vector3(3.5, 0.5, 0.6)
+material = SubResource("mat_madera")
+
+[node name="BancaEste2" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.25, -19)
+use_collision = true
+size = Vector3(3.5, 0.5, 0.6)
+material = SubResource("mat_madera")
+
+[node name="BancaEste3" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.25, -22)
+use_collision = true
+size = Vector3(3.5, 0.5, 0.6)
+material = SubResource("mat_madera")
+
+[node name="BancaEste4" type="CSGBox3D" parent="Geometria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.25, -25)
+use_collision = true
+size = Vector3(3.5, 0.5, 0.6)
+material = SubResource("mat_madera")
+
+[node name="Luces" type="Node3D" parent="."]
+
+[node name="LuzSala1" type="OmniLight3D" parent="Luces"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, -16)
+light_color = Color(1, 0.78, 0.52, 1)
+light_energy = 1.6
+omni_range = 11.0
+
+[node name="LuzSala2" type="OmniLight3D" parent="Luces"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, -24)
+light_color = Color(1, 0.78, 0.52, 1)
+light_energy = 1.6
+omni_range = 11.0
+
+[node name="LuzSala3" type="OmniLight3D" parent="Luces"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, -31)
+light_color = Color(1, 0.78, 0.52, 1)
+light_energy = 1.6
+omni_range = 11.0
+
+[node name="Personajes" type="Node3D" parent="."]
+
+[node name="Mendizabal" type="StaticBody3D" parent="Personajes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 4)
+script = ExtResource("5_personaje")
+id_interaccion = "mendizabal"
+tipo_firma = "firma"
+
+[node name="Modelo" type="MeshInstance3D" parent="Personajes/Mendizabal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+mesh = SubResource("malla_npc_real")
+
+[node name="DiputadoPeru" type="StaticBody3D" parent="Personajes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -6)
+script = ExtResource("5_personaje")
+id_interaccion = "diputado_peru"
+tipo_firma = "firma"
+
+[node name="Modelo" type="MeshInstance3D" parent="Personajes/DiputadoPeru"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+mesh = SubResource("malla_npc_ficticio")
+
+[node name="DiputadoRioPlata" type="StaticBody3D" parent="Personajes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, 1.5, -3)
+script = ExtResource("5_personaje")
+id_interaccion = "diputado_rioplata"
+tipo_firma = "firma"
+
+[node name="Modelo" type="MeshInstance3D" parent="Personajes/DiputadoRioPlata"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+mesh = SubResource("malla_npc_ficticio")
+
+[node name="Olaneta" type="StaticBody3D" parent="Personajes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 0, -28)
+script = ExtResource("5_personaje")
+id_interaccion = "olaneta"
+tipo_firma = "firma"
+
+[node name="Modelo" type="MeshInstance3D" parent="Personajes/Olaneta"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+mesh = SubResource("malla_npc_real")
+
+[node name="Serrano" type="StaticBody3D" parent="Personajes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -33.2)
+script = ExtResource("5_personaje")
+id_interaccion = "serrano"
+tipo_firma = "firma_presidente"
+firmas_requeridas = 3
+
+[node name="Modelo" type="MeshInstance3D" parent="Personajes/Serrano"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+mesh = SubResource("malla_npc_real")
+
+[node name="Objetos" type="Node3D" parent="."]
+
+[node name="Credencial" type="StaticBody3D" parent="Objetos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.81, 3)
+script = ExtResource("6_tomable")
+id_interaccion = "credencial"
+nombre_visible = "la credencial de diputado"
+ficha_id = "f_convocatoria"
+
+[node name="Modelo" type="MeshInstance3D" parent="Objetos/Credencial"]
+mesh = SubResource("malla_credencial")
+
+[node name="Acta" type="StaticBody3D" parent="Objetos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0.905, -31.6)
+script = ExtResource("6_tomable")
+id_interaccion = "acta"
+nombre_visible = "el Acta de la Independencia"
+ficha_id = "f_acta"
+solo_en_mision = "m4_firmas"
+modo = 1
+
+[node name="Modelo" type="MeshInstance3D" parent="Objetos/Acta"]
+mesh = SubResource("malla_acta")
+
+[node name="RetratoBolivar" type="StaticBody3D" parent="Objetos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, -35.96)
+script = ExtResource("7_inspeccionable")
+id_interaccion = "retrato_bolivar"
+nombre_visible = "el retrato de Bolívar"
+ficha_id = "f_retratos"
+
+[node name="Modelo" type="MeshInstance3D" parent="Objetos/RetratoBolivar"]
+mesh = SubResource("malla_retrato")
+
+[node name="PlacaManzana" type="StaticBody3D" parent="Objetos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 10.37)
+script = ExtResource("7_inspeccionable")
+id_interaccion = "placa_manzana"
+nombre_visible = "la placa del edificio"
+ficha_id = "f_manzana_jesuitica"
+
+[node name="Modelo" type="MeshInstance3D" parent="Objetos/PlacaManzana"]
+mesh = SubResource("malla_placa")
+
+[node name="MesaSecretaria" type="StaticBody3D" parent="Objetos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6, 0, -29)
+script = ExtResource("8_entrega")
+id_interaccion = "mesa_secretaria"
+nombre_visible = "la mesa de la Secretaría"
+solo_en_mision = "m5_entrega"
+
+[node name="Modelo" type="MeshInstance3D" parent="Objetos/MesaSecretaria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+mesh = SubResource("malla_mesa_secretaria")
+
+[node name="Soporte" type="Marker3D" parent="Objetos/MesaSecretaria"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81, 0)
+
+[node name="ZonaSalaMayor" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -24)
+script = ExtResource("9_zona")
+id_zona = "sala_mayor"
+mensaje_al_entrar = "Sala Mayor de la Universidad · Chuquisaca, 1825"
+
+[node name="Forma" type="CollisionShape3D" parent="ZonaSalaMayor"]
+shape = SubResource("forma_zona_sala")
+
+[node name="Jugador" parent="." instance=ExtResource("2_jugador")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 8)
+
+[node name="GestorMisiones" type="Node" parent="."]
+script = ExtResource("3_gestor")
+
+[node name="Interfaz" type="CanvasLayer" parent="."]
+script = ExtResource("4_interfaz")
