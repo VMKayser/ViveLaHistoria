@@ -1,0 +1,38 @@
+{
+  "_leeme": "rugosidad: rol -> metros de relieve de su textura (normal por derivadas, de cerca). brillo: rol -> fuerza del reflejo del sol. Estilo de la ciudad: una sola fuente para scripts/estilo.gd (shader) y herramientas/empaquetar.py (grupos). pintura: rol -> [escala, amplitud, tipo] (tipo: 0 manchas, 1 sillares, 2 vetas, 3 follaje, 4 vidrio, 5 cal, 6 agua, 7 baldosas, 8 asfalto, 9 bronce). relieve (CC0, recursos/LICENCIAS.md, triplanar): rol -> [textura, metros por repetición, fuerza]. detalle (elegido por el usuario el 2026-11-23, Poly Haven CC0, recursos/texturas_detalle.py): rol -> [atlas, variantes, columnas, filas, metros por repetición, fuerza]; cada zona de ~30 m usa una variante. Si cambian relieve o detalle: python3 herramientas/capas_textura.py.",
+  "pintura": {
+    "muro": [0.35, 0.09, 5], "moldura": [0.35, 0.04, 0], "pintura_acento": [0.4, 0.08, 5], "azotea": [0.25, 0.08, 0],
+    "zocalo_piedra": [1.6, 0.12, 1], "piedra": [1.4, 0.09, 1], "vereda": [1.1, 0.08, 7], "adoquin": [1.8, 0.1, 1],
+    "calzada": [0.12, 0.035, 8], "teja": [2.2, 0.12, 2], "madera": [1.2, 0.08, 2], "marco_ventana": [1.0, 0.05, 2],
+    "follaje": [0.9, 0.22, 3], "follaje_claro": [0.9, 0.18, 3], "cesped": [0.8, 0.14, 3], "tronco": [2.0, 0.1, 2],
+    "vidrio": [1.0, 0.0, 4], "agua": [1.0, 0.0, 6], "metal": [1.0, 0.0, 9], "hoja": [0.9, 0.1, 3], "cantero": [2.2, 0.2, 0]
+  },
+  "pintura_def": [0.5, 0.05, 0],
+  "relieve": {
+    "cesped": ["relieve_pasto", 1.6, 0.55], "adoquin": ["relieve_empedrado", 1.8, 0.5],
+    "zocalo_piedra": ["relieve_mamposteria", 2.2, 0.35], "piedra": ["relieve_concreto", 2.5, 0.12],
+    "vereda": ["relieve_concreto", 2.5, 0.18], "calzada": ["relieve_acuarela_asfalto", 6.0, 0.3],
+    "azotea": ["relieve_acuarela_tierra", 4.0, 0.22], "cantero": ["relieve_acuarela_tierra", 1.5, 0.4], "muro": ["relieve_acuarela_cal", 5.0, 0.1],
+    "pintura_acento": ["relieve_acuarela_cal", 4.0, 0.1], "agua": ["relieve_acuarela_agua", 3.0, 0.35],
+    "cerro": ["relieve_acuarela_ladera", 420.0, 0.45], "moldura": ["relieve_concreto", 5.0, 0.05]
+  },
+  "detalle": {
+    "muro": ["muro", 7, 4, 2, 2.5, 0.16], "pintura_acento": ["muro", 7, 4, 2, 2.5, 0.14],
+    "zocalo_piedra": ["zocalo_piedra", 5, 4, 2, 2.0, 0.45], "teja": ["teja", 2, 2, 1, 1.6, 0.55],
+    "adoquin": ["adoquin", 1, 1, 1, 1.6, 0.55], "vereda": ["vereda", 2, 2, 1, 2.0, 0.28],
+    "madera": ["madera", 2, 2, 1, 1.4, 0.45], "marco_ventana": ["madera", 2, 2, 1, 1.2, 0.3],
+    "hierro": ["hierro", 3, 3, 1, 1.0, 0.3]
+  },
+  "rugosidad": {
+    "adoquin": 0.03, "zocalo_piedra": 0.025, "piedra": 0.015, "vereda": 0.012, "teja": 0.035, "muro": 0.008,
+    "pintura_acento": 0.008, "madera": 0.01, "marco_ventana": 0.006, "hierro": 0.006, "calzada": 0.008, "cesped": 0.02, "cantero": 0.02,
+    "azotea": 0.01, "moldura": 0.006
+  },
+  "brillo": {
+    "teja": 0.18, "adoquin": 0.12, "piedra": 0.06, "zocalo_piedra": 0.05, "vereda": 0.05, "hierro": 0.35, "metal": 0.6,
+    "madera": 0.08, "marco_ventana": 0.12, "follaje": 0.12, "follaje_claro": 0.12, "hoja": 0.1, "agua": 0.8, "calzada": 0.04
+  },
+  "doble_cara": ["follaje", "follaje_claro"],
+  "suelo": ["calzada", "vereda", "adoquin", "cesped", "agua", "cantero"],
+  "sin_choque": ["follaje", "follaje_claro", "flor", "cerro", "hoja"]
+}
