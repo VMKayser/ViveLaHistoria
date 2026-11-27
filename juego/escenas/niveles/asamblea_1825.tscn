@@ -44,6 +44,8 @@
 [ext_resource type="PackedScene" path="res://assets/personajes/diputado_rioplata.gltf" id="pj_diputado_rioplata"]
 [ext_resource type="PackedScene" path="res://assets/personajes/olaneta.gltf" id="pj_olaneta"]
 [ext_resource type="PackedScene" path="res://assets/personajes/serrano.gltf" id="pj_serrano"]
+[ext_resource type="Script" path="res://scripts/interaccion/cronista.gd" id="s_cronista"]
+[ext_resource type="PackedScene" path="res://assets/personajes/cronista.gltf" id="pj_cronista"]
 
 [sub_resource type="PanoramaSkyMaterial" id="cielo_mat"]
 panorama = ExtResource("t_cielo")
@@ -401,6 +403,11 @@ firmas_requeridas = 3
 [node name="Modelo" type="MeshInstance3D" parent="Personajes/Serrano"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 mesh = SubResource("malla_npc_real")
+
+[node name="Cronista" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3, 0.05, 9.3)
+script = ExtResource("s_cronista")
+modelo = ExtResource("pj_cronista")
 
 [node name="Objetos" type="Node3D" parent="."]
 
