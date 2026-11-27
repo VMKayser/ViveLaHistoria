@@ -1,0 +1,94 @@
+{
+ "muro": {
+  "url": "/texturas/detalle_muro.jpg",
+  "n": 7,
+  "cols": 4,
+  "filas": 2,
+  "escala": 2.5,
+  "fuerza": 0.16,
+  "fuentes": [
+   "plastered_wall",
+   "plastered_wall_02",
+   "plastered_wall_04",
+   "painted_plaster_wall",
+   "patterned_plaster_wall",
+   "damaged_plaster",
+   "rough_plaster_broken"
+  ]
+ },
+ "zocalo_piedra": {
+  "url": "/texturas/detalle_zocalo_piedra.jpg",
+  "n": 5,
+  "cols": 4,
+  "filas": 2,
+  "escala": 2.0,
+  "fuerza": 0.45,
+  "fuentes": [
+   "large_sandstone_blocks",
+   "medieval_blocks_02",
+   "castle_brick_02_white",
+   "plaster_stone_wall_01",
+   "rustic_stone_wall"
+  ]
+ },
+ "teja": {
+  "url": "/texturas/detalle_teja.jpg",
+  "n": 2,
+  "cols": 2,
+  "filas": 1,
+  "escala": 1.6,
+  "fuerza": 0.55,
+  "fuentes": [
+   "clay_roof_tiles_02",
+   "ceramic_roof_01"
+  ]
+ },
+ "adoquin": {
+  "url": "/texturas/detalle_adoquin.jpg",
+  "n": 1,
+  "cols": 1,
+  "filas": 1,
+  "escala": 1.6,
+  "fuerza": 0.55,
+  "fuentes": [
+   "square_cobblestone"
+  ]
+ },
+ "vereda": {
+  "url": "/texturas/detalle_vereda.jpg",
+  "n": 2,
+  "cols": 2,
+  "filas": 1,
+  "escala": 2.0,
+  "fuerza": 0.4,
+  "fuentes": [
+   "precast_stone_paving",
+   "rectangular_paving"
+  ]
+ },
+ "madera": {
+  "url": "/texturas/detalle_madera.jpg",
+  "n": 2,
+  "cols": 2,
+  "filas": 1,
+  "escala": 1.4,
+  "fuerza": 0.45,
+  "fuentes": [
+   "weathered_brown_planks",
+   "old_planks_02"
+  ]
+ },
+ "hierro": {
+  "url": "/texturas/detalle_hierro.jpg",
+  "n": 3,
+  "cols": 3,
+  "filas": 1,
+  "escala": 1.0,
+  "fuerza": 0.3,
+  "fuentes": [
+   "rusty_painted_metal",
+   "rusty_metal_02",
+   "metal_plate"
+  ]
+ }
+}

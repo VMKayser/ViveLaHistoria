@@ -1,0 +1,23 @@
+[
+  {
+    "id": "iglesia",
+    "nombre": "Iglesia principal (ejemplo)",
+    "anio": "1780",
+    "descripcion": "Texto de ejemplo. Aquí va la historia del lugar, datos para estudiantes y recomendaciones para turistas.",
+    "posicion": [0, 14, -18]
+  },
+  {
+    "id": "plaza",
+    "nombre": "Plaza central (ejemplo)",
+    "anio": "1650",
+    "descripcion": "Texto de ejemplo. Punto de partida del recorrido histórico.",
+    "posicion": [0, 2, 0]
+  },
+  {
+    "id": "casona",
+    "nombre": "Casona colonial (ejemplo)",
+    "anio": "1820",
+    "descripcion": "Texto de ejemplo. Casa con balcones de madera y patio interior.",
+    "posicion": [22, 9, 4]
+  }
+]
