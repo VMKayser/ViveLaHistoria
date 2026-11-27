@@ -1,0 +1,38 @@
+{
+ "repositorio": "antrak13/Mi_Ciudad_Sucre",
+ "fecha": "2026-11-27",
+ "zona_horaria": "-04:00",
+ "ventana": [
+  "09:40",
+  "12:30"
+ ],
+ "integrantes": {
+  "ManuelRUa": {
+   "github": "ManuelRua",
+   "prs": [
+    "PR03",
+    "PR05",
+    "PR08",
+    "PR12"
+   ]
+  },
+  "Antrak13": {
+   "github": "antrak13",
+   "prs": [
+    "PR01",
+    "PR04",
+    "PR07",
+    "PR09"
+   ]
+  },
+  "VMKayser": {
+   "github": "VMKayser",
+   "prs": [
+    "PR02",
+    "PR06",
+    "PR10",
+    "PR11"
+   ]
+  }
+ }
+}

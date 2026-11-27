@@ -18,7 +18,7 @@ tráfico, el museo Casa de la Libertad y el recorrido interactivo del 25 de mayo
 ## Instalar y ejecutar
 
 ```bash
-git clone <url-de-este-repositorio> vive-la-historia && cd vive-la-historia && git lfs pull
+git clone git@github.com:antrak13/Mi_Ciudad_Sucre.git && cd Mi_Ciudad_Sucre && git lfs pull
 
 # Web (portada, mapa y página de la ciudad)
 cd web && npm ci && npm run dev                 # http://localhost:3000
@@ -59,6 +59,7 @@ archivo de licencia.
 
 # Vive la Historia · Casa de la Libertad
 
+[![Pruebas](https://github.com/antrak13/Mi_Ciudad_Sucre/actions/workflows/pruebas.yml/badge.svg)](https://github.com/antrak13/Mi_Ciudad_Sucre/actions/workflows/pruebas.yml)
 
 Juego educativo en primera persona sobre la historia de la **Casa de la Libertad** (Sucre, Bolivia).
 El jugador recorre la Sala Mayor en 1825, cumple misiones, toma decisiones y descubre lo que realmente pasó.

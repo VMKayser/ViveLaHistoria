@@ -86,10 +86,10 @@ ciudad3d/escenas_historicas/casa_libertad/
 ## 3. Cómo verlo y cómo usarlo
 
 ### A. Recorrerlo ahora mismo en Godot 4.7 (Escritorio — modo Compatibility)
-Ejecuta desde la raíz del repositorio:
+Ejecuta desde la raíz del repositorio (`miCiudadCharcas/`):
 
 ```powershell
-godot --path "ciudad3d" --rendering-method gl_compatibility --resolution 1280x720 "res://escenas_historicas/casa_libertad/recorrido_casa_libertad.tscn"
+& "C:\Users\antra\Documents\Downloads\Godot_v4.7.2-stable_win64.exe\Godot_v4.7.2-stable_win64_console.exe" --path "ciudad3d" --rendering-method gl_compatibility --resolution 1280x720 "res://escenas_historicas/casa_libertad/recorrido_casa_libertad.tscn"
 ```
 
 **Controles dentro del recorrido:**
@@ -113,7 +113,7 @@ godot --path "ciudad3d" --rendering-method gl_compatibility --resolution 1280x72
    *(Opcional: agrega `--render` para regenerar las vistas en `museo_interior/renders/`).*
 3. Para actualizar el `.glb` en Godot: copia `museo_interior\exports\casa_libertad.glb` a `ciudad3d\escenas_historicas\casa_libertad\casa_libertad.glb` y corre:
    ```powershell
-   godot --headless --path "ciudad3d" --import --quit
+   & "C:\Users\antra\Documents\Downloads\Godot_v4.7.2-stable_win64.exe\Godot_v4.7.2-stable_win64_console.exe" --headless --path "ciudad3d" --import --quit
    ```
 
 ### C. Verlo en navegador (`http://localhost:8060`, WebGL sin hilos)
@@ -124,7 +124,7 @@ godot --path "ciudad3d" --rendering-method gl_compatibility --resolution 1280x72
 4. Exporta y sirve en el puerto `8060`:
    ```powershell
    New-Item -ItemType Directory -Force -Path "museo_interior\web_test" | Out-Null
-   godot --headless --path "ciudad3d" --export-release "Web" "..\museo_interior\web_test\index.html"
+   & "C:\Users\antra\Documents\Downloads\Godot_v4.7.2-stable_win64.exe\Godot_v4.7.2-stable_win64_console.exe" --headless --path "ciudad3d" --export-release "Web" "..\museo_interior\web_test\index.html"
    python -m http.server 8060 -d "museo_interior\web_test"
    ```
    Abre **`http://localhost:8060`** en el navegador.
